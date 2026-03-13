@@ -1,0 +1,26 @@
+{
+  "name": "applied-theta-resume-agent",
+  "owner": {
+    "name": "Stephen Sequenzia",
+    "email": "sequenzia@gmail.com"
+  },
+  "metadata": {
+    "description": "AI-powered resume analysis and optimization plugin"
+  },
+  "plugins": [
+    {
+      "name": "resume-agent",
+      "source": "./",
+      "description": "AI-powered Resume Analysis & Optimization — analyzes resumes across 6 dimensions and produces optimized resumes with change tracking",
+      "version": "1.0.0",
+      "author": {
+        "name": "Stephen Sequenzia",
+        "email": "sequenzia@gmail.com"
+      },
+      "repository": "https://github.com/applied-theta/resume-agent",
+      "license": "MIT",
+      "keywords": ["resume", "optimization", "analysis", "career", "job-search"],
+      "category": "productivity"
+    }
+  ]
+}
