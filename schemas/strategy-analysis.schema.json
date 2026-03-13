@@ -1,0 +1,48 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": ["overall_score", "archetype"],
+  "properties": {
+    "overall_score": { "type": "number", "minimum": 0, "maximum": 100 },
+    "archetype": {
+      "type": "object",
+      "required": ["primary", "confidence"],
+      "properties": {
+        "primary": {
+          "type": "string",
+          "enum": ["linear_progression", "career_changer", "return_to_work", "entry_level", "executive", "military_transitioner", "international_candidate"]
+        },
+        "secondary": { "type": ["string", "null"] },
+        "confidence": { "type": "number", "minimum": 0, "maximum": 1 }
+      }
+    },
+    "value_proposition": {
+      "type": "object",
+      "properties": {
+        "current_effectiveness": { "type": "number", "minimum": 0, "maximum": 100 },
+        "is_differentiated": { "type": "boolean" },
+        "suggested_summary": { "type": "string" },
+        "key_selling_points": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "format_recommendation": {
+      "type": "object",
+      "properties": {
+        "current_format": { "type": "string" },
+        "recommended_format": { "type": "string" },
+        "section_order": { "type": "array", "items": { "type": "string" } },
+        "sections_to_add": { "type": "array", "items": { "type": "string" } },
+        "sections_to_remove": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "competitive_analysis": {
+      "type": "object",
+      "properties": {
+        "strengths_undersold": { "type": "array", "items": { "type": "string" } },
+        "weaknesses_to_mitigate": { "type": "array", "items": { "type": "string" } },
+        "differentiators": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "strategic_recommendations": { "type": "array", "items": { "type": "string" } }
+  }
+}

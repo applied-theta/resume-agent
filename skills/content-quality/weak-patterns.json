@@ -1,0 +1,315 @@
+{
+  "description": "Weak pattern detection rules for resume bullet point analysis. Each pattern includes a regex-compatible expression for matching, the weakness category, and a recommended fix approach. Used by the content-analyst agent to flag problematic bullet constructions.",
+  "usage": "Apply patterns against each bullet point. When a match is found, flag the bullet with the corresponding category, explain the issue, and suggest a rewrite using the fix_guidance.",
+  "pattern_categories": {
+    "responsibility_prefixes": {
+      "description": "Phrases that signal a duty description rather than an accomplishment. These turn achievements into passive job descriptions.",
+      "severity": "high",
+      "patterns": [
+        {
+          "id": "resp-001",
+          "regex": "^Responsible\\s+for\\b",
+          "description": "Starts with 'Responsible for'",
+          "example_match": "Responsible for managing a team of 5 engineers",
+          "fix_guidance": "Replace with a strong action verb. Example: 'Led a team of 5 engineers to deliver...'"
+        },
+        {
+          "id": "resp-002",
+          "regex": "^In\\s+charge\\s+of\\b",
+          "description": "Starts with 'In charge of'",
+          "example_match": "In charge of the company's cloud infrastructure",
+          "fix_guidance": "Replace with an ownership verb. Example: 'Managed the company's cloud infrastructure, achieving 99.9% uptime'"
+        },
+        {
+          "id": "resp-003",
+          "regex": "^Tasked\\s+with\\b",
+          "description": "Starts with 'Tasked with'",
+          "example_match": "Tasked with improving test coverage",
+          "fix_guidance": "Replace with the action taken. Example: 'Increased test coverage from 45% to 92% by implementing...'"
+        },
+        {
+          "id": "resp-004",
+          "regex": "^Duties\\s+include[d]?\\b",
+          "description": "Starts with 'Duties included' or 'Duties include'",
+          "example_match": "Duties included maintaining production servers",
+          "fix_guidance": "Describe what was accomplished instead. Example: 'Maintained 30+ production servers with 99.95% uptime'"
+        },
+        {
+          "id": "resp-005",
+          "regex": "^Accountable\\s+for\\b",
+          "description": "Starts with 'Accountable for'",
+          "example_match": "Accountable for quarterly financial reporting",
+          "fix_guidance": "Replace with an action and result. Example: 'Delivered quarterly financial reports to C-suite, reducing close time by 3 days'"
+        },
+        {
+          "id": "resp-006",
+          "regex": "^Charged\\s+with\\b",
+          "description": "Starts with 'Charged with'",
+          "example_match": "Charged with overseeing vendor relationships",
+          "fix_guidance": "State what was done and the impact. Example: 'Negotiated vendor contracts saving $150K annually'"
+        }
+      ]
+    },
+    "weak_action_verbs": {
+      "description": "Verbs that dilute the candidate's impact by obscuring their actual role and contribution level.",
+      "severity": "high",
+      "patterns": [
+        {
+          "id": "weak-001",
+          "regex": "^Helped\\b",
+          "description": "Starts with 'Helped'",
+          "example_match": "Helped design the new authentication system",
+          "fix_guidance": "Use the specific action. 'Helped design' becomes 'Co-designed' or 'Designed' if the candidate was the primary contributor"
+        },
+        {
+          "id": "weak-002",
+          "regex": "^Assisted\\s+(in|with)\\b",
+          "description": "Starts with 'Assisted in' or 'Assisted with'",
+          "example_match": "Assisted with customer onboarding process improvements",
+          "fix_guidance": "Replace with the specific contribution. Example: 'Redesigned customer onboarding flow, reducing time-to-value by 40%'"
+        },
+        {
+          "id": "weak-003",
+          "regex": "^Worked\\s+on\\b",
+          "description": "Starts with 'Worked on'",
+          "example_match": "Worked on the company's main product",
+          "fix_guidance": "Replace with the specific action. 'Worked on the product' becomes 'Built the payments module for the product' or 'Optimized product performance'"
+        },
+        {
+          "id": "weak-004",
+          "regex": "^Participated\\s+in\\b",
+          "description": "Starts with 'Participated in'",
+          "example_match": "Participated in agile ceremonies and sprint planning",
+          "fix_guidance": "Describe the specific role and impact. Example: 'Facilitated sprint planning for a 10-person team, improving story point accuracy by 25%'"
+        },
+        {
+          "id": "weak-005",
+          "regex": "^(Was|Were)\\s+involved\\s+in\\b",
+          "description": "Starts with 'Was/Were involved in'",
+          "example_match": "Was involved in migrating the database to PostgreSQL",
+          "fix_guidance": "State the direct action. Example: 'Migrated 5 MySQL databases to PostgreSQL, reducing query latency by 30%'"
+        },
+        {
+          "id": "weak-006",
+          "regex": "^Contributed\\s+to\\b",
+          "description": "Starts with 'Contributed to'",
+          "example_match": "Contributed to the open-source framework",
+          "fix_guidance": "Specify the contribution. Example: 'Authored 15 pull requests to the framework, adding OAuth2 support and fixing 8 critical bugs'"
+        },
+        {
+          "id": "weak-007",
+          "regex": "^Supported\\b",
+          "description": "Starts with 'Supported' (when used as a weak action verb)",
+          "example_match": "Supported the QA team in testing activities",
+          "fix_guidance": "Describe the actual support action. Example: 'Built automated test suites for the QA team, reducing manual testing effort by 60%'"
+        },
+        {
+          "id": "weak-008",
+          "regex": "^Handled\\b",
+          "description": "Starts with 'Handled'",
+          "example_match": "Handled customer complaints and escalations",
+          "fix_guidance": "Describe the process and outcome. Example: 'Resolved 50+ customer escalations per month, maintaining a 95% satisfaction rating'"
+        }
+      ]
+    },
+    "passive_voice": {
+      "description": "Passive constructions that remove the candidate as the agent of the action, weakening the impact of the statement.",
+      "severity": "medium",
+      "patterns": [
+        {
+          "id": "pass-001",
+          "regex": "^(Was|Were)\\s+\\w+ed\\b",
+          "description": "Starts with 'Was/Were' + past participle",
+          "example_match": "Was selected to lead the new initiative",
+          "fix_guidance": "Restructure to active voice. Example: 'Selected to lead a $2M initiative' or better: 'Led a $2M initiative that...'"
+        },
+        {
+          "id": "pass-002",
+          "regex": "^(Has|Have|Had)\\s+been\\b",
+          "description": "Starts with 'Has/Have/Had been'",
+          "example_match": "Has been recognized for excellent performance",
+          "fix_guidance": "Use active past tense. Example: 'Earned 3 consecutive performance awards for exceeding targets by 20%+'"
+        },
+        {
+          "id": "pass-003",
+          "regex": "\\b(was|were)\\s+asked\\s+to\\b",
+          "description": "Contains 'was/were asked to'",
+          "example_match": "Was asked to take over the failing project",
+          "fix_guidance": "Lead with the action. Example: 'Rescued a failing project, delivering it on-time and under budget'"
+        },
+        {
+          "id": "pass-004",
+          "regex": "\\b(was|were)\\s+given\\b",
+          "description": "Contains 'was/were given'",
+          "example_match": "Was given responsibility for the East Coast region",
+          "fix_guidance": "State ownership directly. Example: 'Managed the East Coast region, growing revenue 25% year-over-year'"
+        },
+        {
+          "id": "pass-005",
+          "regex": "\\b(was|were)\\s+promoted\\b",
+          "description": "Contains 'was/were promoted'",
+          "example_match": "Was promoted to Senior Engineer after 18 months",
+          "fix_guidance": "Reframe as an achievement. Example: 'Earned promotion to Senior Engineer within 18 months based on technical leadership'"
+        },
+        {
+          "id": "pass-006",
+          "regex": "\\b(was|were)\\s+assigned\\b",
+          "description": "Contains 'was/were assigned'",
+          "example_match": "Was assigned to the critical security remediation project",
+          "fix_guidance": "Lead with the action. Example: 'Drove security remediation across 12 services, closing all critical vulnerabilities within 30 days'"
+        }
+      ]
+    },
+    "vague_scope": {
+      "description": "Words that indicate undefined scale where specific numbers would be more impactful. These suggest the candidate cannot or did not quantify their work.",
+      "severity": "medium",
+      "patterns": [
+        {
+          "id": "vague-001",
+          "regex": "\\b(various|numerous|multiple|several|many|some|a\\s+number\\s+of|a\\s+lot\\s+of|a\\s+few)\\b",
+          "description": "Contains vague quantifiers",
+          "example_match": "Managed various projects across multiple teams",
+          "fix_guidance": "Replace with specific numbers or ranges. Example: 'Managed 8 concurrent projects across 4 teams'"
+        },
+        {
+          "id": "vague-002",
+          "regex": "\\b(significant|substantial|considerable|extensive|notable)\\s+(improvement|impact|growth|reduction|increase)\\b",
+          "description": "Vague impact claims without numbers",
+          "example_match": "Achieved significant improvement in system performance",
+          "fix_guidance": "Quantify the improvement. Example: 'Improved system response time by 65%, from 800ms to 280ms'"
+        },
+        {
+          "id": "vague-003",
+          "regex": "\\b(large|big|small|huge|massive|major|minor)\\s+(team|project|budget|client|system|platform|initiative)\\b",
+          "description": "Vague size descriptors for quantifiable entities",
+          "example_match": "Led a large team on a major project",
+          "fix_guidance": "Replace with specifics. Example: 'Led a 15-person team on a $3M platform migration'"
+        },
+        {
+          "id": "vague-004",
+          "regex": "\\b(regularly|frequently|often|occasionally|sometimes|periodically)\\b",
+          "description": "Vague frequency words",
+          "example_match": "Regularly met with stakeholders to discuss progress",
+          "fix_guidance": "State specific cadence and purpose. Example: 'Conducted weekly stakeholder reviews with VP-level executives, aligning 3 workstreams'"
+        },
+        {
+          "id": "vague-005",
+          "regex": "\\betc\\.?\\b",
+          "description": "Uses 'etc.' to trail off instead of being specific",
+          "example_match": "Managed servers, databases, networking, etc.",
+          "fix_guidance": "Either list the specific items or summarize the scope. Example: 'Managed the full infrastructure stack: 20 servers, 5 database clusters, and 3 network zones'"
+        }
+      ]
+    },
+    "filler_phrases": {
+      "description": "Empty phrases that add words but no meaning. Removing them makes bullets more concise and impactful.",
+      "severity": "low",
+      "patterns": [
+        {
+          "id": "fill-001",
+          "regex": "\\bin\\s+order\\s+to\\b",
+          "description": "Contains 'in order to' (can be replaced with 'to')",
+          "example_match": "Redesigned the API in order to improve performance",
+          "fix_guidance": "Replace 'in order to' with 'to'. Example: 'Redesigned the API to improve performance by 40%'"
+        },
+        {
+          "id": "fill-002",
+          "regex": "\\bon\\s+a\\s+daily\\s+basis\\b",
+          "description": "Contains 'on a daily basis' (can be replaced with 'daily')",
+          "example_match": "Reviewed code on a daily basis",
+          "fix_guidance": "Replace with 'daily' or better yet, quantify. Example: 'Reviewed 10+ pull requests daily, maintaining team velocity'"
+        },
+        {
+          "id": "fill-003",
+          "regex": "\\bsuccessfully\\b",
+          "description": "Contains 'successfully' (redundant if the result proves success)",
+          "example_match": "Successfully launched the new product feature",
+          "fix_guidance": "Remove 'successfully' and let the result demonstrate success. Example: 'Launched product feature adopted by 10K users in the first month'"
+        },
+        {
+          "id": "fill-004",
+          "regex": "\\beffectively\\b",
+          "description": "Contains 'effectively' without measurable evidence",
+          "example_match": "Effectively managed the project timeline",
+          "fix_guidance": "Remove 'effectively' and add evidence. Example: 'Managed project timeline, delivering 2 weeks ahead of schedule'"
+        },
+        {
+          "id": "fill-005",
+          "regex": "\\bin\\s+a\\s+timely\\s+(manner|fashion)\\b",
+          "description": "Contains 'in a timely manner/fashion'",
+          "example_match": "Resolved customer issues in a timely manner",
+          "fix_guidance": "Replace with specific turnaround time. Example: 'Resolved customer issues within 4-hour SLA, achieving 98% on-time resolution'"
+        },
+        {
+          "id": "fill-006",
+          "regex": "\\butilized\\b",
+          "description": "Contains 'utilized' (pretentious form of 'used')",
+          "example_match": "Utilized Python and SQL to build reports",
+          "fix_guidance": "Replace with 'used' or remove entirely if the tools are obvious from context. Better: lead with the action verb. Example: 'Built automated reporting pipeline using Python and SQL'"
+        },
+        {
+          "id": "fill-007",
+          "regex": "\\bleveraged\\b",
+          "description": "Contains 'leveraged' (overused corporate buzzword)",
+          "example_match": "Leveraged cloud technologies to improve scalability",
+          "fix_guidance": "Replace with the specific action. Example: 'Migrated to AWS Lambda, reducing infrastructure costs by 30% while handling 3x more traffic'"
+        },
+        {
+          "id": "fill-008",
+          "regex": "\\bas\\s+needed\\b",
+          "description": "Contains 'as needed' (implies ad-hoc rather than proactive work)",
+          "example_match": "Provided support to other teams as needed",
+          "fix_guidance": "Describe the specific support and its impact. Example: 'Provided on-call technical support for 3 partner teams, resolving 95% of escalations same-day'"
+        }
+      ]
+    },
+    "job_description_language": {
+      "description": "Language that reads like it was copied from a job posting rather than describing personal accomplishments.",
+      "severity": "medium",
+      "patterns": [
+        {
+          "id": "jd-001",
+          "regex": "^Ensure\\s+(compliance|quality|standards|adherence)\\b",
+          "description": "Starts with 'Ensure compliance/quality/standards'",
+          "example_match": "Ensure compliance with SOX regulations",
+          "fix_guidance": "Describe a specific compliance achievement. Example: 'Achieved zero audit findings across 3 consecutive SOX audits by implementing automated controls'"
+        },
+        {
+          "id": "jd-002",
+          "regex": "^Maintain\\s+(standards|systems|records|documentation)\\b",
+          "description": "Starts with 'Maintain standards/systems'",
+          "example_match": "Maintain documentation for all team processes",
+          "fix_guidance": "Describe what was maintained and the impact. Example: 'Authored and maintained 40-page engineering playbook, reducing new hire ramp-up time from 6 weeks to 3'"
+        },
+        {
+          "id": "jd-003",
+          "regex": "^Provide\\s+(support|guidance|assistance|services)\\b",
+          "description": "Starts with 'Provide support/guidance'",
+          "example_match": "Provide technical guidance to junior developers",
+          "fix_guidance": "Describe the mentorship and its outcome. Example: 'Mentored 5 junior developers through technical design reviews, with 3 earning promotions within a year'"
+        },
+        {
+          "id": "jd-004",
+          "regex": "^Perform\\s+(duties|tasks|responsibilities)\\b",
+          "description": "Starts with 'Perform duties/tasks'",
+          "example_match": "Perform duties as assigned by management",
+          "fix_guidance": "Remove entirely or replace with a specific accomplishment. This adds no value to the resume."
+        },
+        {
+          "id": "jd-005",
+          "regex": "^Manage\\s+(day-to-day|daily|routine|ongoing)\\b",
+          "description": "Starts with 'Manage day-to-day/daily/routine'",
+          "example_match": "Manage day-to-day operations of the department",
+          "fix_guidance": "Describe the scale and a specific outcome. Example: 'Managed operations for a 25-person department, reducing operational costs by 15% year-over-year'"
+        },
+        {
+          "id": "jd-006",
+          "regex": "^Serve\\s+as\\b",
+          "description": "Starts with 'Serve as' (defines role rather than accomplishment)",
+          "example_match": "Serve as the primary point of contact for client issues",
+          "fix_guidance": "Describe the impact of serving in that capacity. Example: 'Managed relationships with 12 enterprise clients ($5M+ ARR), achieving 100% retention'"
+        }
+      ]
+    }
+  }
+}

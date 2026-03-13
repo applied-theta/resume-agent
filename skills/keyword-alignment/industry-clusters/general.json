@@ -1,0 +1,306 @@
+{
+  "description": "General cross-industry keyword clusters for semantic matching. Covers project management, leadership, communication, analytics, and universally applicable professional skills.",
+  "industry": "general",
+  "clusters": {
+    "project_management": {
+      "project_management": {
+        "canonical": "Project Management",
+        "synonyms": ["program management", "project coordination"],
+        "abbreviations": ["PM"],
+        "related": ["PMP", "PRINCE2", "PMO", "project plan", "milestone", "deliverable", "timeline"]
+      },
+      "agile": {
+        "canonical": "Agile",
+        "synonyms": ["Agile methodology", "Agile framework"],
+        "abbreviations": [],
+        "related": ["Scrum", "Kanban", "SAFe", "sprint", "iteration", "backlog", "standup", "retrospective"]
+      },
+      "scrum": {
+        "canonical": "Scrum",
+        "synonyms": ["Scrum framework"],
+        "abbreviations": [],
+        "related": ["Agile", "Scrum Master", "Product Owner", "sprint planning", "sprint review", "daily standup"]
+      },
+      "waterfall": {
+        "canonical": "Waterfall",
+        "synonyms": ["Waterfall methodology", "traditional project management"],
+        "abbreviations": [],
+        "related": ["sequential development", "requirements gathering", "design phase", "implementation phase"]
+      },
+      "risk_management": {
+        "canonical": "Risk Management",
+        "synonyms": ["risk mitigation", "risk assessment"],
+        "abbreviations": [],
+        "related": ["risk register", "risk matrix", "mitigation plan", "contingency plan", "issue tracking"]
+      },
+      "stakeholder_management": {
+        "canonical": "Stakeholder Management",
+        "synonyms": ["stakeholder engagement", "stakeholder communication"],
+        "abbreviations": [],
+        "related": ["requirements gathering", "status reporting", "change management", "executive communication"]
+      }
+    },
+    "leadership": {
+      "team_leadership": {
+        "canonical": "Team Leadership",
+        "synonyms": ["team lead", "team management", "people management"],
+        "abbreviations": [],
+        "related": ["direct reports", "mentoring", "coaching", "performance reviews", "hiring", "team building"]
+      },
+      "people_management": {
+        "canonical": "People Management",
+        "synonyms": ["personnel management", "staff management", "managing teams"],
+        "abbreviations": [],
+        "related": ["hiring", "performance management", "career development", "1:1s", "feedback", "retention"]
+      },
+      "strategic_planning": {
+        "canonical": "Strategic Planning",
+        "synonyms": ["strategy development", "strategic thinking"],
+        "abbreviations": [],
+        "related": ["roadmap", "OKRs", "KPIs", "vision", "long-term planning", "business strategy"]
+      },
+      "change_management": {
+        "canonical": "Change Management",
+        "synonyms": ["organizational change", "change leadership"],
+        "abbreviations": [],
+        "related": ["ADKAR", "Kotter", "adoption", "transformation", "communication plan", "training"]
+      },
+      "cross_functional": {
+        "canonical": "Cross-Functional Collaboration",
+        "synonyms": ["cross-functional teams", "cross-departmental"],
+        "abbreviations": [],
+        "related": ["interdisciplinary", "matrix organization", "collaboration", "alignment", "coordination"]
+      },
+      "executive_leadership": {
+        "canonical": "Executive Leadership",
+        "synonyms": ["C-suite", "senior leadership"],
+        "abbreviations": [],
+        "related": ["board presentation", "executive stakeholder", "strategic direction", "P&L responsibility", "budget ownership"]
+      }
+    },
+    "communication": {
+      "communication_skills": {
+        "canonical": "Communication Skills",
+        "synonyms": ["strong communicator", "excellent communication"],
+        "abbreviations": [],
+        "related": ["presentation skills", "written communication", "verbal communication", "public speaking", "technical writing"]
+      },
+      "presentation": {
+        "canonical": "Presentation Skills",
+        "synonyms": ["presenting", "public speaking"],
+        "abbreviations": [],
+        "related": ["PowerPoint", "Keynote", "executive presentations", "demo", "storytelling"]
+      },
+      "technical_writing": {
+        "canonical": "Technical Writing",
+        "synonyms": ["documentation", "technical documentation"],
+        "abbreviations": [],
+        "related": ["user guides", "API documentation", "knowledge base", "SOPs", "standard operating procedures"]
+      },
+      "negotiation": {
+        "canonical": "Negotiation",
+        "synonyms": ["negotiation skills"],
+        "abbreviations": [],
+        "related": ["contract negotiation", "vendor management", "deal closing", "conflict resolution"]
+      }
+    },
+    "data_and_analytics": {
+      "data_analysis": {
+        "canonical": "Data Analysis",
+        "synonyms": ["data analytics", "analytical skills"],
+        "abbreviations": [],
+        "related": ["SQL", "Excel", "data visualization", "reporting", "insights", "metrics", "KPIs"]
+      },
+      "business_intelligence": {
+        "canonical": "Business Intelligence",
+        "synonyms": ["BI"],
+        "abbreviations": ["BI"],
+        "related": ["Tableau", "Power BI", "Looker", "dashboards", "reporting", "data warehouse", "OLAP"]
+      },
+      "data_visualization": {
+        "canonical": "Data Visualization",
+        "synonyms": ["data viz"],
+        "abbreviations": [],
+        "related": ["Tableau", "Power BI", "D3.js", "charts", "dashboards", "infographics"]
+      },
+      "excel": {
+        "canonical": "Microsoft Excel",
+        "synonyms": ["Excel", "advanced Excel"],
+        "abbreviations": [],
+        "related": ["pivot tables", "VLOOKUP", "INDEX/MATCH", "VBA", "macros", "Power Query", "spreadsheets"]
+      },
+      "statistics": {
+        "canonical": "Statistics",
+        "synonyms": ["statistical analysis"],
+        "abbreviations": ["stats"],
+        "related": ["regression", "hypothesis testing", "A/B testing", "statistical modeling", "R", "SPSS", "SAS"]
+      }
+    },
+    "business_operations": {
+      "process_improvement": {
+        "canonical": "Process Improvement",
+        "synonyms": ["process optimization", "operational improvement"],
+        "abbreviations": [],
+        "related": ["Lean", "Six Sigma", "Kaizen", "BPR", "workflow optimization", "efficiency", "automation"]
+      },
+      "six_sigma": {
+        "canonical": "Six Sigma",
+        "synonyms": ["Lean Six Sigma"],
+        "abbreviations": ["LSS"],
+        "related": ["DMAIC", "Green Belt", "Black Belt", "process improvement", "root cause analysis", "statistical process control"]
+      },
+      "vendor_management": {
+        "canonical": "Vendor Management",
+        "synonyms": ["supplier management", "third-party management"],
+        "abbreviations": [],
+        "related": ["procurement", "RFP", "contract management", "SLA", "vendor evaluation", "sourcing"]
+      },
+      "budgeting": {
+        "canonical": "Budget Management",
+        "synonyms": ["budgeting", "financial management", "cost management"],
+        "abbreviations": [],
+        "related": ["P&L", "cost reduction", "forecasting", "resource allocation", "ROI", "cost-benefit analysis"]
+      },
+      "operations_management": {
+        "canonical": "Operations Management",
+        "synonyms": ["operational management", "operations"],
+        "abbreviations": ["ops"],
+        "related": ["supply chain", "logistics", "capacity planning", "SLA management", "service delivery"]
+      }
+    },
+    "product_and_design": {
+      "product_management": {
+        "canonical": "Product Management",
+        "synonyms": ["product owner", "product strategy"],
+        "abbreviations": ["PM", "PdM"],
+        "related": ["roadmap", "user stories", "backlog", "PRD", "A/B testing", "user research", "product-market fit"]
+      },
+      "ux_design": {
+        "canonical": "UX Design",
+        "synonyms": ["User Experience Design", "UX"],
+        "abbreviations": ["UX"],
+        "related": ["user research", "wireframing", "prototyping", "usability testing", "Figma", "Sketch", "design thinking"]
+      },
+      "ui_design": {
+        "canonical": "UI Design",
+        "synonyms": ["User Interface Design", "UI"],
+        "abbreviations": ["UI"],
+        "related": ["visual design", "design systems", "responsive design", "accessibility", "WCAG", "Figma", "Adobe XD"]
+      },
+      "design_thinking": {
+        "canonical": "Design Thinking",
+        "synonyms": ["human-centered design"],
+        "abbreviations": [],
+        "related": ["empathy mapping", "ideation", "prototyping", "user journey", "persona", "problem framing"]
+      }
+    },
+    "soft_skills": {
+      "problem_solving": {
+        "canonical": "Problem Solving",
+        "synonyms": ["problem-solving skills", "analytical thinking", "critical thinking"],
+        "abbreviations": [],
+        "related": ["root cause analysis", "troubleshooting", "debugging", "decision making"]
+      },
+      "collaboration": {
+        "canonical": "Collaboration",
+        "synonyms": ["teamwork", "team player", "cooperative"],
+        "abbreviations": [],
+        "related": ["cross-functional", "partnership", "alignment", "consensus building"]
+      },
+      "adaptability": {
+        "canonical": "Adaptability",
+        "synonyms": ["flexibility", "adaptable", "versatile"],
+        "abbreviations": [],
+        "related": ["fast-paced environment", "ambiguity", "change management", "growth mindset", "learning agility"]
+      },
+      "attention_to_detail": {
+        "canonical": "Attention to Detail",
+        "synonyms": ["detail-oriented", "meticulous", "thorough"],
+        "abbreviations": [],
+        "related": ["accuracy", "quality assurance", "proofreading", "precision"]
+      },
+      "time_management": {
+        "canonical": "Time Management",
+        "synonyms": ["prioritization", "deadline management"],
+        "abbreviations": [],
+        "related": ["multitasking", "organization", "efficiency", "workload management", "meeting deadlines"]
+      },
+      "mentoring": {
+        "canonical": "Mentoring",
+        "synonyms": ["mentorship", "coaching"],
+        "abbreviations": [],
+        "related": ["training", "knowledge transfer", "onboarding", "professional development", "career guidance"]
+      }
+    },
+    "tools_general": {
+      "microsoft_office": {
+        "canonical": "Microsoft Office",
+        "synonyms": ["MS Office", "Office 365", "Microsoft 365"],
+        "abbreviations": [],
+        "related": ["Word", "Excel", "PowerPoint", "Outlook", "Teams", "SharePoint", "OneDrive"]
+      },
+      "google_workspace": {
+        "canonical": "Google Workspace",
+        "synonyms": ["G Suite", "Google Apps"],
+        "abbreviations": [],
+        "related": ["Google Docs", "Google Sheets", "Google Slides", "Gmail", "Google Drive", "Google Meet"]
+      },
+      "jira": {
+        "canonical": "Jira",
+        "synonyms": ["Atlassian Jira", "Jira Software"],
+        "abbreviations": [],
+        "related": ["Confluence", "Atlassian", "issue tracking", "project tracking", "Kanban board", "sprint board"]
+      },
+      "slack": {
+        "canonical": "Slack",
+        "synonyms": [],
+        "abbreviations": [],
+        "related": ["Microsoft Teams", "team communication", "messaging", "channels", "collaboration tool"]
+      },
+      "confluence": {
+        "canonical": "Confluence",
+        "synonyms": ["Atlassian Confluence"],
+        "abbreviations": [],
+        "related": ["Jira", "wiki", "documentation", "knowledge management", "Atlassian"]
+      },
+      "crm": {
+        "canonical": "CRM",
+        "synonyms": ["Customer Relationship Management"],
+        "abbreviations": ["CRM"],
+        "related": ["Salesforce", "HubSpot", "Dynamics 365", "customer management", "pipeline management"]
+      },
+      "erp": {
+        "canonical": "ERP",
+        "synonyms": ["Enterprise Resource Planning"],
+        "abbreviations": ["ERP"],
+        "related": ["SAP", "Oracle", "NetSuite", "Workday", "enterprise systems"]
+      }
+    },
+    "certifications_general": {
+      "pmp": {
+        "canonical": "PMP",
+        "synonyms": ["Project Management Professional"],
+        "abbreviations": ["PMP"],
+        "related": ["PMI", "PMBOK", "project management certification"]
+      },
+      "csm": {
+        "canonical": "CSM",
+        "synonyms": ["Certified ScrumMaster"],
+        "abbreviations": ["CSM"],
+        "related": ["Scrum Alliance", "Agile certification", "Scrum Master"]
+      },
+      "six_sigma_cert": {
+        "canonical": "Six Sigma Certification",
+        "synonyms": ["Lean Six Sigma certification"],
+        "abbreviations": [],
+        "related": ["Green Belt", "Black Belt", "Yellow Belt", "DMAIC"]
+      },
+      "itil": {
+        "canonical": "ITIL",
+        "synonyms": ["IT Infrastructure Library", "ITIL Foundation"],
+        "abbreviations": ["ITIL"],
+        "related": ["IT service management", "ITSM", "service desk", "incident management", "change management"]
+      }
+    }
+  }
+}

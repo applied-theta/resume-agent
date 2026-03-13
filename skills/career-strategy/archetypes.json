@@ -1,0 +1,389 @@
+{
+  "description": "Career archetype definitions with detection criteria. Used by the strategy-advisor agent to classify candidates and guide strategic recommendations.",
+  "archetypes": {
+    "linear_progression": {
+      "name": "Linear Progression",
+      "description": "Candidate with steady upward career growth within one industry or domain. Shows clear advancement through progressively senior roles.",
+      "detection_signals": {
+        "keywords": [
+          "promoted to",
+          "advanced to",
+          "progressed to",
+          "elevated to",
+          "senior",
+          "lead",
+          "principal",
+          "staff",
+          "manager",
+          "director"
+        ],
+        "patterns": [
+          "Multiple roles at the same company showing promotion",
+          "Job titles that show increasing seniority over time",
+          "Consistent industry or domain across all roles",
+          "Steady increase in scope (team size, budget, responsibility)"
+        ],
+        "structural_indicators": [
+          "5+ years of experience in a single domain",
+          "2+ roles with the same employer",
+          "No gaps longer than 3 months between roles",
+          "Education aligns with career field",
+          "Job titles follow a clear progression ladder"
+        ]
+      },
+      "recommended_format": "reverse-chronological",
+      "key_strengths_to_emphasize": [
+        "Career trajectory and promotions",
+        "Deepening expertise within the domain",
+        "Increasing scope of responsibility",
+        "Loyalty and organizational impact",
+        "Leadership growth over time"
+      ],
+      "weaknesses_to_mitigate": [
+        "May appear too narrow or specialized if targeting a broader role",
+        "Could seem risk-averse or lacking breadth",
+        "Multiple roles at one company may raise questions about adaptability"
+      ]
+    },
+    "career_changer": {
+      "name": "Career Changer",
+      "description": "Candidate transitioning from one field or industry to a different one. Prior experience may not directly match the target role.",
+      "detection_signals": {
+        "keywords": [
+          "transitioning",
+          "career change",
+          "pivoting",
+          "transferable skills",
+          "bootcamp",
+          "retraining",
+          "certification in",
+          "completed program in",
+          "self-taught",
+          "cross-functional"
+        ],
+        "patterns": [
+          "Recent education or certifications in a different field than prior work",
+          "Summary mentions transition or career change",
+          "Most recent role is in a different industry than earlier roles",
+          "Projects section showcases skills from the new field",
+          "Skills section emphasizes new-field competencies"
+        ],
+        "structural_indicators": [
+          "Industry mismatch between recent and older roles",
+          "Recent bootcamp, degree, or certification in a new field",
+          "Projects section features work in the target field",
+          "Experience in the target field is less than 2 years",
+          "Skills listed do not match the majority of prior job titles"
+        ]
+      },
+      "recommended_format": "hybrid",
+      "key_strengths_to_emphasize": [
+        "Transferable skills that bridge old and new fields",
+        "Unique perspective from cross-industry experience",
+        "Demonstrated ability to learn and adapt quickly",
+        "Relevant projects, coursework, or certifications in target field",
+        "Domain knowledge that enriches the new role"
+      ],
+      "weaknesses_to_mitigate": [
+        "Lack of direct experience in the target field",
+        "Job titles that do not match the target role",
+        "Potential perception of being a flight risk or uncommitted",
+        "Gaps in domain-specific technical depth"
+      ]
+    },
+    "return_to_work": {
+      "name": "Return to Work",
+      "description": "Candidate re-entering the workforce after a career gap of 1 or more years due to caregiving, health, personal reasons, or other circumstances.",
+      "detection_signals": {
+        "keywords": [
+          "career break",
+          "sabbatical",
+          "gap",
+          "returning to",
+          "re-entering",
+          "freelance",
+          "consulting",
+          "volunteer",
+          "caregiver",
+          "parental leave"
+        ],
+        "patterns": [
+          "Unexplained gap of 1+ years between the most recent role and the present",
+          "Freelance or consulting work listed to cover a gap period",
+          "Volunteer work or community involvement during the gap",
+          "Recent upskilling activities (courses, certifications) before re-entry",
+          "Summary explicitly addresses the career break"
+        ],
+        "structural_indicators": [
+          "Most recent role ended 1+ years ago with no subsequent employment",
+          "Gap of 1+ years between two consecutive roles",
+          "Presence of volunteer, freelance, or training entries during the gap",
+          "Recent certifications or courses suggesting skill refreshing",
+          "Resume date range shows an unexplained break in employment"
+        ]
+      },
+      "recommended_format": "hybrid",
+      "key_strengths_to_emphasize": [
+        "Prior professional experience and achievements",
+        "Skills maintained or refreshed during the break",
+        "Freelance, consulting, or volunteer work during the gap",
+        "Recent training or certifications showing current competence",
+        "Maturity and perspective gained during the break"
+      ],
+      "weaknesses_to_mitigate": [
+        "Career gap raises questions about skill currency",
+        "Technology or industry changes during the absence",
+        "Potential bias against candidates with employment gaps",
+        "Reduced professional network from time away"
+      ]
+    },
+    "entry_level": {
+      "name": "Entry Level",
+      "description": "Candidate with under 2 years of professional experience, typically a recent graduate or early career professional.",
+      "detection_signals": {
+        "keywords": [
+          "intern",
+          "internship",
+          "junior",
+          "associate",
+          "entry-level",
+          "recent graduate",
+          "new grad",
+          "graduating",
+          "class of",
+          "GPA",
+          "dean's list",
+          "coursework",
+          "capstone"
+        ],
+        "patterns": [
+          "Education section is more detailed than experience section",
+          "Projects section features academic or personal projects",
+          "Experience consists primarily of internships or part-time roles",
+          "Summary uses language like 'aspiring', 'passionate', 'eager to learn'",
+          "Graduation date is within the last 2 years"
+        ],
+        "structural_indicators": [
+          "Less than 2 years of total professional experience",
+          "0-2 full-time roles listed",
+          "Education section includes GPA, coursework, or honors",
+          "Multiple internship entries",
+          "Resume is 1 page or less",
+          "Presence of academic projects, hackathons, or student organizations"
+        ]
+      },
+      "recommended_format": "reverse-chronological",
+      "key_strengths_to_emphasize": [
+        "Education quality and relevant coursework",
+        "Technical projects demonstrating practical skills",
+        "Internship achievements with measurable impact",
+        "Leadership in student organizations or extracurriculars",
+        "Certifications and technical skills"
+      ],
+      "weaknesses_to_mitigate": [
+        "Limited professional experience",
+        "Lack of industry-specific track record",
+        "No management or leadership experience in professional settings",
+        "Potential over-reliance on academic credentials"
+      ]
+    },
+    "executive": {
+      "name": "Executive",
+      "description": "Director-level or above with 15+ years of experience. Focus is on leadership scope, strategic impact, and organizational transformation.",
+      "detection_signals": {
+        "keywords": [
+          "VP",
+          "Vice President",
+          "SVP",
+          "EVP",
+          "C-suite",
+          "CEO",
+          "CTO",
+          "CFO",
+          "COO",
+          "CMO",
+          "CIO",
+          "CISO",
+          "Chief",
+          "Director",
+          "Head of",
+          "General Manager",
+          "Partner",
+          "Managing Director",
+          "board",
+          "P&L",
+          "revenue",
+          "transformation",
+          "strategic"
+        ],
+        "patterns": [
+          "Job titles include Director, VP, SVP, C-level, or Head of",
+          "Achievements reference revenue, P&L, organizational scope, or headcount",
+          "Experience spans 15+ years with progressively senior roles",
+          "Board memberships, advisory roles, or speaking engagements listed",
+          "Summary positions candidate as a strategic leader"
+        ],
+        "structural_indicators": [
+          "15+ years of professional experience",
+          "At least one Director-level or above title",
+          "Achievements include dollar amounts in millions or billions",
+          "Team sizes of 50+ people managed",
+          "Resume is 2+ pages",
+          "Presence of board, advisory, or industry leadership roles"
+        ]
+      },
+      "recommended_format": "reverse-chronological",
+      "key_strengths_to_emphasize": [
+        "Leadership scope (teams, budgets, P&L)",
+        "Strategic impact and business outcomes",
+        "Organizational transformation and change leadership",
+        "Board-level experience and governance",
+        "Industry recognition and thought leadership"
+      ],
+      "weaknesses_to_mitigate": [
+        "Resume may be too long with excessive detail on older roles",
+        "Could appear over-qualified for non-executive positions",
+        "Technical skills may appear outdated if not maintained",
+        "May need to demonstrate hands-on capability for smaller organizations"
+      ]
+    },
+    "military_transitioner": {
+      "name": "Military Transitioner",
+      "description": "Candidate transitioning from active military service to civilian employment. Military experience requires translation to civilian-equivalent language.",
+      "detection_signals": {
+        "keywords": [
+          "military",
+          "Army",
+          "Navy",
+          "Air Force",
+          "Marine",
+          "Marines",
+          "Coast Guard",
+          "Space Force",
+          "National Guard",
+          "veteran",
+          "active duty",
+          "enlisted",
+          "officer",
+          "commissioned",
+          "non-commissioned",
+          "NCO",
+          "deployment",
+          "MOS",
+          "AFSC",
+          "NEC",
+          "rank",
+          "security clearance",
+          "Top Secret",
+          "TS/SCI",
+          "DD-214",
+          "GI Bill",
+          "honorable discharge"
+        ],
+        "patterns": [
+          "Job titles include military ranks (Captain, Sergeant, Lieutenant, etc.)",
+          "Experience entries reference military bases, units, or commands",
+          "Achievements described using military terminology and acronyms",
+          "Security clearance level mentioned",
+          "Training and certifications from military institutions",
+          "Dates of service with branch identification"
+        ],
+        "structural_indicators": [
+          "Employer is a branch of the military",
+          "Military ranks used as job titles",
+          "Security clearance mentioned in summary or skills",
+          "Military-specific certifications or training",
+          "MOS, AFSC, or NEC codes referenced",
+          "Multiple deployments or duty station changes"
+        ]
+      },
+      "recommended_format": "hybrid",
+      "key_strengths_to_emphasize": [
+        "Leadership experience (often leading large teams at young ages)",
+        "Discipline, reliability, and mission-focused work ethic",
+        "Security clearances (highly valued in defense and government sectors)",
+        "Training and certifications from rigorous military programs",
+        "Experience operating in high-pressure and complex environments",
+        "Project management, logistics, and operations expertise"
+      ],
+      "weaknesses_to_mitigate": [
+        "Military jargon and acronyms that civilians do not understand",
+        "Job titles that have no direct civilian equivalent",
+        "Perception that military experience does not translate to corporate settings",
+        "Potential culture mismatch concerns from hiring managers",
+        "May lack civilian industry-specific experience or certifications"
+      ]
+    },
+    "international_candidate": {
+      "name": "International Candidate",
+      "description": "Candidate applying from or relocating to a different country. May face work authorization concerns, credential recognition, and cultural resume convention differences.",
+      "detection_signals": {
+        "keywords": [
+          "visa",
+          "work permit",
+          "work authorization",
+          "authorized to work",
+          "sponsorship",
+          "H-1B",
+          "OPT",
+          "CPT",
+          "EAD",
+          "green card",
+          "permanent resident",
+          "relocation",
+          "relocating",
+          "international",
+          "global",
+          "expat",
+          "IELTS",
+          "TOEFL",
+          "bilingual",
+          "multilingual",
+          "native speaker"
+        ],
+        "patterns": [
+          "Education from institutions in foreign countries",
+          "Work experience at companies in multiple countries",
+          "Language proficiency section listing multiple languages",
+          "Address or location in a different country than the target job market",
+          "Resume includes personal information common in other countries (date of birth, nationality, photo)",
+          "Work authorization or visa status mentioned"
+        ],
+        "structural_indicators": [
+          "Educational institutions are international (non-domestic)",
+          "Work history spans multiple countries",
+          "Language skills section present with multiple languages",
+          "Resume includes elements uncommon in the target country (photo, DOB, marital status)",
+          "Visa or work authorization status explicitly mentioned",
+          "Resume length or format follows conventions of another country"
+        ]
+      },
+      "recommended_format": "reverse-chronological",
+      "key_strengths_to_emphasize": [
+        "International perspective and cross-cultural competence",
+        "Multilingual abilities",
+        "Experience working across different markets and regulatory environments",
+        "Global network and relationships",
+        "Adaptability demonstrated by working in multiple countries"
+      ],
+      "weaknesses_to_mitigate": [
+        "Work authorization uncertainty may deter employers",
+        "Foreign credentials may not be recognized or understood",
+        "Resume conventions from other countries may seem unusual",
+        "Potential language or communication concerns",
+        "Unfamiliarity with local industry norms or business culture"
+      ]
+    }
+  },
+  "detection_rules": {
+    "scoring_method": "Each archetype is scored from 0 to 1 based on the proportion and strength of matching signals. Keyword matches carry less weight individually than pattern or structural indicator matches.",
+    "signal_weights": {
+      "keyword_match": 0.1,
+      "pattern_match": 0.3,
+      "structural_indicator_match": 0.3
+    },
+    "primary_threshold": "Highest scoring archetype becomes primary if confidence >= 0.3",
+    "secondary_threshold": "Second-highest scoring archetype becomes secondary if confidence >= 0.4",
+    "multi_archetype_handling": "When a secondary archetype is detected, use the primary archetype's format recommendation but apply the secondary archetype's mitigation strategies as supplementary advice."
+  }
+}

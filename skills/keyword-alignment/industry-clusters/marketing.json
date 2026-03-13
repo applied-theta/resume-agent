@@ -1,0 +1,306 @@
+{
+  "description": "Marketing industry keyword clusters for semantic matching. Covers digital marketing, content/brand, product marketing, growth, analytics, and communications.",
+  "industry": "marketing",
+  "clusters": {
+    "digital_marketing": {
+      "seo": {
+        "canonical": "Search Engine Optimization",
+        "synonyms": ["search engine optimization"],
+        "abbreviations": ["SEO"],
+        "related": ["Google Search Console", "Ahrefs", "SEMrush", "Moz", "organic traffic", "domain authority", "keyword research", "on-page SEO", "technical SEO", "link building"]
+      },
+      "sem": {
+        "canonical": "Search Engine Marketing",
+        "synonyms": ["search engine marketing", "paid search"],
+        "abbreviations": ["SEM"],
+        "related": ["Google Ads", "Bing Ads", "PPC", "ad auctions", "quality score"]
+      },
+      "ppc": {
+        "canonical": "Pay-Per-Click",
+        "synonyms": ["pay-per-click advertising", "paid search advertising"],
+        "abbreviations": ["PPC"],
+        "related": ["Google Ads", "Meta Ads Manager", "LinkedIn Campaign Manager", "CPC", "CPA", "ROAS", "display advertising"]
+      },
+      "content_marketing": {
+        "canonical": "Content Marketing",
+        "synonyms": ["inbound marketing"],
+        "abbreviations": [],
+        "related": ["blog posts", "whitepapers", "ebooks", "webinars", "content distribution", "editorial calendar", "content strategy"]
+      },
+      "email_marketing": {
+        "canonical": "Email Marketing",
+        "synonyms": ["email campaigns"],
+        "abbreviations": [],
+        "related": ["Mailchimp", "Klaviyo", "marketing automation", "drip campaigns", "open rate", "click-through rate", "segmentation", "personalization"]
+      },
+      "social_media_marketing": {
+        "canonical": "Social Media Marketing",
+        "synonyms": ["social media management", "social media strategy"],
+        "abbreviations": ["SMM"],
+        "related": ["Meta Ads Manager", "LinkedIn Campaign Manager", "Hootsuite", "Sprout Social", "engagement rate", "impressions", "reach", "influencer marketing"]
+      },
+      "programmatic_advertising": {
+        "canonical": "Programmatic Advertising",
+        "synonyms": ["programmatic media buying"],
+        "abbreviations": [],
+        "related": ["display advertising", "DSP", "SSP", "RTB", "CPM", "ad exchange", "DMP"]
+      },
+      "marketing_automation": {
+        "canonical": "Marketing Automation",
+        "synonyms": ["automated marketing"],
+        "abbreviations": [],
+        "related": ["HubSpot", "Marketo", "Pardot", "lead nurturing", "drip campaigns", "workflow automation", "lead scoring"]
+      },
+      "cro": {
+        "canonical": "Conversion Rate Optimization",
+        "synonyms": ["conversion optimization"],
+        "abbreviations": ["CRO"],
+        "related": ["A/B testing", "landing pages", "user experience", "funnel optimization", "heatmaps", "Optimizely"]
+      },
+      "affiliate_marketing": {
+        "canonical": "Affiliate Marketing",
+        "synonyms": ["affiliate programs", "partner marketing"],
+        "abbreviations": [],
+        "related": ["referral programs", "commission structures", "tracking pixels", "affiliate networks"]
+      },
+      "influencer_marketing": {
+        "canonical": "Influencer Marketing",
+        "synonyms": ["creator marketing", "influencer partnerships"],
+        "abbreviations": [],
+        "related": ["brand ambassadors", "sponsored content", "social media marketing", "micro-influencers", "KOL"]
+      }
+    },
+    "content_and_brand": {
+      "content_strategy": {
+        "canonical": "Content Strategy",
+        "synonyms": ["editorial strategy"],
+        "abbreviations": [],
+        "related": ["editorial planning", "content calendar management", "content distribution", "content audit", "content governance"]
+      },
+      "copywriting": {
+        "canonical": "Copywriting",
+        "synonyms": ["copy writing", "ad copy"],
+        "abbreviations": [],
+        "related": ["landing pages", "email copy", "ad copy", "UX writing", "Grammarly", "tone of voice"]
+      },
+      "brand_storytelling": {
+        "canonical": "Brand Storytelling",
+        "synonyms": ["brand narrative", "brand story"],
+        "abbreviations": [],
+        "related": ["brand positioning", "messaging framework", "thought leadership", "brand guidelines"]
+      },
+      "brand_positioning": {
+        "canonical": "Brand Positioning",
+        "synonyms": ["brand strategy"],
+        "abbreviations": [],
+        "related": ["messaging framework", "brand guidelines", "tone of voice", "brand identity", "competitive differentiation"]
+      },
+      "thought_leadership": {
+        "canonical": "Thought Leadership",
+        "synonyms": ["industry thought leadership"],
+        "abbreviations": [],
+        "related": ["whitepapers", "speaking engagements", "bylined articles", "executive positioning", "webinars", "podcasts"]
+      },
+      "video_marketing": {
+        "canonical": "Video Marketing",
+        "synonyms": ["video content", "video production"],
+        "abbreviations": [],
+        "related": ["YouTube", "webinars", "social video", "explainer videos", "live streaming"]
+      },
+      "cms": {
+        "canonical": "Content Management System",
+        "synonyms": ["content management"],
+        "abbreviations": ["CMS"],
+        "related": ["WordPress", "Contentful", "Drupal", "headless CMS", "DAM", "digital asset management"]
+      }
+    },
+    "product_marketing": {
+      "gtm_strategy": {
+        "canonical": "Go-to-Market Strategy",
+        "synonyms": ["go-to-market", "GTM strategy", "go-to-market plan"],
+        "abbreviations": ["GTM"],
+        "related": ["product launches", "market entry", "launch planning", "channel strategy"]
+      },
+      "product_positioning": {
+        "canonical": "Product Positioning",
+        "synonyms": ["positioning strategy"],
+        "abbreviations": [],
+        "related": ["positioning documents", "messaging framework", "value proposition", "differentiation"]
+      },
+      "competitive_intelligence": {
+        "canonical": "Competitive Intelligence",
+        "synonyms": ["competitive analysis", "competitor research"],
+        "abbreviations": ["CI"],
+        "related": ["battle cards", "competitive matrices", "win/loss analysis", "market research"]
+      },
+      "sales_enablement": {
+        "canonical": "Sales Enablement",
+        "synonyms": ["sales support", "revenue enablement"],
+        "abbreviations": [],
+        "related": ["sales decks", "product one-pagers", "demo scripts", "battle cards", "ROI calculators", "customer testimonials"]
+      },
+      "market_research": {
+        "canonical": "Market Research",
+        "synonyms": ["market analysis", "market intelligence"],
+        "abbreviations": [],
+        "related": ["buyer persona development", "TAM/SAM/SOM", "surveys", "focus groups", "industry analysis"]
+      },
+      "product_launches": {
+        "canonical": "Product Launches",
+        "synonyms": ["product launch management", "launch management"],
+        "abbreviations": [],
+        "related": ["GTM strategy", "launch planning", "cross-functional coordination", "feature adoption"]
+      },
+      "pricing_strategy": {
+        "canonical": "Pricing Strategy",
+        "synonyms": ["pricing optimization", "pricing analysis"],
+        "abbreviations": [],
+        "related": ["competitive pricing", "value-based pricing", "freemium", "tiered pricing", "price elasticity"]
+      },
+      "analyst_relations": {
+        "canonical": "Analyst Relations",
+        "synonyms": ["industry analyst relations"],
+        "abbreviations": ["AR"],
+        "related": ["Gartner", "Forrester", "IDC", "Magic Quadrant", "Wave reports"]
+      }
+    },
+    "growth_and_performance": {
+      "growth_hacking": {
+        "canonical": "Growth Hacking",
+        "synonyms": ["growth marketing", "growth strategy"],
+        "abbreviations": [],
+        "related": ["viral loops", "referral programs", "user acquisition", "experimentation framework"]
+      },
+      "funnel_optimization": {
+        "canonical": "Funnel Optimization",
+        "synonyms": ["conversion funnel optimization", "sales funnel optimization"],
+        "abbreviations": [],
+        "related": ["TOFU", "MOFU", "BOFU", "lead generation", "nurture campaigns", "conversion rate"]
+      },
+      "ab_testing": {
+        "canonical": "A/B Testing",
+        "synonyms": ["split testing", "multivariate testing"],
+        "abbreviations": [],
+        "related": ["Optimizely", "LaunchDarkly", "experimentation framework", "statistical significance", "hypothesis testing"]
+      },
+      "user_acquisition": {
+        "canonical": "User Acquisition",
+        "synonyms": ["customer acquisition"],
+        "abbreviations": ["UA"],
+        "related": ["CAC", "paid channels", "organic channels", "Appsflyer", "Branch", "mobile acquisition"]
+      },
+      "retention_marketing": {
+        "canonical": "Retention Marketing",
+        "synonyms": ["lifecycle marketing", "customer retention"],
+        "abbreviations": [],
+        "related": ["churn rate", "retention rate", "Braze", "Iterable", "email sequences", "push notifications", "in-app messaging"]
+      },
+      "cohort_analysis": {
+        "canonical": "Cohort Analysis",
+        "synonyms": ["cohort-based analysis"],
+        "abbreviations": [],
+        "related": ["retention curves", "user segmentation", "behavioral analytics", "Amplitude", "Mixpanel"]
+      },
+      "attribution_modeling": {
+        "canonical": "Attribution Modeling",
+        "synonyms": ["marketing attribution", "conversion attribution"],
+        "abbreviations": [],
+        "related": ["multi-touch attribution", "first-touch", "last-touch", "Segment", "data-driven attribution"]
+      },
+      "ltv": {
+        "canonical": "Lifetime Value",
+        "synonyms": ["customer lifetime value", "CLV"],
+        "abbreviations": ["LTV", "CLV", "CLTV"],
+        "related": ["CAC", "LTV:CAC ratio", "ARPU", "MRR", "ARR", "unit economics"]
+      }
+    },
+    "marketing_analytics": {
+      "marketing_analytics": {
+        "canonical": "Marketing Analytics",
+        "synonyms": ["data-driven marketing", "marketing data analytics"],
+        "abbreviations": [],
+        "related": ["Google Analytics", "GA4", "Tableau", "Looker", "SQL", "Python", "R", "dashboards"]
+      },
+      "marketing_attribution": {
+        "canonical": "Marketing Attribution",
+        "synonyms": ["attribution analysis"],
+        "abbreviations": ["MTA"],
+        "related": ["multi-touch attribution", "media mix modeling", "MMM", "incrementality testing", "Segment"]
+      },
+      "crm_management": {
+        "canonical": "CRM Management",
+        "synonyms": ["customer relationship management"],
+        "abbreviations": ["CRM"],
+        "related": ["Salesforce", "HubSpot", "lead scoring", "pipeline management", "customer segmentation"]
+      },
+      "marketing_operations": {
+        "canonical": "Marketing Operations",
+        "synonyms": ["MOps", "marketing ops"],
+        "abbreviations": ["MOps"],
+        "related": ["martech stack management", "process optimization", "data governance", "campaign operations", "workflow automation"]
+      },
+      "martech": {
+        "canonical": "Marketing Technology",
+        "synonyms": ["martech stack", "marketing tech stack"],
+        "abbreviations": ["martech"],
+        "related": ["HubSpot", "Marketo", "Pardot", "Salesforce", "CDP", "customer data platform", "Segment", "integration"]
+      },
+      "cdp": {
+        "canonical": "Customer Data Platform",
+        "synonyms": ["customer data management"],
+        "abbreviations": ["CDP"],
+        "related": ["Segment", "first-party data", "data unification", "audience segmentation", "identity resolution"]
+      },
+      "lead_scoring": {
+        "canonical": "Lead Scoring",
+        "synonyms": ["lead qualification", "lead grading"],
+        "abbreviations": [],
+        "related": ["MQL", "SQL", "marketing qualified lead", "sales qualified lead", "predictive scoring", "CRM"]
+      }
+    },
+    "communications": {
+      "public_relations": {
+        "canonical": "Public Relations",
+        "synonyms": ["PR", "media outreach"],
+        "abbreviations": ["PR"],
+        "related": ["press releases", "media pitching", "earned media", "media impressions", "share of voice"]
+      },
+      "media_relations": {
+        "canonical": "Media Relations",
+        "synonyms": ["press relations", "journalist relations"],
+        "abbreviations": [],
+        "related": ["press coverage", "media list", "press release writing", "media briefings", "editorial calendar"]
+      },
+      "crisis_communications": {
+        "canonical": "Crisis Communications",
+        "synonyms": ["crisis management", "crisis PR"],
+        "abbreviations": [],
+        "related": ["reputation management", "media response", "stakeholder communication", "messaging strategy"]
+      },
+      "corporate_communications": {
+        "canonical": "Corporate Communications",
+        "synonyms": ["corporate comms"],
+        "abbreviations": [],
+        "related": ["internal communications", "executive communications", "employee engagement", "company messaging"]
+      },
+      "internal_communications": {
+        "canonical": "Internal Communications",
+        "synonyms": ["internal comms", "employee communications"],
+        "abbreviations": [],
+        "related": ["intranet", "town halls", "newsletters", "change communications", "culture"]
+      },
+      "event_management": {
+        "canonical": "Event Management",
+        "synonyms": ["event marketing", "event planning"],
+        "abbreviations": [],
+        "related": ["conferences", "trade shows", "webinars", "speaking engagements", "virtual events", "field marketing"]
+      },
+      "sentiment_analysis": {
+        "canonical": "Sentiment Analysis",
+        "synonyms": ["brand sentiment", "social listening"],
+        "abbreviations": [],
+        "related": ["share of voice", "media monitoring", "earned media value", "brand perception"]
+      }
+    }
+  }
+}

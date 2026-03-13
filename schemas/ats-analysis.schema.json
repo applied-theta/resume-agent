@@ -1,0 +1,73 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": ["overall_score", "dimensions"],
+  "properties": {
+    "overall_score": { "type": "number", "minimum": 0, "maximum": 100 },
+    "dimensions": {
+      "type": "object",
+      "required": ["parsability", "format_compliance", "keyword_readiness", "structure_quality"],
+      "properties": {
+        "parsability": {
+          "type": "object",
+          "required": ["score", "issues", "recommendations"],
+          "properties": {
+            "score": { "type": "number", "minimum": 0, "maximum": 100 },
+            "issues": { "type": "array", "items": { "type": "string" } },
+            "recommendations": { "type": "array", "items": { "type": "string" } }
+          }
+        },
+        "format_compliance": {
+          "type": "object",
+          "required": ["score", "issues", "recommendations"],
+          "properties": {
+            "score": { "type": "number", "minimum": 0, "maximum": 100 },
+            "issues": { "type": "array", "items": { "type": "string" } },
+            "recommendations": { "type": "array", "items": { "type": "string" } }
+          }
+        },
+        "keyword_readiness": {
+          "type": "object",
+          "required": ["score", "issues", "recommendations"],
+          "properties": {
+            "score": { "type": "number", "minimum": 0, "maximum": 100 },
+            "issues": { "type": "array", "items": { "type": "string" } },
+            "recommendations": { "type": "array", "items": { "type": "string" } }
+          }
+        },
+        "structure_quality": {
+          "type": "object",
+          "required": ["score", "issues", "recommendations"],
+          "properties": {
+            "score": { "type": "number", "minimum": 0, "maximum": 100 },
+            "issues": { "type": "array", "items": { "type": "string" } },
+            "recommendations": { "type": "array", "items": { "type": "string" } }
+          }
+        }
+      }
+    },
+    "critical_issues": { "type": "array", "items": { "type": "string" } },
+    "platform_specific_notes": { "type": "object" },
+    "platform_simulation": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["platform", "score", "issues", "tips", "data_source"],
+        "properties": {
+          "platform": {
+            "type": "string",
+            "enum": ["Workday", "Greenhouse", "Lever"]
+          },
+          "score": { "type": "number", "minimum": 0, "maximum": 100 },
+          "issues": { "type": "array", "items": { "type": "string" } },
+          "tips": { "type": "array", "items": { "type": "string" } },
+          "data_source": {
+            "type": "string",
+            "enum": ["live_research", "static_baseline", "mixed"]
+          },
+          "contradictions": { "type": "array", "items": { "type": "string" } }
+        }
+      }
+    }
+  }
+}

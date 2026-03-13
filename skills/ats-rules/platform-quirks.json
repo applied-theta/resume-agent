@@ -1,0 +1,209 @@
+{
+  "description": "Platform-specific ATS parsing behaviors and quirks. Used by the ats-analyzer agent to provide targeted recommendations.",
+  "platforms": {
+    "workday": {
+      "name": "Workday",
+      "market_segment": "enterprise",
+      "prevalence": "Very high - dominant in Fortune 500 and large enterprises",
+      "parsing_engine": "Proprietary with optional third-party integration",
+      "strengths": [
+        "Good at extracting structured fields from clean PDFs",
+        "Supports standard section headers reliably",
+        "Handles bullet points well"
+      ],
+      "weaknesses": [
+        "Struggles with multi-column layouts",
+        "May misparse tables, reading left-to-right across rows",
+        "Header and footer content is often ignored",
+        "Custom fonts can cause character encoding issues"
+      ],
+      "quirks": [
+        "Requires applicants to manually correct parsed fields, so parsing errors are visible to candidates",
+        "Resume text is re-parsed when recruiters search, so keyword placement matters",
+        "Date parsing expects Month YYYY or MM/YYYY format",
+        "LinkedIn URL field is extracted separately from the resume body"
+      ],
+      "recommended_format": "Single-column PDF with standard fonts, no tables",
+      "file_size_limit_mb": 5,
+      "supported_formats": ["pdf", "docx", "doc", "txt", "rtf"]
+    },
+    "greenhouse": {
+      "name": "Greenhouse",
+      "market_segment": "tech, startups, mid-market",
+      "prevalence": "High - popular in technology sector and fast-growing companies",
+      "parsing_engine": "Third-party parsing (uses multiple vendors)",
+      "strengths": [
+        "Generally more tolerant of modern formatting",
+        "Good at extracting skills from various formats",
+        "Handles hyperlinks well",
+        "Better than average at multi-column layouts"
+      ],
+      "weaknesses": [
+        "Text boxes may still be skipped depending on the parsing vendor",
+        "Image-based content is not extracted",
+        "Very complex table layouts can still cause issues"
+      ],
+      "quirks": [
+        "Parsing quality can vary because Greenhouse uses third-party vendors that may change",
+        "Extracted text is used for search matching, not field-by-field parsing in most cases",
+        "Supports resume parsing from LinkedIn profile imports",
+        "Custom questions in applications are separate from resume parsing"
+      ],
+      "recommended_format": "Clean PDF or DOCX, standard fonts",
+      "file_size_limit_mb": 25,
+      "supported_formats": ["pdf", "docx", "doc", "txt", "rtf"]
+    },
+    "lever": {
+      "name": "Lever",
+      "market_segment": "startups, mid-market, tech",
+      "prevalence": "Moderate-high - popular with tech companies and modern hiring teams",
+      "parsing_engine": "Proprietary parsing engine",
+      "strengths": [
+        "Strong text extraction from standard PDFs",
+        "Good at identifying section boundaries",
+        "Handles standard bullet point formats well",
+        "Decent handling of simple two-column layouts"
+      ],
+      "weaknesses": [
+        "Complex table layouts cause misaligned data",
+        "Text boxes with contact info may be missed",
+        "Graphics and icons are ignored",
+        "Non-standard section headers may not map to the correct fields"
+      ],
+      "quirks": [
+        "Lever combines ATS and CRM, so parsed resume data feeds into relationship tracking",
+        "Keyword search looks at the full text, not just parsed fields",
+        "Resume snapshots are stored as PDFs regardless of upload format",
+        "Supports applying via LinkedIn profile, reducing resume parsing dependency"
+      ],
+      "recommended_format": "Single-column PDF with clear section headers",
+      "file_size_limit_mb": 10,
+      "supported_formats": ["pdf", "docx", "doc", "txt", "rtf", "odt"]
+    },
+    "taleo": {
+      "name": "Taleo (Oracle)",
+      "market_segment": "large enterprise, government",
+      "prevalence": "Moderate - declining but still widely used in legacy enterprise environments",
+      "parsing_engine": "Proprietary legacy parser",
+      "strengths": [
+        "Very predictable parsing behavior once you know the rules",
+        "Strong at extracting standard formatted resumes",
+        "Well-documented field mapping"
+      ],
+      "weaknesses": [
+        "Most restrictive parser among major platforms",
+        "Tables are frequently misread or ignored",
+        "Text boxes are almost always skipped",
+        "Headers and footers are completely ignored",
+        "Non-standard fonts cause garbled characters",
+        "Multi-column layouts break parsing entirely",
+        "Special characters and Unicode are poorly handled"
+      ],
+      "quirks": [
+        "Often requires candidates to paste resume text into a plain text box in addition to uploading a file",
+        "Parsing results are used to auto-populate application forms that candidates must verify",
+        "Search functionality relies heavily on exact keyword matching, not semantic matching",
+        "Date format is very strict: Month YYYY or MM/DD/YYYY expected",
+        "Section headers must closely match Taleo's predefined categories"
+      ],
+      "recommended_format": "Simple single-column PDF or plain text, absolutely no tables or graphics",
+      "file_size_limit_mb": 5,
+      "supported_formats": ["pdf", "docx", "doc", "txt", "rtf", "html"]
+    },
+    "icims": {
+      "name": "iCIMS",
+      "market_segment": "enterprise, healthcare, retail",
+      "prevalence": "Moderate-high - significant market share in large enterprise hiring",
+      "parsing_engine": "Proprietary with Textkernel integration",
+      "strengths": [
+        "Good at extracting contact information",
+        "Handles standard resume formats reliably",
+        "Decent skills extraction from dedicated skills sections",
+        "Better than Taleo at handling minor formatting variations"
+      ],
+      "weaknesses": [
+        "Tables with complex layouts cause parsing errors",
+        "Text boxes may be partially or fully skipped",
+        "Images and graphics are ignored",
+        "Headers/footers are unreliable for content extraction"
+      ],
+      "quirks": [
+        "Uses AI-powered matching that goes beyond simple keyword matching",
+        "Parsed fields feed into automated screening questions",
+        "Resume data is used for compliance reporting, so accurate parsing matters for candidates",
+        "Supports multiple resume versions per candidate profile",
+        "Date parsing handles Month YYYY and MM/YYYY but may struggle with other formats"
+      ],
+      "recommended_format": "Single-column PDF or DOCX with standard section headers",
+      "file_size_limit_mb": 10,
+      "supported_formats": ["pdf", "docx", "doc", "txt", "rtf"]
+    },
+    "brassring": {
+      "name": "BrassRing (Kenexa/IBM)",
+      "market_segment": "government, defense, large enterprise",
+      "prevalence": "Low-moderate - declining, but still used in government and defense sectors",
+      "parsing_engine": "Legacy proprietary parser",
+      "strengths": [
+        "Predictable behavior with standard formats",
+        "Strong compliance-oriented field extraction"
+      ],
+      "weaknesses": [
+        "Very strict parsing requirements similar to Taleo",
+        "Poor handling of any non-standard formatting",
+        "Tables, text boxes, and graphics all cause failures",
+        "Limited font support",
+        "Multi-column layouts not supported",
+        "Unicode and special characters poorly handled"
+      ],
+      "quirks": [
+        "Common in government and defense where compliance tracking is critical",
+        "Often paired with very long application forms where parsed data auto-populates fields",
+        "Keyword matching is typically exact-match, not semantic",
+        "Older installations may have even stricter file size and format limits",
+        "May require specific date formats tied to regional settings"
+      ],
+      "recommended_format": "Plain single-column PDF or plain text, minimal formatting",
+      "file_size_limit_mb": 5,
+      "supported_formats": ["pdf", "docx", "doc", "txt"]
+    },
+    "successfactors": {
+      "name": "SAP SuccessFactors",
+      "market_segment": "enterprise, multinational",
+      "prevalence": "Moderate - used by large multinational corporations",
+      "parsing_engine": "Proprietary with optional third-party parsing",
+      "strengths": [
+        "Good integration with SAP HR ecosystem",
+        "Handles multilingual resumes better than most platforms",
+        "Standard format parsing is reliable"
+      ],
+      "weaknesses": [
+        "Tables can cause issues depending on configuration",
+        "Complex formatting may not parse correctly",
+        "Image-based content is not extracted",
+        "Parsing quality varies significantly by customer configuration"
+      ],
+      "quirks": [
+        "Parsing behavior depends heavily on how the customer has configured their instance",
+        "May use different parsing vendors in different regions",
+        "Supports structured resume profiles that candidates can edit directly",
+        "Integration with LinkedIn is available but implementation varies",
+        "Date format expectations may vary by regional configuration"
+      ],
+      "recommended_format": "Clean single-column PDF with standard fonts and headers",
+      "file_size_limit_mb": 10,
+      "supported_formats": ["pdf", "docx", "doc", "txt", "rtf"]
+    }
+  },
+  "cross_platform_recommendations": [
+    "Use a single-column layout to ensure correct reading order on all platforms",
+    "Place contact information in the document body, not in headers or footers",
+    "Use standard section headers: Experience, Education, Skills, Summary, Certifications",
+    "Use Month YYYY date format for maximum compatibility",
+    "Avoid tables, text boxes, images, and graphics entirely",
+    "Use standard fonts: Arial, Calibri, Times New Roman, or Garamond",
+    "Keep file size under 5 MB to meet the most restrictive platform limits",
+    "Pair acronyms with full terms on first use: 'Amazon Web Services (AWS)'",
+    "Include a dedicated skills section with discrete, comma-separated or bulleted items",
+    "Save as PDF with selectable text (not a scanned image)"
+  ]
+}

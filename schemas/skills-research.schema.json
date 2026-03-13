@@ -1,0 +1,151 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": [
+    "overall_score",
+    "target_role",
+    "skill_assessments",
+    "terminology_verification",
+    "trending_skills",
+    "recommendations",
+    "sources"
+  ],
+  "properties": {
+    "overall_score": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 100
+    },
+    "target_role": {
+      "type": "object",
+      "required": ["title", "source"],
+      "properties": {
+        "title": { "type": "string" },
+        "source": {
+          "type": "string",
+          "enum": ["job_description", "inferred"]
+        },
+        "inferred_from": {
+          "type": "string"
+        }
+      }
+    },
+    "skill_assessments": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["skill", "demand", "trend"],
+        "properties": {
+          "skill": { "type": "string" },
+          "demand": {
+            "type": "string",
+            "enum": ["High", "Moderate", "Low", "Emerging"]
+          },
+          "trend": {
+            "type": "string",
+            "enum": ["Rising", "Stable", "Declining"]
+          },
+          "salary_impact": {
+            "type": "object",
+            "properties": {
+              "description": { "type": "string" },
+              "premium_percentage": { "type": "number" }
+            }
+          },
+          "source_citation": { "$ref": "#/$defs/source_citation" },
+          "fallback_label": { "type": "string" }
+        }
+      }
+    },
+    "terminology_verification": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["original", "correct", "is_correct"],
+        "properties": {
+          "original": { "type": "string" },
+          "correct": { "type": "string" },
+          "is_correct": { "type": "boolean" },
+          "suggestion": { "type": "string" },
+          "source_citation": { "$ref": "#/$defs/source_citation" },
+          "fallback_label": { "type": "string" }
+        }
+      }
+    },
+    "trending_skills": {
+      "type": "array",
+      "minItems": 3,
+      "maxItems": 5,
+      "items": {
+        "type": "object",
+        "required": ["skill", "relevance", "demand"],
+        "properties": {
+          "skill": { "type": "string" },
+          "relevance": { "type": "string" },
+          "demand": {
+            "type": "string",
+            "enum": ["High", "Moderate", "Low", "Emerging"]
+          },
+          "trend": {
+            "type": "string",
+            "enum": ["Rising", "Stable", "Declining"]
+          },
+          "salary_impact": {
+            "type": "object",
+            "properties": {
+              "description": { "type": "string" },
+              "premium_percentage": { "type": "number" }
+            }
+          },
+          "source_citation": { "$ref": "#/$defs/source_citation" },
+          "fallback_label": { "type": "string" }
+        }
+      }
+    },
+    "recommendations": {
+      "type": "object",
+      "required": ["high", "medium", "low"],
+      "properties": {
+        "high": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/recommendation" }
+        },
+        "medium": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/recommendation" }
+        },
+        "low": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/recommendation" }
+        }
+      }
+    },
+    "sources": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/source_citation" }
+    },
+    "fallback_label": {
+      "type": "string"
+    }
+  },
+  "$defs": {
+    "source_citation": {
+      "type": "object",
+      "required": ["description"],
+      "properties": {
+        "url": { "type": "string", "format": "uri" },
+        "description": { "type": "string" }
+      }
+    },
+    "recommendation": {
+      "type": "object",
+      "required": ["action", "rationale"],
+      "properties": {
+        "action": { "type": "string" },
+        "rationale": { "type": "string" },
+        "source_citation": { "$ref": "#/$defs/source_citation" },
+        "fallback_label": { "type": "string" }
+      }
+    }
+  }
+}

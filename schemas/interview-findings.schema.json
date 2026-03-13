@@ -1,0 +1,108 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": ["status", "optimization_directives"],
+  "properties": {
+    "status": {
+      "type": "string",
+      "enum": ["complete", "partial"]
+    },
+    "career_direction": {
+      "type": "string"
+    },
+    "new_accomplishments": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["content", "confidence", "verification_required"],
+        "properties": {
+          "content": { "type": "string" },
+          "confidence": {
+            "type": "string",
+            "const": "low"
+          },
+          "verification_required": {
+            "type": "boolean",
+            "const": true
+          }
+        }
+      }
+    },
+    "emphasis_preferences": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "gap_context": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["gap_type", "explanation"],
+        "properties": {
+          "gap_type": { "type": "string" },
+          "explanation": { "type": "string" }
+        }
+      }
+    },
+    "section_priorities": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string",
+        "enum": ["high", "medium", "low"]
+      }
+    },
+    "target_role_insights": {
+      "type": "object",
+      "properties": {
+        "target_title": { "type": "string" },
+        "target_company": { "type": "string" },
+        "target_industry": { "type": "string" }
+      }
+    },
+    "research_results": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/research_result" }
+    },
+    "optimization_directives": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "interview_metadata": {
+      "type": "object",
+      "required": ["questions_asked", "categories_covered", "duration_estimate"],
+      "properties": {
+        "questions_asked": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "categories_covered": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "duration_estimate": { "type": "string" }
+      }
+    }
+  },
+  "$defs": {
+    "research_result": {
+      "type": "object",
+      "required": ["query_type", "query", "findings", "sources", "relevance_to_resume", "status"],
+      "properties": {
+        "query_type": {
+          "type": "string",
+          "enum": ["company_research", "industry_trends", "skills_demand", "role_requirements"]
+        },
+        "query": { "type": "string" },
+        "findings": { "type": "string" },
+        "sources": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "relevance_to_resume": { "type": "string" },
+        "status": {
+          "type": "string",
+          "enum": ["complete", "partial", "inconclusive"]
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,80 @@
+{
+  "grade_mapping": [
+    { "min_score": 97, "grade": "A+", "label": "Exceptional" },
+    { "min_score": 93, "grade": "A", "label": "Excellent" },
+    { "min_score": 90, "grade": "A-", "label": "Very Good" },
+    { "min_score": 87, "grade": "B+", "label": "Good" },
+    { "min_score": 83, "grade": "B", "label": "Above Average" },
+    { "min_score": 80, "grade": "B-", "label": "Acceptable" },
+    { "min_score": 77, "grade": "C+", "label": "Below Average" },
+    { "min_score": 73, "grade": "C", "label": "Needs Improvement" },
+    { "min_score": 70, "grade": "C-", "label": "Weak" },
+    { "min_score": 67, "grade": "D+", "label": "Poor" },
+    { "min_score": 63, "grade": "D", "label": "Very Poor" },
+    { "min_score": 60, "grade": "D-", "label": "Critical" },
+    { "min_score": 0, "grade": "F", "label": "Failing" }
+  ],
+  "weights": {
+    "with_jd": {
+      "description": "Scoring weights when a job description is provided",
+      "dimensions": {
+        "ats_compatibility": { "weight": 0.18, "source_file": "ats-analysis.json", "score_field": "overall_score" },
+        "keyword_alignment": { "weight": 0.22, "source_file": "keyword-analysis.json", "score_field": "match_rate" },
+        "content_quality": { "weight": 0.22, "source_file": "content-analysis.json", "score_field": "overall_score" },
+        "strategic_positioning": { "weight": 0.13, "source_file": "strategy-analysis.json", "score_field": "overall_score" },
+        "structure_format": { "weight": 0.12, "source_file": "ats-analysis.json", "score_field": "dimensions.structure_quality.score" },
+        "market_intelligence": { "weight": 0.13, "source_file": "skills-research.json", "score_field": "overall_score" }
+      }
+    },
+    "without_jd": {
+      "description": "Scoring weights when no job description is provided",
+      "dimensions": {
+        "ats_compatibility": { "weight": 0.22, "source_file": "ats-analysis.json", "score_field": "overall_score" },
+        "content_quality": { "weight": 0.26, "source_file": "content-analysis.json", "score_field": "overall_score" },
+        "strategic_positioning": { "weight": 0.22, "source_file": "strategy-analysis.json", "score_field": "overall_score" },
+        "structure_format": { "weight": 0.17, "source_file": "ats-analysis.json", "score_field": "dimensions.structure_quality.score" },
+        "market_intelligence": { "weight": 0.13, "source_file": "skills-research.json", "score_field": "overall_score" }
+      }
+    }
+  },
+  "dimensions": {
+    "ats_compatibility": {
+      "display_name": "ATS Compatibility",
+      "description": "How well the resume performs when processed by Applicant Tracking Systems",
+      "agent": "ats-analyzer",
+      "score_range": [0, 100]
+    },
+    "keyword_alignment": {
+      "display_name": "Keyword Alignment",
+      "description": "How well the resume matches a specific job description's requirements",
+      "agent": "keyword-optimizer",
+      "score_range": [0, 100],
+      "requires_jd": true
+    },
+    "content_quality": {
+      "display_name": "Content Quality",
+      "description": "Quality of bullet points, action verbs, quantification, and narrative coherence",
+      "agent": "content-analyst",
+      "score_range": [0, 100]
+    },
+    "strategic_positioning": {
+      "display_name": "Strategic Positioning",
+      "description": "How effectively the resume positions the candidate's career story",
+      "agent": "strategy-advisor",
+      "score_range": [0, 100]
+    },
+    "structure_format": {
+      "display_name": "Structure & Format",
+      "description": "Resume organization, chronological order, consistency, and length appropriateness",
+      "agent": "ats-analyzer",
+      "score_range": [0, 100],
+      "derived_from": "ats-analysis.json dimensions.structure_quality.score"
+    },
+    "market_intelligence": {
+      "display_name": "Market Intelligence",
+      "description": "Research-backed analysis of skills demand, terminology accuracy, and industry trend alignment",
+      "agent": "skills-research",
+      "score_range": [0, 100]
+    }
+  }
+}

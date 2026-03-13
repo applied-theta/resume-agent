@@ -1,0 +1,89 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": ["metadata", "changes"],
+  "properties": {
+    "metadata": {
+      "type": "object",
+      "required": [
+        "session_id",
+        "resume_source",
+        "interview_conducted",
+        "rewrite_mode",
+        "total_changes",
+        "confidence_breakdown"
+      ],
+      "properties": {
+        "session_id": { "type": "string" },
+        "resume_source": { "type": "string" },
+        "interview_conducted": { "type": "boolean" },
+        "rewrite_mode": {
+          "type": "string",
+          "enum": ["conservative", "full_rewrite", "polish"]
+        },
+        "total_changes": { "type": "integer", "minimum": 0 },
+        "confidence_breakdown": {
+          "type": "object",
+          "required": ["high", "medium", "low"],
+          "properties": {
+            "high": { "type": "integer", "minimum": 0 },
+            "medium": { "type": "integer", "minimum": 0 },
+            "low": { "type": "integer", "minimum": 0 }
+          },
+          "additionalProperties": false
+        },
+        "summary": { "type": "string" }
+      }
+    },
+    "changes": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/change_entry" }
+    }
+  },
+  "$defs": {
+    "change_entry": {
+      "type": "object",
+      "required": [
+        "change_id",
+        "section",
+        "original_text",
+        "optimized_text",
+        "rationale",
+        "confidence",
+        "source",
+        "verification_required",
+        "status"
+      ],
+      "properties": {
+        "change_id": { "type": "string" },
+        "section": {
+          "type": "string",
+          "enum": ["summary", "experience", "skills", "education", "certifications", "structure"]
+        },
+        "location": {
+          "type": "object",
+          "properties": {
+            "experience_index": { "type": "integer" },
+            "bullet_index": { "type": "integer" }
+          }
+        },
+        "original_text": { "type": "string" },
+        "optimized_text": { "type": "string" },
+        "rationale": { "type": "string" },
+        "confidence": {
+          "type": "string",
+          "enum": ["High", "Medium", "Low"]
+        },
+        "source": {
+          "type": "string",
+          "enum": ["analysis", "interview", "both"]
+        },
+        "verification_required": { "type": "boolean" },
+        "status": {
+          "type": "string",
+          "enum": ["pending", "accepted", "rejected"]
+        }
+      }
+    }
+  }
+}

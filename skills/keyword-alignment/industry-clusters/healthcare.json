@@ -1,0 +1,204 @@
+{
+  "description": "Healthcare industry keyword clusters for semantic matching. Covers clinical systems, health IT, regulatory compliance, medical specialties, and healthcare administration.",
+  "industry": "healthcare",
+  "clusters": {
+    "health_it": {
+      "ehr_emr": {
+        "canonical": "Electronic Health Records",
+        "synonyms": ["Electronic Medical Records", "EHR systems", "EMR systems"],
+        "abbreviations": ["EHR", "EMR"],
+        "related": ["Epic", "Cerner", "Allscripts", "MEDITECH", "athenahealth", "clinical documentation", "chart review"]
+      },
+      "epic": {
+        "canonical": "Epic Systems",
+        "synonyms": ["Epic EHR", "Epic"],
+        "abbreviations": [],
+        "related": ["MyChart", "Epic Caboodle", "Epic Cogito", "Hyperspace", "Epic certification"]
+      },
+      "hl7": {
+        "canonical": "HL7",
+        "synonyms": ["Health Level Seven"],
+        "abbreviations": ["HL7"],
+        "related": ["FHIR", "HL7 v2", "HL7 v3", "CDA", "ADT messages", "ORU messages", "interoperability"]
+      },
+      "fhir": {
+        "canonical": "FHIR",
+        "synonyms": ["Fast Healthcare Interoperability Resources"],
+        "abbreviations": ["FHIR"],
+        "related": ["HL7", "REST API", "interoperability", "healthcare API", "SMART on FHIR", "resources"]
+      },
+      "clinical_decision_support": {
+        "canonical": "Clinical Decision Support",
+        "synonyms": ["CDS", "clinical decision support system"],
+        "abbreviations": ["CDS", "CDSS"],
+        "related": ["clinical alerts", "order sets", "evidence-based medicine", "clinical pathways"]
+      },
+      "telemedicine": {
+        "canonical": "Telemedicine",
+        "synonyms": ["telehealth", "virtual care", "remote healthcare"],
+        "abbreviations": [],
+        "related": ["video visits", "remote patient monitoring", "RPM", "mHealth", "digital health"]
+      },
+      "health_informatics": {
+        "canonical": "Health Informatics",
+        "synonyms": ["clinical informatics", "biomedical informatics", "medical informatics"],
+        "abbreviations": [],
+        "related": ["data analytics", "clinical data warehouse", "population health", "data governance"]
+      }
+    },
+    "regulatory_compliance": {
+      "hipaa": {
+        "canonical": "HIPAA",
+        "synonyms": ["Health Insurance Portability and Accountability Act"],
+        "abbreviations": ["HIPAA"],
+        "related": ["PHI", "protected health information", "privacy rule", "security rule", "BAA", "business associate agreement", "HITECH"]
+      },
+      "fda": {
+        "canonical": "FDA",
+        "synonyms": ["Food and Drug Administration", "FDA regulations"],
+        "abbreviations": ["FDA"],
+        "related": ["510(k)", "PMA", "clinical trials", "GMP", "QSR", "device classification", "regulatory submission"]
+      },
+      "phi": {
+        "canonical": "Protected Health Information",
+        "synonyms": ["patient data", "health data privacy"],
+        "abbreviations": ["PHI"],
+        "related": ["HIPAA", "de-identification", "safe harbor", "expert determination", "data anonymization"]
+      },
+      "meaningful_use": {
+        "canonical": "Meaningful Use",
+        "synonyms": ["Promoting Interoperability"],
+        "abbreviations": ["MU"],
+        "related": ["CMS", "quality measures", "eCQM", "MIPS", "Medicare", "incentive programs"]
+      },
+      "jcaho": {
+        "canonical": "Joint Commission",
+        "synonyms": ["JCAHO", "TJC", "Joint Commission Accreditation"],
+        "abbreviations": ["JCAHO", "TJC"],
+        "related": ["accreditation", "patient safety", "quality improvement", "hospital standards"]
+      },
+      "gxp": {
+        "canonical": "GxP",
+        "synonyms": ["Good Practice regulations"],
+        "abbreviations": ["GxP"],
+        "related": ["GMP", "GCP", "GLP", "Good Manufacturing Practice", "Good Clinical Practice", "Good Laboratory Practice", "validation"]
+      }
+    },
+    "clinical_domains": {
+      "clinical_research": {
+        "canonical": "Clinical Research",
+        "synonyms": ["clinical studies", "clinical investigation"],
+        "abbreviations": [],
+        "related": ["clinical trials", "Phase I", "Phase II", "Phase III", "Phase IV", "IRB", "informed consent", "protocol", "CRO"]
+      },
+      "medical_coding": {
+        "canonical": "Medical Coding",
+        "synonyms": ["clinical coding"],
+        "abbreviations": [],
+        "related": ["ICD-10", "CPT", "HCPCS", "DRG", "medical billing", "coding compliance", "SNOMED CT"]
+      },
+      "pharmacy": {
+        "canonical": "Pharmacy",
+        "synonyms": ["pharmaceutical"],
+        "abbreviations": ["Rx"],
+        "related": ["medication management", "formulary", "CPOE", "drug interactions", "pharmacy benefit management", "PBM"]
+      },
+      "medical_devices": {
+        "canonical": "Medical Devices",
+        "synonyms": ["med devices", "medical technology"],
+        "abbreviations": ["medtech"],
+        "related": ["FDA 510(k)", "device design", "biocompatibility", "ISO 13485", "IEC 62304", "design controls"]
+      },
+      "diagnostics": {
+        "canonical": "Diagnostics",
+        "synonyms": ["clinical diagnostics", "diagnostic testing"],
+        "abbreviations": ["Dx"],
+        "related": ["laboratory testing", "CLIA", "point-of-care", "molecular diagnostics", "imaging", "pathology"]
+      }
+    },
+    "healthcare_operations": {
+      "revenue_cycle": {
+        "canonical": "Revenue Cycle Management",
+        "synonyms": ["revenue cycle", "RCM"],
+        "abbreviations": ["RCM"],
+        "related": ["claims processing", "billing", "denials management", "prior authorization", "payer contracts", "coding"]
+      },
+      "population_health": {
+        "canonical": "Population Health Management",
+        "synonyms": ["population health", "PHM"],
+        "abbreviations": ["PHM"],
+        "related": ["care management", "risk stratification", "social determinants of health", "SDOH", "health equity", "chronic disease management"]
+      },
+      "quality_improvement": {
+        "canonical": "Quality Improvement",
+        "synonyms": ["QI", "continuous quality improvement"],
+        "abbreviations": ["QI", "CQI"],
+        "related": ["patient safety", "Six Sigma", "Lean", "PDSA cycle", "root cause analysis", "HEDIS", "quality metrics"]
+      },
+      "care_coordination": {
+        "canonical": "Care Coordination",
+        "synonyms": ["care management", "case management"],
+        "abbreviations": [],
+        "related": ["transitions of care", "discharge planning", "patient navigation", "interdisciplinary team", "care plan"]
+      },
+      "health_insurance": {
+        "canonical": "Health Insurance",
+        "synonyms": ["health plans", "managed care"],
+        "abbreviations": [],
+        "related": ["Medicare", "Medicaid", "commercial insurance", "HMO", "PPO", "value-based care", "capitation", "fee-for-service"]
+      }
+    },
+    "data_and_analytics": {
+      "clinical_data": {
+        "canonical": "Clinical Data Management",
+        "synonyms": ["clinical data", "CDM"],
+        "abbreviations": ["CDM"],
+        "related": ["EDC", "electronic data capture", "CRF", "case report form", "data cleaning", "CDISC", "SDTM", "ADaM"]
+      },
+      "biostatistics": {
+        "canonical": "Biostatistics",
+        "synonyms": ["biostatistical analysis"],
+        "abbreviations": [],
+        "related": ["SAS", "R", "statistical analysis", "survival analysis", "regression", "sample size", "power analysis"]
+      },
+      "real_world_evidence": {
+        "canonical": "Real-World Evidence",
+        "synonyms": ["real-world data", "RWD"],
+        "abbreviations": ["RWE", "RWD"],
+        "related": ["claims data", "observational studies", "registry data", "HEOR", "health economics", "outcomes research"]
+      },
+      "health_data_standards": {
+        "canonical": "Health Data Standards",
+        "synonyms": [],
+        "abbreviations": [],
+        "related": ["ICD-10", "SNOMED CT", "LOINC", "RxNorm", "NDC", "DICOM", "terminology mapping"]
+      }
+    },
+    "certifications": {
+      "epic_certification": {
+        "canonical": "Epic Certification",
+        "synonyms": ["Epic certified"],
+        "abbreviations": [],
+        "related": ["Epic training", "Epic modules", "Caboodle", "Cogito", "Healthy Planet"]
+      },
+      "cissp_healthcare": {
+        "canonical": "HCISPP",
+        "synonyms": ["HealthCare Information Security and Privacy Practitioner"],
+        "abbreviations": ["HCISPP"],
+        "related": ["CISSP", "healthcare security", "privacy", "HIPAA compliance"]
+      },
+      "pmp_healthcare": {
+        "canonical": "PMP",
+        "synonyms": ["Project Management Professional"],
+        "abbreviations": ["PMP"],
+        "related": ["project management", "healthcare IT implementation", "go-live", "system migration"]
+      },
+      "chime": {
+        "canonical": "CHIME",
+        "synonyms": ["College of Healthcare Information Management Executives"],
+        "abbreviations": ["CHIME"],
+        "related": ["CHCIO", "healthcare CIO", "health IT leadership"]
+      }
+    }
+  }
+}

@@ -1,0 +1,72 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": ["overall_score", "grade", "weights_used", "dimension_scores"],
+  "properties": {
+    "overall_score": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 100
+    },
+    "grade": {
+      "type": "string",
+      "enum": ["A+", "A", "A-", "B+", "B", "B-", "C+", "C", "C-", "D+", "D", "D-", "F"]
+    },
+    "weights_used": {
+      "type": "string",
+      "enum": ["with_jd", "without_jd"]
+    },
+    "dimension_scores": {
+      "type": "object",
+      "minProperties": 1,
+      "properties": {
+        "ats_compatibility": {
+          "$ref": "#/$defs/dimension_entry"
+        },
+        "keyword_alignment": {
+          "$ref": "#/$defs/dimension_entry"
+        },
+        "content_quality": {
+          "$ref": "#/$defs/dimension_entry"
+        },
+        "strategic_positioning": {
+          "$ref": "#/$defs/dimension_entry"
+        },
+        "structure_format": {
+          "$ref": "#/$defs/dimension_entry"
+        },
+        "market_intelligence": {
+          "$ref": "#/$defs/dimension_entry"
+        }
+      },
+      "additionalProperties": {
+        "$ref": "#/$defs/dimension_entry"
+      }
+    }
+  },
+  "$defs": {
+    "dimension_entry": {
+      "type": "object",
+      "required": ["score", "weight", "weighted"],
+      "properties": {
+        "score": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "weight": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "weighted": {
+          "type": "number",
+          "minimum": 0
+        },
+        "fallback": {
+          "type": "boolean"
+        }
+      }
+    }
+  }
+}

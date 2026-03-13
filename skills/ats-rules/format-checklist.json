@@ -1,0 +1,286 @@
+{
+  "description": "Format compliance checklist for ATS resume analysis. Each item has a severity level indicating its impact on ATS parsing.",
+  "severity_levels": {
+    "critical": "Causes complete parsing failure or significant data loss on most ATS platforms. Must be fixed.",
+    "warning": "May cause partial parsing issues or degraded keyword extraction. Should be fixed.",
+    "info": "Minor or cosmetic issue with minimal ATS impact. Nice to fix but not urgent."
+  },
+  "checklist": [
+    {
+      "id": "fmt-001",
+      "category": "layout",
+      "element": "Tables",
+      "severity": "critical",
+      "description": "Resume uses HTML tables or table-based layout",
+      "impact": "ATS reads table cells left-to-right across rows, jumbling content in multi-column table layouts. Skills, experience, and contact info placed in table cells may be concatenated incorrectly.",
+      "detection_hints": [
+        "Look for grid-like alignment of text in distinct columns",
+        "In PDF: text blocks that align in a grid pattern",
+        "In Markdown: pipe-delimited table syntax or HTML <table> tags"
+      ],
+      "recommendation": "Replace tables with simple lists or sequential sections. Use line breaks and headings for visual separation instead.",
+      "platforms_most_affected": ["taleo", "brassring", "workday", "icims"]
+    },
+    {
+      "id": "fmt-002",
+      "category": "layout",
+      "element": "Text boxes",
+      "severity": "critical",
+      "description": "Content placed inside text boxes or floating frames",
+      "impact": "Text boxes are frequently skipped entirely by ATS parsers. Any content inside them (contact info, skills, sidebar content) becomes invisible to the system.",
+      "detection_hints": [
+        "In PDF: text that appears in a bordered or shaded rectangular area separate from the main text flow",
+        "Content in sidebars or callout boxes",
+        "Not typically an issue in Markdown files"
+      ],
+      "recommendation": "Move all text box content into the main document flow. Use headings and spacing for visual organization.",
+      "platforms_most_affected": ["taleo", "brassring", "icims", "workday"]
+    },
+    {
+      "id": "fmt-003",
+      "category": "layout",
+      "element": "Multi-column layout",
+      "severity": "critical",
+      "description": "Resume uses a two-column or multi-column layout",
+      "impact": "ATS may read across columns instead of down each column, mixing unrelated content. A skills column next to an experience column could produce garbled output.",
+      "detection_hints": [
+        "In PDF: distinct content blocks side by side with different types of information",
+        "Sidebar with contact info or skills next to main experience content",
+        "In Markdown: HTML div elements with float or column styling"
+      ],
+      "recommendation": "Use a single-column layout. Place all content in a sequential top-to-bottom flow.",
+      "platforms_most_affected": ["taleo", "brassring", "workday"]
+    },
+    {
+      "id": "fmt-004",
+      "category": "content_placement",
+      "element": "Headers and footers with critical info",
+      "severity": "critical",
+      "description": "Name, contact information, or other important content placed in document headers or footers",
+      "impact": "Most ATS systems ignore document headers and footers entirely. Name and contact info placed there will not be extracted, making the candidate unidentifiable in the system.",
+      "detection_hints": [
+        "In PDF: contact info that repeats on every page in the same position at top or bottom",
+        "Name appearing above the main content area in a header region",
+        "Page numbers with candidate name in footer",
+        "Not applicable to Markdown files (no header/footer concept)"
+      ],
+      "recommendation": "Place name and all contact information in the main document body at the top of the first page.",
+      "platforms_most_affected": ["taleo", "brassring", "icims", "workday", "successfactors"]
+    },
+    {
+      "id": "fmt-005",
+      "category": "visual_elements",
+      "element": "Images and graphics",
+      "severity": "critical",
+      "description": "Resume contains images, logos, icons, skill bar graphics, or infographics",
+      "impact": "All image content is invisible to ATS parsers. Skill level indicators shown as bars or circles, section icons, company logos, and candidate photos are all lost. Any text embedded in images (such as a logo with the candidate's name) is also lost.",
+      "detection_hints": [
+        "In PDF: embedded images, logos, or graphic elements",
+        "Skill bars or progress indicators for skill levels",
+        "Icons used for phone, email, location, or LinkedIn",
+        "Candidate photo",
+        "In Markdown: image references via ![alt](url) syntax"
+      ],
+      "recommendation": "Remove all images and graphics. Express skill levels in text (e.g., 'Proficient', 'Advanced') or omit levels entirely. Use text labels instead of icons.",
+      "platforms_most_affected": ["all"]
+    },
+    {
+      "id": "fmt-006",
+      "category": "typography",
+      "element": "Non-standard or decorative fonts",
+      "severity": "warning",
+      "description": "Resume uses unusual, decorative, or non-standard fonts",
+      "impact": "Non-standard fonts may not be embedded correctly in PDFs, causing character substitution or missing characters. Some ATS systems have limited font rendering and may display garbled text.",
+      "detection_hints": [
+        "In PDF: check embedded font names for non-standard typefaces",
+        "Fonts that are artistic, handwritten, or highly stylized",
+        "Not applicable to Markdown files (rendered by the reading application)"
+      ],
+      "recommendation": "Use widely-supported fonts: Arial, Calibri, Times New Roman, Garamond, Cambria, or Helvetica.",
+      "platforms_most_affected": ["taleo", "brassring"]
+    },
+    {
+      "id": "fmt-007",
+      "category": "typography",
+      "element": "Special characters and Unicode symbols",
+      "severity": "warning",
+      "description": "Resume uses Unicode symbols, emojis, or special characters for bullets or decoration",
+      "impact": "Special characters may be stripped, replaced with question marks, or cause encoding errors. This can break section detection and make content unreadable in the ATS database.",
+      "detection_hints": [
+        "Non-ASCII bullet characters (arrows, diamonds, stars)",
+        "Emojis anywhere in the resume",
+        "Unicode symbols used for decoration or section separators",
+        "In Markdown: non-standard list markers"
+      ],
+      "recommendation": "Use standard ASCII characters for bullets (dash, asterisk, or standard round bullet). Avoid emojis and decorative Unicode symbols.",
+      "platforms_most_affected": ["taleo", "brassring", "icims"]
+    },
+    {
+      "id": "fmt-008",
+      "category": "typography",
+      "element": "Excessive formatting variation",
+      "severity": "warning",
+      "description": "Heavy use of multiple font sizes, colors, bold/italic/underline combinations",
+      "impact": "Excessive formatting variation can confuse section boundary detection. Some ATS systems strip all formatting and rely on spacing and text patterns, so content that depends on visual formatting for meaning may lose its structure.",
+      "detection_hints": [
+        "More than 3-4 distinct font sizes used",
+        "Multiple colors used for text",
+        "Mixing bold, italic, and underline within the same section inconsistently",
+        "In Markdown: excessive use of bold, italic, and heading levels"
+      ],
+      "recommendation": "Use a consistent formatting hierarchy: one font size for body text, one for section headers, one for name. Limit bold to headers and job titles. Avoid colored text.",
+      "platforms_most_affected": ["taleo", "brassring"]
+    },
+    {
+      "id": "fmt-009",
+      "category": "content_placement",
+      "element": "Non-standard section headers",
+      "severity": "warning",
+      "description": "Section headers use creative or non-standard names instead of recognized labels",
+      "impact": "ATS systems map content to predefined fields (experience, education, skills) based on header recognition. Creative headers like 'My Journey', 'Toolbox', 'Adventures' prevent correct field mapping, and the content may be classified as 'other' or unstructured text.",
+      "detection_hints": [
+        "Headers that do not match standard labels: Experience, Work Experience, Education, Skills, Technical Skills, Summary, Professional Summary, Certifications, Projects, Awards, Publications, Volunteer",
+        "Creative or branded section names",
+        "Missing headers with sections separated only by visual spacing"
+      ],
+      "recommendation": "Use standard section headers: 'Experience' or 'Work Experience', 'Education', 'Skills' or 'Technical Skills', 'Summary' or 'Professional Summary', 'Certifications', 'Projects'.",
+      "platforms_most_affected": ["taleo", "brassring", "workday", "icims"]
+    },
+    {
+      "id": "fmt-010",
+      "category": "dates",
+      "element": "Inconsistent or non-standard date formats",
+      "severity": "warning",
+      "description": "Date formats vary across entries or use non-standard expressions",
+      "impact": "ATS systems parse dates to calculate years of experience and sort entries chronologically. Inconsistent formats (mixing 'Jan 2023' with '2023-01' or '01/2023') or non-standard expressions ('Summer 2022', 'Q3 2023') may cause incorrect experience calculations or sorting failures.",
+      "detection_hints": [
+        "Different date formats used in different experience entries",
+        "Seasonal references: 'Summer', 'Fall', 'Spring', 'Winter'",
+        "Quarter references: 'Q1', 'Q2', 'Q3', 'Q4'",
+        "Year-only dates where month would be expected",
+        "Non-standard 'current' indicators: 'Now', 'Ongoing', 'Today'"
+      ],
+      "recommendation": "Use 'Month YYYY' format consistently (e.g., 'January 2023 - Present'). Use 'Present' for current roles. Ensure all entries have both start and end dates.",
+      "platforms_most_affected": ["taleo", "workday", "icims"]
+    },
+    {
+      "id": "fmt-011",
+      "category": "content_placement",
+      "element": "Missing contact information",
+      "severity": "warning",
+      "description": "Resume is missing key contact fields (name, email, phone)",
+      "impact": "Without extractable contact information, the ATS cannot create a complete candidate profile. Recruiters may not be able to reach the candidate even if the resume matches a search.",
+      "detection_hints": [
+        "No email address found in the document",
+        "No phone number found in the document",
+        "Name not clearly identifiable at the top of the document"
+      ],
+      "recommendation": "Include at minimum: full name, email address, and phone number at the top of the resume in the main document body. City and state are recommended. LinkedIn URL is a useful addition.",
+      "platforms_most_affected": ["all"]
+    },
+    {
+      "id": "fmt-012",
+      "category": "content_placement",
+      "element": "No dedicated skills section",
+      "severity": "warning",
+      "description": "Resume lacks a clearly labeled skills section",
+      "impact": "Without a dedicated skills section, ATS keyword extraction relies entirely on finding skills mentioned in prose within experience bullets. This reduces keyword match rates because skills in prose are harder for ATS to identify as discrete skills.",
+      "detection_hints": [
+        "No section header containing 'Skills', 'Technical Skills', 'Core Competencies', or similar",
+        "Skills mentioned only within experience bullet points",
+        "Skills scattered across multiple sections without a consolidated list"
+      ],
+      "recommendation": "Add a dedicated 'Skills' or 'Technical Skills' section listing skills as discrete, comma-separated or bulleted items.",
+      "platforms_most_affected": ["taleo", "workday", "brassring"]
+    },
+    {
+      "id": "fmt-013",
+      "category": "layout",
+      "element": "Embedded hyperlinks without visible URLs",
+      "severity": "info",
+      "description": "Links are embedded in clickable text but the URL is not shown as plain text",
+      "impact": "Some ATS systems strip hyperlinks, leaving only the anchor text. If a LinkedIn profile is linked as 'LinkedIn Profile' without showing the URL, the actual URL may be lost.",
+      "detection_hints": [
+        "Clickable text that does not show the destination URL",
+        "LinkedIn, GitHub, or portfolio links shown as 'Click here' or branded text",
+        "In Markdown: [text](url) where the URL is important but only the text would survive stripping"
+      ],
+      "recommendation": "Show important URLs as visible text in addition to or instead of hyperlinked text. For example: 'linkedin.com/in/johndoe' instead of just 'LinkedIn'.",
+      "platforms_most_affected": ["taleo", "brassring"]
+    },
+    {
+      "id": "fmt-014",
+      "category": "typography",
+      "element": "Non-standard bullet characters",
+      "severity": "info",
+      "description": "Bullet points use non-standard characters (arrows, diamonds, custom symbols)",
+      "impact": "Most ATS systems handle non-standard bullets acceptably, but some older systems may strip them and lose the line break, concatenating separate bullet points into a single paragraph.",
+      "detection_hints": [
+        "Bullet characters that are not standard round dots, dashes, or asterisks",
+        "Arrow symbols, diamond shapes, or custom glyphs used as list markers",
+        "In Markdown: standard list markers (-, *, 1.) are always safe"
+      ],
+      "recommendation": "Use standard round bullet points, dashes, or simple markers. In Markdown, use standard list syntax.",
+      "platforms_most_affected": ["taleo", "brassring"]
+    },
+    {
+      "id": "fmt-015",
+      "category": "layout",
+      "element": "Page breaks within entries",
+      "severity": "info",
+      "description": "A page break falls in the middle of an experience entry or education entry",
+      "impact": "Some ATS systems parse page-by-page and may split an experience entry, assigning the job title to one block and the bullets to another. This can cause incomplete or misattributed work history entries.",
+      "detection_hints": [
+        "In PDF: an experience entry that starts on one page and continues on the next",
+        "Job title and company on one page, bullets on the next",
+        "Not applicable to Markdown files (no page break concept)"
+      ],
+      "recommendation": "Adjust spacing and content so that each experience or education entry fits entirely on one page. If not possible, ensure the break falls between bullets rather than between the header and bullets.",
+      "platforms_most_affected": ["taleo", "icims"]
+    },
+    {
+      "id": "fmt-016",
+      "category": "file",
+      "element": "Large file size",
+      "severity": "info",
+      "description": "Resume file exceeds 2 MB",
+      "impact": "Most ATS systems accept files up to 5-10 MB, but very large files may indicate embedded images, complex formatting, or high-resolution graphics that slow processing. Some older systems have 2 MB or 5 MB limits.",
+      "detection_hints": [
+        "PDF file larger than 2 MB for a 1-2 page resume",
+        "File size disproportionate to page count",
+        "Not typically an issue for Markdown files"
+      ],
+      "recommendation": "Optimize file size by removing embedded images, compressing the PDF, and simplifying formatting. A clean 1-2 page text-based resume should be under 500 KB.",
+      "platforms_most_affected": ["taleo", "brassring"]
+    },
+    {
+      "id": "fmt-017",
+      "category": "visual_elements",
+      "element": "Skill level indicators (bars, stars, percentages)",
+      "severity": "critical",
+      "description": "Skill proficiency shown as visual indicators (progress bars, star ratings, percentage circles)",
+      "impact": "Visual skill indicators are images and completely invisible to ATS. The skill name may be parseable but the level indicator is lost. Worse, some candidates remove the text label and rely solely on the graphic, making the skill entirely invisible.",
+      "detection_hints": [
+        "In PDF: horizontal bars, star ratings, or circular progress indicators next to skill names",
+        "Percentage numbers that appear to accompany visual indicators",
+        "In Markdown: not typically an issue unless using image references for skill visualization"
+      ],
+      "recommendation": "Remove visual skill indicators entirely. If skill levels are important, use text labels (Expert, Advanced, Proficient, Intermediate) or group skills by proficiency level under subheadings.",
+      "platforms_most_affected": ["all"]
+    },
+    {
+      "id": "fmt-018",
+      "category": "visual_elements",
+      "element": "Candidate photo",
+      "severity": "warning",
+      "description": "Resume includes a photograph of the candidate",
+      "impact": "Photos take up space, increase file size, and provide no value to ATS parsing. In many countries (including the US), photos can create bias concerns and some ATS systems flag or strip them. The space used by a photo could contain keyword-rich content.",
+      "detection_hints": [
+        "In PDF: an image in the upper portion of the resume that appears to be a headshot",
+        "In Markdown: image reference at the top of the document"
+      ],
+      "recommendation": "Remove the photo from the resume. Use the recovered space for additional skills or experience content. Note: photos are standard in some countries (Germany, Japan) but not recommended for US/UK/Canada/Australia applications.",
+      "platforms_most_affected": ["workday", "icims"]
+    }
+  ]
+}

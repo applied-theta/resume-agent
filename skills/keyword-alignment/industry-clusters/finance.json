@@ -1,0 +1,238 @@
+{
+  "description": "Finance industry keyword clusters for semantic matching. Covers banking, investment, fintech, risk management, compliance, and financial technology.",
+  "industry": "finance",
+  "clusters": {
+    "financial_analysis": {
+      "financial_modeling": {
+        "canonical": "Financial Modeling",
+        "synonyms": ["financial models", "financial analysis models"],
+        "abbreviations": [],
+        "related": ["DCF", "discounted cash flow", "valuation", "LBO", "merger model", "sensitivity analysis", "scenario analysis"]
+      },
+      "valuation": {
+        "canonical": "Valuation",
+        "synonyms": ["company valuation", "business valuation"],
+        "abbreviations": [],
+        "related": ["DCF", "comparable company analysis", "precedent transactions", "enterprise value", "EV/EBITDA", "P/E ratio"]
+      },
+      "risk_analysis": {
+        "canonical": "Risk Analysis",
+        "synonyms": ["risk assessment", "risk evaluation"],
+        "abbreviations": [],
+        "related": ["VaR", "Value at Risk", "Monte Carlo simulation", "stress testing", "risk modeling", "credit risk", "market risk"]
+      },
+      "quantitative_analysis": {
+        "canonical": "Quantitative Analysis",
+        "synonyms": ["quantitative finance", "quant"],
+        "abbreviations": ["quant"],
+        "related": ["stochastic calculus", "time series analysis", "derivatives pricing", "Black-Scholes", "statistical arbitrage"]
+      },
+      "financial_reporting": {
+        "canonical": "Financial Reporting",
+        "synonyms": ["financial statements", "financial disclosure"],
+        "abbreviations": [],
+        "related": ["income statement", "balance sheet", "cash flow statement", "10-K", "10-Q", "annual report", "earnings"]
+      }
+    },
+    "banking": {
+      "investment_banking": {
+        "canonical": "Investment Banking",
+        "synonyms": ["IB"],
+        "abbreviations": ["IB"],
+        "related": ["M&A", "mergers and acquisitions", "IPO", "underwriting", "capital markets", "pitch book", "deal execution"]
+      },
+      "commercial_banking": {
+        "canonical": "Commercial Banking",
+        "synonyms": ["corporate banking"],
+        "abbreviations": [],
+        "related": ["lending", "credit analysis", "loan origination", "treasury management", "cash management"]
+      },
+      "private_equity": {
+        "canonical": "Private Equity",
+        "synonyms": [],
+        "abbreviations": ["PE"],
+        "related": ["LBO", "leveraged buyout", "portfolio company", "due diligence", "fund management", "carried interest"]
+      },
+      "venture_capital": {
+        "canonical": "Venture Capital",
+        "synonyms": [],
+        "abbreviations": ["VC"],
+        "related": ["startup investing", "Series A", "term sheet", "cap table", "due diligence", "portfolio management"]
+      },
+      "wealth_management": {
+        "canonical": "Wealth Management",
+        "synonyms": ["private wealth", "private banking"],
+        "abbreviations": ["WM"],
+        "related": ["portfolio management", "asset allocation", "financial planning", "high net worth", "HNW", "UHNW"]
+      }
+    },
+    "trading_and_markets": {
+      "trading": {
+        "canonical": "Trading",
+        "synonyms": ["securities trading"],
+        "abbreviations": [],
+        "related": ["equities", "fixed income", "derivatives", "options", "futures", "FX", "commodities", "execution"]
+      },
+      "algorithmic_trading": {
+        "canonical": "Algorithmic Trading",
+        "synonyms": ["algo trading", "systematic trading", "automated trading"],
+        "abbreviations": [],
+        "related": ["high-frequency trading", "HFT", "market making", "execution algorithms", "VWAP", "TWAP", "latency"]
+      },
+      "portfolio_management": {
+        "canonical": "Portfolio Management",
+        "synonyms": ["asset management", "investment management"],
+        "abbreviations": ["PM"],
+        "related": ["asset allocation", "rebalancing", "alpha", "beta", "Sharpe ratio", "diversification", "benchmark"]
+      },
+      "derivatives": {
+        "canonical": "Derivatives",
+        "synonyms": ["financial derivatives"],
+        "abbreviations": [],
+        "related": ["options", "futures", "swaps", "forwards", "hedging", "Greeks", "delta", "gamma", "Black-Scholes"]
+      },
+      "fixed_income": {
+        "canonical": "Fixed Income",
+        "synonyms": ["bonds", "debt securities"],
+        "abbreviations": ["FI"],
+        "related": ["yield curve", "duration", "credit spreads", "treasuries", "corporate bonds", "mortgage-backed securities", "MBS"]
+      }
+    },
+    "compliance_and_regulation": {
+      "regulatory_compliance": {
+        "canonical": "Regulatory Compliance",
+        "synonyms": ["compliance", "financial compliance"],
+        "abbreviations": [],
+        "related": ["KYC", "AML", "BSA", "SOX", "Dodd-Frank", "Basel III", "MiFID II", "GDPR"]
+      },
+      "kyc_aml": {
+        "canonical": "KYC/AML",
+        "synonyms": ["Know Your Customer", "Anti-Money Laundering"],
+        "abbreviations": ["KYC", "AML"],
+        "related": ["customer due diligence", "CDD", "enhanced due diligence", "EDD", "suspicious activity report", "SAR", "BSA"]
+      },
+      "risk_management": {
+        "canonical": "Risk Management",
+        "synonyms": ["enterprise risk management", "ERM"],
+        "abbreviations": [],
+        "related": ["operational risk", "credit risk", "market risk", "liquidity risk", "stress testing", "risk appetite"]
+      },
+      "audit": {
+        "canonical": "Audit",
+        "synonyms": ["internal audit", "external audit"],
+        "abbreviations": [],
+        "related": ["SOX compliance", "controls testing", "audit findings", "COSO", "PCAOB"]
+      }
+    },
+    "fintech": {
+      "payments": {
+        "canonical": "Payments",
+        "synonyms": ["payment processing", "digital payments"],
+        "abbreviations": [],
+        "related": ["Stripe", "PayPal", "ACH", "wire transfer", "real-time payments", "ISO 20022", "PCI DSS", "payment gateway"]
+      },
+      "blockchain": {
+        "canonical": "Blockchain",
+        "synonyms": ["distributed ledger", "DLT"],
+        "abbreviations": [],
+        "related": ["cryptocurrency", "smart contracts", "Ethereum", "Solidity", "DeFi", "Web3", "consensus mechanism"]
+      },
+      "lending_tech": {
+        "canonical": "Lending Technology",
+        "synonyms": ["digital lending", "online lending"],
+        "abbreviations": [],
+        "related": ["credit scoring", "underwriting automation", "loan origination system", "LOS", "credit decisioning"]
+      },
+      "regtech": {
+        "canonical": "RegTech",
+        "synonyms": ["regulatory technology"],
+        "abbreviations": [],
+        "related": ["compliance automation", "regulatory reporting", "transaction monitoring", "identity verification"]
+      }
+    },
+    "accounting": {
+      "gaap": {
+        "canonical": "GAAP",
+        "synonyms": ["Generally Accepted Accounting Principles", "US GAAP"],
+        "abbreviations": ["GAAP"],
+        "related": ["IFRS", "accounting standards", "revenue recognition", "ASC 606", "lease accounting", "ASC 842"]
+      },
+      "ifrs": {
+        "canonical": "IFRS",
+        "synonyms": ["International Financial Reporting Standards"],
+        "abbreviations": ["IFRS"],
+        "related": ["GAAP", "international accounting", "IASB", "fair value"]
+      },
+      "tax": {
+        "canonical": "Tax",
+        "synonyms": ["taxation", "tax compliance"],
+        "abbreviations": [],
+        "related": ["corporate tax", "income tax", "transfer pricing", "tax planning", "tax provision", "ASC 740"]
+      },
+      "fp_and_a": {
+        "canonical": "FP&A",
+        "synonyms": ["Financial Planning and Analysis", "financial planning & analysis"],
+        "abbreviations": ["FP&A"],
+        "related": ["budgeting", "forecasting", "variance analysis", "business planning", "rolling forecast"]
+      }
+    },
+    "tools_and_platforms": {
+      "bloomberg": {
+        "canonical": "Bloomberg Terminal",
+        "synonyms": ["Bloomberg", "BBG"],
+        "abbreviations": ["BBG"],
+        "related": ["market data", "Bloomberg API", "BQL"]
+      },
+      "excel": {
+        "canonical": "Microsoft Excel",
+        "synonyms": ["Excel", "Advanced Excel"],
+        "abbreviations": [],
+        "related": ["VBA", "macros", "pivot tables", "VLOOKUP", "financial modeling", "Power Query"]
+      },
+      "sap": {
+        "canonical": "SAP",
+        "synonyms": ["SAP ERP", "SAP S/4HANA"],
+        "abbreviations": [],
+        "related": ["ERP", "SAP FICO", "SAP BW", "enterprise resource planning"]
+      },
+      "tableau": {
+        "canonical": "Tableau",
+        "synonyms": [],
+        "abbreviations": [],
+        "related": ["data visualization", "dashboards", "business intelligence", "BI"]
+      },
+      "power_bi": {
+        "canonical": "Power BI",
+        "synonyms": ["Microsoft Power BI"],
+        "abbreviations": [],
+        "related": ["data visualization", "dashboards", "business intelligence", "DAX"]
+      }
+    },
+    "certifications": {
+      "cfa": {
+        "canonical": "CFA",
+        "synonyms": ["Chartered Financial Analyst"],
+        "abbreviations": ["CFA"],
+        "related": ["CFA Institute", "Level I", "Level II", "Level III", "investment analysis"]
+      },
+      "cpa": {
+        "canonical": "CPA",
+        "synonyms": ["Certified Public Accountant"],
+        "abbreviations": ["CPA"],
+        "related": ["accounting", "audit", "tax", "public accounting"]
+      },
+      "frm": {
+        "canonical": "FRM",
+        "synonyms": ["Financial Risk Manager"],
+        "abbreviations": ["FRM"],
+        "related": ["GARP", "risk management", "market risk", "credit risk"]
+      },
+      "series_licenses": {
+        "canonical": "FINRA Licenses",
+        "synonyms": ["securities licenses"],
+        "abbreviations": [],
+        "related": ["Series 7", "Series 63", "Series 66", "SIE", "Series 3", "registered representative"]
+      }
+    }
+  }
+}

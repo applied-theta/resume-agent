@@ -1,0 +1,89 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": ["contact", "experience", "metadata"],
+  "properties": {
+    "contact": {
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "email": { "type": ["string", "null"] },
+        "phone": { "type": ["string", "null"] },
+        "location": { "type": ["string", "null"] },
+        "linkedin": { "type": ["string", "null"] },
+        "portfolio": { "type": ["string", "null"] }
+      }
+    },
+    "summary": { "type": ["string", "null"] },
+    "experience": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["title", "company"],
+        "properties": {
+          "title": { "type": "string" },
+          "company": { "type": "string" },
+          "location": { "type": ["string", "null"] },
+          "start_date": { "type": ["string", "null"] },
+          "end_date": { "type": ["string", "null"] },
+          "is_current": { "type": "boolean" },
+          "bullets": {
+            "type": "array",
+            "items": { "type": "string" }
+          }
+        }
+      }
+    },
+    "education": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "degree": { "type": "string" },
+          "institution": { "type": "string" },
+          "date": { "type": ["string", "null"] },
+          "gpa": { "type": ["string", "null"] },
+          "honors": { "type": ["string", "null"] }
+        }
+      }
+    },
+    "skills": {
+      "type": "object",
+      "properties": {
+        "technical": { "type": "array", "items": { "type": "string" } },
+        "soft": { "type": "array", "items": { "type": "string" } },
+        "tools": { "type": "array", "items": { "type": "string" } },
+        "certifications": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "projects": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": { "type": "string" },
+          "description": { "type": "string" },
+          "technologies": { "type": "array", "items": { "type": "string" } },
+          "url": { "type": ["string", "null"] },
+          "start_date": { "type": ["string", "null"] },
+          "end_date": { "type": ["string", "null"] },
+          "bullets": { "type": "array", "items": { "type": "string" } }
+        }
+      }
+    },
+    "additional_sections": { "type": "array" },
+    "metadata": {
+      "type": "object",
+      "required": ["format", "page_count"],
+      "properties": {
+        "format": { "type": "string", "enum": ["pdf", "markdown"] },
+        "page_count": { "type": "integer" },
+        "has_tables": { "type": "boolean" },
+        "has_graphics": { "type": "boolean" },
+        "has_columns": { "type": "boolean" },
+        "detected_language": { "type": "string" },
+        "structure_quality": { "type": "string" }
+      }
+    }
+  }
+}

@@ -1,0 +1,444 @@
+{
+  "description": "Technology industry keyword clusters for semantic matching. Covers programming languages, frameworks, cloud platforms, DevOps, databases, and related skill areas.",
+  "industry": "technology",
+  "clusters": {
+    "programming_languages": {
+      "python": {
+        "canonical": "Python",
+        "synonyms": ["Python 3", "Python3", "CPython"],
+        "abbreviations": ["py"],
+        "related": ["Django", "Flask", "FastAPI", "NumPy", "pandas", "pip", "PyPI"]
+      },
+      "javascript": {
+        "canonical": "JavaScript",
+        "synonyms": ["ECMAScript", "ES6", "ES2015", "ES2020", "ES2023"],
+        "abbreviations": ["JS"],
+        "related": ["Node.js", "TypeScript", "React", "Vue.js", "Angular", "npm", "Webpack", "Babel"]
+      },
+      "typescript": {
+        "canonical": "TypeScript",
+        "synonyms": [],
+        "abbreviations": ["TS"],
+        "related": ["JavaScript", "Node.js", "React", "Angular", "tsc"]
+      },
+      "java": {
+        "canonical": "Java",
+        "synonyms": ["Java SE", "Java EE", "Jakarta EE"],
+        "abbreviations": [],
+        "related": ["Spring", "Spring Boot", "Maven", "Gradle", "JVM", "JDK", "Hibernate"]
+      },
+      "csharp": {
+        "canonical": "C#",
+        "synonyms": ["C Sharp", "CSharp"],
+        "abbreviations": [],
+        "related": [".NET", "ASP.NET", ".NET Core", "Entity Framework", "LINQ", "Visual Studio"]
+      },
+      "cpp": {
+        "canonical": "C++",
+        "synonyms": ["CPP", "C Plus Plus"],
+        "abbreviations": [],
+        "related": ["C", "STL", "Boost", "CMake", "GCC", "Clang"]
+      },
+      "go": {
+        "canonical": "Go",
+        "synonyms": ["Golang"],
+        "abbreviations": [],
+        "related": ["goroutines", "Go modules", "gRPC"]
+      },
+      "rust": {
+        "canonical": "Rust",
+        "synonyms": ["Rust lang"],
+        "abbreviations": [],
+        "related": ["Cargo", "WebAssembly", "WASM", "systems programming"]
+      },
+      "ruby": {
+        "canonical": "Ruby",
+        "synonyms": [],
+        "abbreviations": [],
+        "related": ["Ruby on Rails", "Rails", "RoR", "Sinatra", "RubyGems"]
+      },
+      "swift": {
+        "canonical": "Swift",
+        "synonyms": [],
+        "abbreviations": [],
+        "related": ["SwiftUI", "UIKit", "iOS development", "Xcode", "Cocoa"]
+      },
+      "kotlin": {
+        "canonical": "Kotlin",
+        "synonyms": [],
+        "abbreviations": [],
+        "related": ["Android development", "JVM", "Ktor", "Jetpack Compose"]
+      },
+      "php": {
+        "canonical": "PHP",
+        "synonyms": [],
+        "abbreviations": [],
+        "related": ["Laravel", "Symfony", "WordPress", "Composer"]
+      },
+      "scala": {
+        "canonical": "Scala",
+        "synonyms": [],
+        "abbreviations": [],
+        "related": ["JVM", "Akka", "Play Framework", "Apache Spark", "sbt"]
+      },
+      "sql": {
+        "canonical": "SQL",
+        "synonyms": ["Structured Query Language"],
+        "abbreviations": [],
+        "related": ["MySQL", "PostgreSQL", "SQLite", "SQL Server", "Oracle DB", "T-SQL", "PL/SQL"]
+      }
+    },
+    "frontend_frameworks": {
+      "react": {
+        "canonical": "React",
+        "synonyms": ["React.js", "ReactJS"],
+        "abbreviations": [],
+        "related": ["JSX", "Redux", "Next.js", "React Router", "React Hooks", "React Native"]
+      },
+      "angular": {
+        "canonical": "Angular",
+        "synonyms": ["Angular 2+", "AngularJS"],
+        "abbreviations": [],
+        "related": ["TypeScript", "RxJS", "NgRx", "Angular CLI", "Angular Material"]
+      },
+      "vue": {
+        "canonical": "Vue.js",
+        "synonyms": ["Vue", "VueJS"],
+        "abbreviations": [],
+        "related": ["Vuex", "Nuxt.js", "Vue Router", "Pinia", "Composition API"]
+      },
+      "svelte": {
+        "canonical": "Svelte",
+        "synonyms": ["SvelteKit"],
+        "abbreviations": [],
+        "related": ["Svelte stores", "SvelteKit"]
+      },
+      "html_css": {
+        "canonical": "HTML/CSS",
+        "synonyms": ["HTML5", "CSS3", "HTML 5", "CSS 3"],
+        "abbreviations": [],
+        "related": ["Sass", "SCSS", "Less", "Tailwind CSS", "Bootstrap", "responsive design", "flexbox", "CSS Grid"]
+      }
+    },
+    "backend_frameworks": {
+      "nodejs": {
+        "canonical": "Node.js",
+        "synonyms": ["Node", "NodeJS"],
+        "abbreviations": [],
+        "related": ["Express", "Express.js", "Fastify", "Koa", "NestJS", "npm", "yarn"]
+      },
+      "spring": {
+        "canonical": "Spring",
+        "synonyms": ["Spring Framework"],
+        "abbreviations": [],
+        "related": ["Spring Boot", "Spring MVC", "Spring Security", "Spring Cloud", "Java"]
+      },
+      "django": {
+        "canonical": "Django",
+        "synonyms": [],
+        "abbreviations": [],
+        "related": ["Django REST Framework", "DRF", "Python", "Celery"]
+      },
+      "dotnet": {
+        "canonical": ".NET",
+        "synonyms": [".NET Core", ".NET Framework", "dotnet"],
+        "abbreviations": [],
+        "related": ["ASP.NET", "C#", "Entity Framework", "Blazor", "SignalR"]
+      },
+      "rails": {
+        "canonical": "Ruby on Rails",
+        "synonyms": ["Rails", "RoR"],
+        "abbreviations": [],
+        "related": ["Ruby", "ActiveRecord", "Sidekiq", "Puma"]
+      }
+    },
+    "cloud_platforms": {
+      "aws": {
+        "canonical": "Amazon Web Services",
+        "synonyms": ["AWS Cloud"],
+        "abbreviations": ["AWS"],
+        "related": ["EC2", "S3", "Lambda", "RDS", "DynamoDB", "CloudFormation", "ECS", "EKS", "SQS", "SNS", "IAM", "CloudWatch", "API Gateway", "Route 53"]
+      },
+      "azure": {
+        "canonical": "Microsoft Azure",
+        "synonyms": ["Azure Cloud"],
+        "abbreviations": ["Azure"],
+        "related": ["Azure DevOps", "Azure Functions", "Azure AD", "Azure Kubernetes Service", "AKS", "Cosmos DB", "Azure Storage", "Azure Pipelines"]
+      },
+      "gcp": {
+        "canonical": "Google Cloud Platform",
+        "synonyms": ["Google Cloud"],
+        "abbreviations": ["GCP"],
+        "related": ["BigQuery", "Cloud Functions", "GKE", "Cloud Run", "Cloud Storage", "Pub/Sub", "Firestore", "Cloud Spanner"]
+      }
+    },
+    "devops_and_infrastructure": {
+      "docker": {
+        "canonical": "Docker",
+        "synonyms": ["Docker containers"],
+        "abbreviations": [],
+        "related": ["Dockerfile", "Docker Compose", "container", "containerization", "OCI"]
+      },
+      "kubernetes": {
+        "canonical": "Kubernetes",
+        "synonyms": ["K8s"],
+        "abbreviations": ["k8s"],
+        "related": ["Helm", "kubectl", "pods", "container orchestration", "EKS", "GKE", "AKS"]
+      },
+      "terraform": {
+        "canonical": "Terraform",
+        "synonyms": ["HashiCorp Terraform"],
+        "abbreviations": ["TF"],
+        "related": ["Infrastructure as Code", "IaC", "HCL", "Terraform modules", "OpenTofu"]
+      },
+      "cicd": {
+        "canonical": "CI/CD",
+        "synonyms": ["Continuous Integration/Continuous Deployment", "Continuous Integration/Continuous Delivery", "CI/CD pipeline"],
+        "abbreviations": [],
+        "related": ["Jenkins", "GitHub Actions", "GitLab CI", "CircleCI", "Travis CI", "ArgoCD", "Tekton"]
+      },
+      "ansible": {
+        "canonical": "Ansible",
+        "synonyms": ["Red Hat Ansible"],
+        "abbreviations": [],
+        "related": ["configuration management", "playbooks", "Ansible Tower", "AWX"]
+      },
+      "monitoring": {
+        "canonical": "monitoring and observability",
+        "synonyms": ["observability", "application monitoring"],
+        "abbreviations": [],
+        "related": ["Prometheus", "Grafana", "Datadog", "New Relic", "Splunk", "ELK Stack", "Elasticsearch", "Logstash", "Kibana", "PagerDuty", "OpenTelemetry"]
+      },
+      "linux": {
+        "canonical": "Linux",
+        "synonyms": ["GNU/Linux"],
+        "abbreviations": [],
+        "related": ["Ubuntu", "CentOS", "Red Hat", "RHEL", "Debian", "shell scripting", "Bash", "systemd"]
+      },
+      "git": {
+        "canonical": "Git",
+        "synonyms": [],
+        "abbreviations": [],
+        "related": ["GitHub", "GitLab", "Bitbucket", "version control", "source control", "branching strategy", "Git flow"]
+      }
+    },
+    "databases": {
+      "postgresql": {
+        "canonical": "PostgreSQL",
+        "synonyms": ["Postgres"],
+        "abbreviations": [],
+        "related": ["SQL", "RDBMS", "relational database", "pgAdmin"]
+      },
+      "mysql": {
+        "canonical": "MySQL",
+        "synonyms": ["MariaDB"],
+        "abbreviations": [],
+        "related": ["SQL", "RDBMS", "relational database"]
+      },
+      "mongodb": {
+        "canonical": "MongoDB",
+        "synonyms": ["Mongo"],
+        "abbreviations": [],
+        "related": ["NoSQL", "document database", "Mongoose", "MongoDB Atlas"]
+      },
+      "redis": {
+        "canonical": "Redis",
+        "synonyms": [],
+        "abbreviations": [],
+        "related": ["caching", "in-memory database", "key-value store", "pub/sub"]
+      },
+      "elasticsearch": {
+        "canonical": "Elasticsearch",
+        "synonyms": ["Elastic"],
+        "abbreviations": ["ES"],
+        "related": ["ELK Stack", "Kibana", "Logstash", "full-text search", "OpenSearch"]
+      },
+      "dynamodb": {
+        "canonical": "DynamoDB",
+        "synonyms": ["Amazon DynamoDB", "AWS DynamoDB"],
+        "abbreviations": [],
+        "related": ["NoSQL", "key-value store", "AWS", "serverless database"]
+      },
+      "cassandra": {
+        "canonical": "Apache Cassandra",
+        "synonyms": ["Cassandra"],
+        "abbreviations": [],
+        "related": ["NoSQL", "distributed database", "wide-column store"]
+      }
+    },
+    "data_engineering": {
+      "spark": {
+        "canonical": "Apache Spark",
+        "synonyms": ["Spark"],
+        "abbreviations": [],
+        "related": ["PySpark", "Spark SQL", "distributed computing", "big data", "Databricks"]
+      },
+      "kafka": {
+        "canonical": "Apache Kafka",
+        "synonyms": ["Kafka"],
+        "abbreviations": [],
+        "related": ["event streaming", "message queue", "pub/sub", "Confluent", "event-driven architecture"]
+      },
+      "airflow": {
+        "canonical": "Apache Airflow",
+        "synonyms": ["Airflow"],
+        "abbreviations": [],
+        "related": ["DAGs", "workflow orchestration", "ETL", "data pipelines"]
+      },
+      "etl": {
+        "canonical": "ETL",
+        "synonyms": ["Extract, Transform, Load", "ELT"],
+        "abbreviations": [],
+        "related": ["data pipeline", "data transformation", "data integration", "dbt"]
+      },
+      "snowflake": {
+        "canonical": "Snowflake",
+        "synonyms": [],
+        "abbreviations": [],
+        "related": ["data warehouse", "cloud data platform", "SQL", "data lakehouse"]
+      }
+    },
+    "machine_learning": {
+      "machine_learning": {
+        "canonical": "Machine Learning",
+        "synonyms": ["ML"],
+        "abbreviations": ["ML"],
+        "related": ["deep learning", "neural networks", "model training", "scikit-learn", "feature engineering"]
+      },
+      "deep_learning": {
+        "canonical": "Deep Learning",
+        "synonyms": [],
+        "abbreviations": ["DL"],
+        "related": ["neural networks", "TensorFlow", "PyTorch", "Keras", "CNN", "RNN", "transformer"]
+      },
+      "nlp": {
+        "canonical": "Natural Language Processing",
+        "synonyms": ["NLP"],
+        "abbreviations": ["NLP"],
+        "related": ["text classification", "sentiment analysis", "named entity recognition", "NER", "LLM", "transformers", "BERT", "GPT"]
+      },
+      "llm": {
+        "canonical": "Large Language Models",
+        "synonyms": ["LLMs"],
+        "abbreviations": ["LLM"],
+        "related": ["GPT", "Claude", "fine-tuning", "prompt engineering", "RAG", "vector databases", "embeddings"]
+      },
+      "computer_vision": {
+        "canonical": "Computer Vision",
+        "synonyms": [],
+        "abbreviations": ["CV"],
+        "related": ["image recognition", "object detection", "OpenCV", "YOLO", "image classification"]
+      }
+    },
+    "security": {
+      "cybersecurity": {
+        "canonical": "Cybersecurity",
+        "synonyms": ["Information Security", "InfoSec", "IT Security"],
+        "abbreviations": [],
+        "related": ["penetration testing", "vulnerability assessment", "SIEM", "SOC", "incident response", "threat modeling"]
+      },
+      "application_security": {
+        "canonical": "Application Security",
+        "synonyms": ["AppSec"],
+        "abbreviations": [],
+        "related": ["OWASP", "SAST", "DAST", "code review", "security scanning", "DevSecOps"]
+      },
+      "cloud_security": {
+        "canonical": "Cloud Security",
+        "synonyms": [],
+        "abbreviations": [],
+        "related": ["IAM", "security groups", "encryption", "compliance", "zero trust", "CSPM"]
+      }
+    },
+    "mobile_development": {
+      "ios": {
+        "canonical": "iOS Development",
+        "synonyms": ["iOS", "iPhone development"],
+        "abbreviations": [],
+        "related": ["Swift", "SwiftUI", "UIKit", "Xcode", "Objective-C", "CocoaPods", "App Store"]
+      },
+      "android": {
+        "canonical": "Android Development",
+        "synonyms": ["Android"],
+        "abbreviations": [],
+        "related": ["Kotlin", "Java", "Jetpack Compose", "Android Studio", "Gradle", "Google Play"]
+      },
+      "react_native": {
+        "canonical": "React Native",
+        "synonyms": [],
+        "abbreviations": ["RN"],
+        "related": ["cross-platform", "mobile development", "JavaScript", "Expo"]
+      },
+      "flutter": {
+        "canonical": "Flutter",
+        "synonyms": [],
+        "abbreviations": [],
+        "related": ["Dart", "cross-platform", "mobile development", "Google"]
+      }
+    },
+    "architecture_patterns": {
+      "microservices": {
+        "canonical": "Microservices",
+        "synonyms": ["Microservices Architecture", "microservice architecture"],
+        "abbreviations": [],
+        "related": ["service-oriented architecture", "SOA", "distributed systems", "API gateway", "service mesh"]
+      },
+      "rest_api": {
+        "canonical": "REST API",
+        "synonyms": ["RESTful API", "RESTful services", "REST"],
+        "abbreviations": [],
+        "related": ["HTTP", "JSON", "API design", "OpenAPI", "Swagger", "endpoints"]
+      },
+      "graphql": {
+        "canonical": "GraphQL",
+        "synonyms": [],
+        "abbreviations": [],
+        "related": ["Apollo", "schema", "queries", "mutations", "subscriptions"]
+      },
+      "event_driven": {
+        "canonical": "Event-Driven Architecture",
+        "synonyms": ["event-driven", "EDA"],
+        "abbreviations": ["EDA"],
+        "related": ["message queue", "pub/sub", "Kafka", "RabbitMQ", "event sourcing", "CQRS"]
+      },
+      "serverless": {
+        "canonical": "Serverless",
+        "synonyms": ["serverless architecture", "FaaS"],
+        "abbreviations": [],
+        "related": ["AWS Lambda", "Azure Functions", "Cloud Functions", "event-driven", "pay-per-use"]
+      }
+    },
+    "methodologies": {
+      "agile": {
+        "canonical": "Agile",
+        "synonyms": ["Agile methodology", "Agile development"],
+        "abbreviations": [],
+        "related": ["Scrum", "Kanban", "sprint", "standup", "retrospective", "user stories", "backlog"]
+      },
+      "scrum": {
+        "canonical": "Scrum",
+        "synonyms": [],
+        "abbreviations": [],
+        "related": ["Agile", "sprint", "Scrum Master", "Product Owner", "daily standup", "sprint review"]
+      },
+      "devops": {
+        "canonical": "DevOps",
+        "synonyms": ["Dev Ops"],
+        "abbreviations": [],
+        "related": ["CI/CD", "automation", "infrastructure as code", "monitoring", "site reliability"]
+      },
+      "sre": {
+        "canonical": "Site Reliability Engineering",
+        "synonyms": ["SRE"],
+        "abbreviations": ["SRE"],
+        "related": ["DevOps", "reliability", "SLO", "SLA", "SLI", "incident management", "on-call", "toil reduction"]
+      },
+      "tdd": {
+        "canonical": "Test-Driven Development",
+        "synonyms": ["TDD"],
+        "abbreviations": ["TDD"],
+        "related": ["unit testing", "BDD", "automated testing", "test automation"]
+      }
+    }
+  }
+}

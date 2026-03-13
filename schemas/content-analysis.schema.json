@@ -1,0 +1,46 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": ["overall_score", "bullet_analysis"],
+  "properties": {
+    "overall_score": { "type": "number", "minimum": 0, "maximum": 100 },
+    "bullet_analysis": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["experience_index", "bullet_index", "original_text", "score"],
+        "properties": {
+          "experience_index": { "type": "integer" },
+          "bullet_index": { "type": "integer" },
+          "original_text": { "type": "string" },
+          "score": { "type": "integer", "minimum": 1, "maximum": 5 },
+          "issues": { "type": "array", "items": { "type": "string" } },
+          "suggestion": { "type": "string" }
+        }
+      }
+    },
+    "quantification_gaps": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "experience_index": { "type": "integer" },
+          "bullet_index": { "type": "integer" },
+          "metric_type": { "type": "string" },
+          "suggestion": { "type": "string" }
+        }
+      }
+    },
+    "language_issues": { "type": "array" },
+    "narrative_assessment": {
+      "type": "object",
+      "properties": {
+        "coherence_score": { "type": "number", "minimum": 0, "maximum": 100 },
+        "progression_clear": { "type": "boolean" },
+        "identity_defined": { "type": "boolean" },
+        "gaps_or_jumps": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "top_improvements": { "type": "array", "items": { "type": "string" } }
+  }
+}

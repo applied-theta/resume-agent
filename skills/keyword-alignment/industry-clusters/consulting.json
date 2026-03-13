@@ -1,0 +1,262 @@
+{
+  "description": "Consulting industry keyword clusters for semantic matching. Covers management consulting, technology consulting, operations, financial advisory, and human capital.",
+  "industry": "consulting",
+  "clusters": {
+    "management_consulting": {
+      "strategy_development": {
+        "canonical": "Strategy Development",
+        "synonyms": ["strategic planning", "corporate strategy", "business strategy"],
+        "abbreviations": [],
+        "related": ["growth strategy", "market entry", "competitive response", "TAM/SAM/SOM", "SWOT analysis", "Porter's Five Forces"]
+      },
+      "business_transformation": {
+        "canonical": "Business Transformation",
+        "synonyms": ["enterprise transformation", "organizational transformation"],
+        "abbreviations": [],
+        "related": ["digital transformation", "operating model design", "organizational restructuring", "change management", "implementation roadmaps"]
+      },
+      "organizational_design": {
+        "canonical": "Organizational Design",
+        "synonyms": ["org design", "organization design"],
+        "abbreviations": [],
+        "related": ["operating model design", "organizational restructuring", "span of control", "role definition", "governance model"]
+      },
+      "change_management": {
+        "canonical": "Change Management",
+        "synonyms": ["organizational change management", "OCM"],
+        "abbreviations": ["OCM"],
+        "related": ["stakeholder management", "communication planning", "adoption strategy", "Prosci", "ADKAR model", "change readiness"]
+      },
+      "stakeholder_management": {
+        "canonical": "Stakeholder Management",
+        "synonyms": ["stakeholder engagement", "client management"],
+        "abbreviations": [],
+        "related": ["executive communication", "board-ready decks", "executive presentations", "client relationship"]
+      },
+      "hypothesis_driven_problem_solving": {
+        "canonical": "Hypothesis-Driven Problem Solving",
+        "synonyms": ["structured problem solving", "analytical problem solving"],
+        "abbreviations": [],
+        "related": ["issue trees", "MECE", "80/20 analysis", "root cause analysis", "framework-based thinking"]
+      },
+      "due_diligence": {
+        "canonical": "Due Diligence",
+        "synonyms": ["commercial due diligence", "strategic due diligence"],
+        "abbreviations": ["DD"],
+        "related": ["M&A", "post-merger integration", "PMI", "synergy assessment", "integration planning"]
+      },
+      "post_merger_integration": {
+        "canonical": "Post-Merger Integration",
+        "synonyms": ["merger integration", "PMI"],
+        "abbreviations": ["PMI"],
+        "related": ["due diligence", "synergy capture", "Day 1 readiness", "integration management office", "cultural integration"]
+      },
+      "benchmarking": {
+        "canonical": "Benchmarking",
+        "synonyms": ["competitive benchmarking", "industry benchmarking"],
+        "abbreviations": [],
+        "related": ["best practices", "peer analysis", "performance comparison", "KPI benchmarking"]
+      },
+      "cost_reduction": {
+        "canonical": "Cost Reduction",
+        "synonyms": ["cost optimization", "cost transformation"],
+        "abbreviations": [],
+        "related": ["zero-based budgeting", "spend analysis", "procurement optimization", "operating cost reduction"]
+      }
+    },
+    "technology_consulting": {
+      "it_strategy": {
+        "canonical": "IT Strategy",
+        "synonyms": ["technology strategy", "information technology strategy"],
+        "abbreviations": [],
+        "related": ["technology roadmap", "digital strategy", "IT operating model", "technology vision"]
+      },
+      "enterprise_architecture": {
+        "canonical": "Enterprise Architecture",
+        "synonyms": ["EA"],
+        "abbreviations": ["EA"],
+        "related": ["TOGAF", "solution architecture", "reference architecture", "technology landscape", "architecture governance"]
+      },
+      "system_integration": {
+        "canonical": "System Integration",
+        "synonyms": ["systems integration", "SI"],
+        "abbreviations": ["SI"],
+        "related": ["ERP implementation", "middleware", "API management", "data integration", "vendor evaluation"]
+      },
+      "erp_implementation": {
+        "canonical": "ERP Implementation",
+        "synonyms": ["enterprise resource planning implementation"],
+        "abbreviations": ["ERP"],
+        "related": ["SAP", "Oracle", "Workday", "system integration", "business process reengineering", "data migration"]
+      },
+      "cloud_migration": {
+        "canonical": "Cloud Migration",
+        "synonyms": ["cloud transformation", "cloud adoption"],
+        "abbreviations": [],
+        "related": ["AWS", "Azure", "GCP", "lift and shift", "cloud-native", "hybrid cloud", "multi-cloud"]
+      },
+      "digital_strategy": {
+        "canonical": "Digital Strategy",
+        "synonyms": ["digital transformation strategy"],
+        "abbreviations": [],
+        "related": ["digital transformation", "customer experience", "omnichannel", "digital innovation", "technology roadmap"]
+      },
+      "technology_due_diligence": {
+        "canonical": "Technology Due Diligence",
+        "synonyms": ["tech due diligence", "technical due diligence"],
+        "abbreviations": [],
+        "related": ["M&A", "technology assessment", "scalability review", "technical debt assessment", "architecture review"]
+      },
+      "agile_delivery": {
+        "canonical": "Agile Delivery",
+        "synonyms": ["agile transformation", "agile implementation"],
+        "abbreviations": [],
+        "related": ["Scrum", "SAFe", "Kanban", "DevOps", "sprint planning", "agile coaching"]
+      },
+      "vendor_evaluation": {
+        "canonical": "Vendor Evaluation",
+        "synonyms": ["vendor selection", "vendor assessment", "RFP management"],
+        "abbreviations": [],
+        "related": ["RFP responses", "proof of concept", "technology selection", "build vs. buy"]
+      }
+    },
+    "operations_consulting": {
+      "process_optimization": {
+        "canonical": "Process Optimization",
+        "synonyms": ["process improvement", "business process optimization"],
+        "abbreviations": [],
+        "related": ["process mapping", "value stream mapping", "workflow redesign", "operational efficiency", "business process reengineering"]
+      },
+      "lean_manufacturing": {
+        "canonical": "Lean Manufacturing",
+        "synonyms": ["lean production", "lean operations", "lean management"],
+        "abbreviations": [],
+        "related": ["waste reduction", "continuous improvement", "kaizen", "value stream mapping", "just-in-time", "5S"]
+      },
+      "six_sigma": {
+        "canonical": "Six Sigma",
+        "synonyms": ["Lean Six Sigma"],
+        "abbreviations": ["6σ", "LSS"],
+        "related": ["DMAIC", "Green Belt", "Black Belt", "Master Black Belt", "process capability", "statistical process control"]
+      },
+      "supply_chain_strategy": {
+        "canonical": "Supply Chain Strategy",
+        "synonyms": ["supply chain optimization", "supply chain management"],
+        "abbreviations": ["SCM"],
+        "related": ["logistics optimization", "inventory management", "demand planning", "S&OP", "procurement optimization", "SCOR model"]
+      },
+      "procurement_optimization": {
+        "canonical": "Procurement Optimization",
+        "synonyms": ["strategic sourcing", "procurement strategy"],
+        "abbreviations": [],
+        "related": ["vendor management", "spend analysis", "category management", "cost reduction", "supplier negotiation"]
+      },
+      "manufacturing_excellence": {
+        "canonical": "Manufacturing Excellence",
+        "synonyms": ["operational excellence", "production excellence"],
+        "abbreviations": [],
+        "related": ["OEE", "capacity planning", "production scheduling", "quality management", "TPM"]
+      },
+      "cost_to_serve": {
+        "canonical": "Cost-to-Serve Analysis",
+        "synonyms": ["cost to serve", "CTS analysis"],
+        "abbreviations": ["CTS"],
+        "related": ["customer profitability", "service level optimization", "distribution network", "logistics cost"]
+      }
+    },
+    "financial_advisory": {
+      "transaction_advisory": {
+        "canonical": "Transaction Advisory",
+        "synonyms": ["transaction services", "deal advisory"],
+        "abbreviations": ["TAS"],
+        "related": ["M&A", "due diligence", "buy-side advisory", "sell-side advisory", "deal structuring"]
+      },
+      "valuation": {
+        "canonical": "Valuation",
+        "synonyms": ["business valuation", "enterprise valuation"],
+        "abbreviations": [],
+        "related": ["DCF analysis", "comparable company analysis", "precedent transactions", "equity valuation", "fair value"]
+      },
+      "financial_modeling": {
+        "canonical": "Financial Modeling",
+        "synonyms": ["financial analysis", "financial projections"],
+        "abbreviations": [],
+        "related": ["DCF", "LBO modeling", "three-statement model", "scenario analysis", "sensitivity analysis", "Excel"]
+      },
+      "restructuring_advisory": {
+        "canonical": "Restructuring Advisory",
+        "synonyms": ["restructuring", "turnaround advisory"],
+        "abbreviations": [],
+        "related": ["bankruptcy", "debt restructuring", "operational turnaround", "cash flow management", "creditor negotiations"]
+      },
+      "forensic_accounting": {
+        "canonical": "Forensic Accounting",
+        "synonyms": ["forensic investigation", "fraud investigation"],
+        "abbreviations": [],
+        "related": ["dispute resolution", "litigation support", "fraud detection", "regulatory compliance", "expert testimony"]
+      },
+      "quality_of_earnings": {
+        "canonical": "Quality of Earnings",
+        "synonyms": ["QoE", "earnings quality analysis"],
+        "abbreviations": ["QoE"],
+        "related": ["due diligence", "EBITDA adjustments", "working capital analysis", "revenue sustainability", "GAAP", "IFRS"]
+      },
+      "regulatory_advisory": {
+        "canonical": "Regulatory Advisory",
+        "synonyms": ["regulatory consulting", "compliance advisory"],
+        "abbreviations": [],
+        "related": ["tax advisory", "transfer pricing", "GAAP", "IFRS", "regulatory compliance", "risk management"]
+      }
+    },
+    "human_capital": {
+      "workforce_planning": {
+        "canonical": "Workforce Planning",
+        "synonyms": ["strategic workforce planning", "workforce strategy"],
+        "abbreviations": [],
+        "related": ["headcount planning", "skills gap analysis", "workforce analytics", "succession planning", "talent pipeline"]
+      },
+      "talent_strategy": {
+        "canonical": "Talent Strategy",
+        "synonyms": ["talent management strategy", "people strategy"],
+        "abbreviations": [],
+        "related": ["talent acquisition", "employer branding", "retention strategy", "talent development", "high-potential programs"]
+      },
+      "organizational_design": {
+        "canonical": "Organizational Design",
+        "synonyms": ["org design", "organization design"],
+        "abbreviations": [],
+        "related": ["role design", "governance model", "span of control", "operating model", "organizational effectiveness"]
+      },
+      "leadership_development": {
+        "canonical": "Leadership Development",
+        "synonyms": ["executive development", "leadership programs"],
+        "abbreviations": [],
+        "related": ["coaching", "mentoring", "assessment centers", "360-degree feedback", "competency frameworks"]
+      },
+      "compensation_and_benefits": {
+        "canonical": "Compensation and Benefits",
+        "synonyms": ["total rewards", "comp and benefits"],
+        "abbreviations": ["C&B"],
+        "related": ["salary benchmarking", "incentive design", "equity compensation", "benefits administration", "pay equity"]
+      },
+      "culture_transformation": {
+        "canonical": "Culture Transformation",
+        "synonyms": ["cultural change", "culture change"],
+        "abbreviations": [],
+        "related": ["employee experience", "engagement surveys", "values alignment", "DEI", "diversity equity and inclusion"]
+      },
+      "hr_technology": {
+        "canonical": "HR Technology Strategy",
+        "synonyms": ["HR tech", "HRIS strategy"],
+        "abbreviations": [],
+        "related": ["Workday", "SuccessFactors", "HRIS", "HCM", "people analytics", "HR digital transformation"]
+      },
+      "dei": {
+        "canonical": "Diversity, Equity, and Inclusion",
+        "synonyms": ["DEI", "diversity and inclusion", "D&I"],
+        "abbreviations": ["DEI", "D&I"],
+        "related": ["inclusive leadership", "equity analysis", "belonging", "representation", "ERGs", "employee resource groups"]
+      }
+    }
+  }
+}

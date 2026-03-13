@@ -1,0 +1,212 @@
+{
+  "description": "Categorized action verbs for resume bullet point analysis. Used by the content-analyst agent to assess verb strength, suggest alternatives, and evaluate domain appropriateness.",
+  "usage": "When flagging a weak verb, suggest 2-3 alternatives from the category matching the candidate's role and the action being described. Avoid suggesting verbs already used elsewhere in the resume.",
+  "strength_levels": {
+    "strong": "Conveys leadership, ownership, initiative, or significant impact. Preferred for senior roles and high-impact bullets.",
+    "moderate": "Conveys clear action and competence. Appropriate for mid-level roles and standard accomplishments.",
+    "weak": "Passive, vague, or diluting. Should be replaced in nearly all cases."
+  },
+  "categories": {
+    "leadership": {
+      "description": "Verbs for managing people, teams, and organizational initiatives",
+      "verbs": [
+        { "verb": "Led", "strength": "strong" },
+        { "verb": "Directed", "strength": "strong" },
+        { "verb": "Spearheaded", "strength": "strong" },
+        { "verb": "Orchestrated", "strength": "strong" },
+        { "verb": "Championed", "strength": "strong" },
+        { "verb": "Mentored", "strength": "strong" },
+        { "verb": "Coached", "strength": "strong" },
+        { "verb": "Oversaw", "strength": "moderate" },
+        { "verb": "Guided", "strength": "moderate" },
+        { "verb": "Mobilized", "strength": "strong" },
+        { "verb": "Empowered", "strength": "strong" },
+        { "verb": "Cultivated", "strength": "strong" },
+        { "verb": "Delegated", "strength": "moderate" },
+        { "verb": "Supervised", "strength": "moderate" },
+        { "verb": "Coordinated", "strength": "moderate" },
+        { "verb": "Recruited", "strength": "moderate" },
+        { "verb": "Onboarded", "strength": "moderate" },
+        { "verb": "Unified", "strength": "strong" }
+      ]
+    },
+    "technical": {
+      "description": "Verbs for engineering, development, and technical implementation work",
+      "verbs": [
+        { "verb": "Architected", "strength": "strong" },
+        { "verb": "Engineered", "strength": "strong" },
+        { "verb": "Built", "strength": "moderate" },
+        { "verb": "Developed", "strength": "moderate" },
+        { "verb": "Implemented", "strength": "moderate" },
+        { "verb": "Designed", "strength": "moderate" },
+        { "verb": "Programmed", "strength": "moderate" },
+        { "verb": "Deployed", "strength": "moderate" },
+        { "verb": "Automated", "strength": "strong" },
+        { "verb": "Optimized", "strength": "strong" },
+        { "verb": "Integrated", "strength": "moderate" },
+        { "verb": "Refactored", "strength": "moderate" },
+        { "verb": "Debugged", "strength": "moderate" },
+        { "verb": "Configured", "strength": "moderate" },
+        { "verb": "Migrated", "strength": "moderate" },
+        { "verb": "Scaled", "strength": "strong" },
+        { "verb": "Provisioned", "strength": "moderate" },
+        { "verb": "Containerized", "strength": "moderate" }
+      ]
+    },
+    "analytical": {
+      "description": "Verbs for research, data analysis, problem-solving, and strategic thinking",
+      "verbs": [
+        { "verb": "Analyzed", "strength": "moderate" },
+        { "verb": "Evaluated", "strength": "moderate" },
+        { "verb": "Diagnosed", "strength": "strong" },
+        { "verb": "Investigated", "strength": "moderate" },
+        { "verb": "Assessed", "strength": "moderate" },
+        { "verb": "Quantified", "strength": "strong" },
+        { "verb": "Benchmarked", "strength": "strong" },
+        { "verb": "Forecasted", "strength": "strong" },
+        { "verb": "Identified", "strength": "moderate" },
+        { "verb": "Mapped", "strength": "moderate" },
+        { "verb": "Modeled", "strength": "moderate" },
+        { "verb": "Researched", "strength": "moderate" },
+        { "verb": "Audited", "strength": "moderate" },
+        { "verb": "Validated", "strength": "moderate" },
+        { "verb": "Synthesized", "strength": "strong" },
+        { "verb": "Discovered", "strength": "strong" },
+        { "verb": "Interpreted", "strength": "moderate" },
+        { "verb": "Surveyed", "strength": "moderate" }
+      ]
+    },
+    "creative": {
+      "description": "Verbs for design, content creation, innovation, and creative problem-solving",
+      "verbs": [
+        { "verb": "Designed", "strength": "moderate" },
+        { "verb": "Created", "strength": "moderate" },
+        { "verb": "Crafted", "strength": "strong" },
+        { "verb": "Conceptualized", "strength": "strong" },
+        { "verb": "Innovated", "strength": "strong" },
+        { "verb": "Pioneered", "strength": "strong" },
+        { "verb": "Prototyped", "strength": "moderate" },
+        { "verb": "Illustrated", "strength": "moderate" },
+        { "verb": "Envisioned", "strength": "strong" },
+        { "verb": "Composed", "strength": "moderate" },
+        { "verb": "Devised", "strength": "strong" },
+        { "verb": "Invented", "strength": "strong" },
+        { "verb": "Reimagined", "strength": "strong" },
+        { "verb": "Revitalized", "strength": "strong" },
+        { "verb": "Produced", "strength": "moderate" },
+        { "verb": "Styled", "strength": "moderate" },
+        { "verb": "Branded", "strength": "moderate" },
+        { "verb": "Curated", "strength": "moderate" }
+      ]
+    },
+    "communication": {
+      "description": "Verbs for presenting, writing, collaborating, and stakeholder engagement",
+      "verbs": [
+        { "verb": "Presented", "strength": "moderate" },
+        { "verb": "Authored", "strength": "strong" },
+        { "verb": "Negotiated", "strength": "strong" },
+        { "verb": "Advocated", "strength": "strong" },
+        { "verb": "Facilitated", "strength": "moderate" },
+        { "verb": "Articulated", "strength": "strong" },
+        { "verb": "Persuaded", "strength": "strong" },
+        { "verb": "Briefed", "strength": "moderate" },
+        { "verb": "Collaborated", "strength": "moderate" },
+        { "verb": "Corresponded", "strength": "moderate" },
+        { "verb": "Conveyed", "strength": "moderate" },
+        { "verb": "Documented", "strength": "moderate" },
+        { "verb": "Published", "strength": "strong" },
+        { "verb": "Reported", "strength": "moderate" },
+        { "verb": "Translated", "strength": "moderate" },
+        { "verb": "Mediated", "strength": "strong" },
+        { "verb": "Evangelized", "strength": "strong" },
+        { "verb": "Clarified", "strength": "moderate" }
+      ]
+    },
+    "strategic": {
+      "description": "Verbs for executive-level strategy, vision-setting, and organizational transformation",
+      "verbs": [
+        { "verb": "Defined", "strength": "strong" },
+        { "verb": "Established", "strength": "strong" },
+        { "verb": "Transformed", "strength": "strong" },
+        { "verb": "Drove", "strength": "strong" },
+        { "verb": "Shaped", "strength": "strong" },
+        { "verb": "Launched", "strength": "strong" },
+        { "verb": "Positioned", "strength": "strong" },
+        { "verb": "Restructured", "strength": "strong" },
+        { "verb": "Instituted", "strength": "strong" },
+        { "verb": "Formulated", "strength": "strong" },
+        { "verb": "Expanded", "strength": "moderate" },
+        { "verb": "Accelerated", "strength": "strong" },
+        { "verb": "Revamped", "strength": "strong" },
+        { "verb": "Consolidated", "strength": "moderate" },
+        { "verb": "Diversified", "strength": "strong" },
+        { "verb": "Privatized", "strength": "strong" },
+        { "verb": "Standardized", "strength": "moderate" },
+        { "verb": "Modernized", "strength": "strong" }
+      ]
+    },
+    "operational": {
+      "description": "Verbs for process improvement, operations, and project execution",
+      "verbs": [
+        { "verb": "Streamlined", "strength": "strong" },
+        { "verb": "Eliminated", "strength": "strong" },
+        { "verb": "Reduced", "strength": "strong" },
+        { "verb": "Improved", "strength": "moderate" },
+        { "verb": "Increased", "strength": "moderate" },
+        { "verb": "Delivered", "strength": "moderate" },
+        { "verb": "Executed", "strength": "moderate" },
+        { "verb": "Centralized", "strength": "moderate" },
+        { "verb": "Systematized", "strength": "strong" },
+        { "verb": "Overhauled", "strength": "strong" },
+        { "verb": "Resolved", "strength": "moderate" },
+        { "verb": "Prioritized", "strength": "moderate" },
+        { "verb": "Scheduled", "strength": "moderate" },
+        { "verb": "Tracked", "strength": "moderate" },
+        { "verb": "Maintained", "strength": "moderate" },
+        { "verb": "Expedited", "strength": "strong" },
+        { "verb": "Simplified", "strength": "strong" },
+        { "verb": "Reorganized", "strength": "moderate" }
+      ]
+    },
+    "financial": {
+      "description": "Verbs for budgeting, revenue generation, cost management, and financial analysis",
+      "verbs": [
+        { "verb": "Generated", "strength": "strong" },
+        { "verb": "Saved", "strength": "strong" },
+        { "verb": "Budgeted", "strength": "moderate" },
+        { "verb": "Forecasted", "strength": "strong" },
+        { "verb": "Allocated", "strength": "moderate" },
+        { "verb": "Secured", "strength": "strong" },
+        { "verb": "Monetized", "strength": "strong" },
+        { "verb": "Funded", "strength": "moderate" },
+        { "verb": "Maximized", "strength": "strong" },
+        { "verb": "Minimized", "strength": "strong" },
+        { "verb": "Invested", "strength": "moderate" },
+        { "verb": "Procured", "strength": "moderate" },
+        { "verb": "Projected", "strength": "moderate" },
+        { "verb": "Capitalized", "strength": "strong" },
+        { "verb": "Divested", "strength": "strong" },
+        { "verb": "Recovered", "strength": "strong" },
+        { "verb": "Undercut", "strength": "moderate" },
+        { "verb": "Economized", "strength": "moderate" }
+      ]
+    }
+  },
+  "weak_verbs": {
+    "description": "Verbs that should almost always be replaced. These dilute impact and obscure the candidate's actual contribution.",
+    "verbs": [
+      { "verb": "Helped", "alternatives": ["Led", "Facilitated", "Enabled"] },
+      { "verb": "Assisted", "alternatives": ["Supported", "Coordinated", "Contributed"] },
+      { "verb": "Worked on", "alternatives": ["Built", "Developed", "Delivered"] },
+      { "verb": "Was responsible for", "alternatives": ["Managed", "Owned", "Led"] },
+      { "verb": "Participated in", "alternatives": ["Contributed to", "Collaborated on", "Co-led"] },
+      { "verb": "Was involved in", "alternatives": ["Drove", "Executed", "Shaped"] },
+      { "verb": "Supported", "alternatives": ["Enabled", "Facilitated", "Strengthened"] },
+      { "verb": "Contributed to", "alternatives": ["Drove", "Advanced", "Shaped"] },
+      { "verb": "Handled", "alternatives": ["Managed", "Resolved", "Processed"] },
+      { "verb": "Dealt with", "alternatives": ["Resolved", "Addressed", "Navigated"] },
+      { "verb": "Did", "alternatives": ["Executed", "Performed", "Completed"] },
+      { "verb": "Made", "alternatives": ["Created", "Developed", "Produced"] }
+    ]
+  }
+}
