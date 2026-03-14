@@ -1,11 +1,6 @@
----
-description: Career archetype detection and strategic positioning methodology for resume analysis
-auto-loaded: true
----
-
 # Career Strategy
 
-This skill provides the domain knowledge and methodology for strategic positioning analysis of resumes. It is auto-loaded by the strategy-advisor agent when performing analysis.
+This document provides the domain knowledge and methodology for strategic positioning analysis of resumes. It is loaded by the strategy-advisor agent when performing analysis.
 
 ## Career Archetype Classification
 
@@ -45,7 +40,6 @@ Some candidates match multiple archetypes. Common combinations:
 
 When a secondary archetype is detected, apply the primary archetype's format recommendation but incorporate mitigation strategies from the secondary archetype.
 
----
 
 ## Value Proposition Evaluation
 
@@ -87,7 +81,6 @@ When a job description is provided, evaluate alignment:
 - Is the resume length appropriate for the target role's seniority level?
 - Does the section order emphasize what matters most for this role?
 
----
 
 ## Resume Format Recommendations
 
@@ -112,7 +105,6 @@ Refer to `format-decision-tree.md` for the complete decision tree. The three for
 - **Weaknesses**: ATS systems strongly prefer chronological data; many recruiters dislike this format
 - **Caution**: Use sparingly; reverse-chronological or hybrid is almost always preferable
 
----
 
 ## Section Ordering Optimization
 
@@ -190,7 +182,6 @@ Section order should be optimized based on the candidate's archetype and the con
 5. Education (note equivalencies if needed)
 6. Certifications (note international recognition)
 
----
 
 ## Length Appropriateness Guidelines
 
@@ -220,7 +211,6 @@ When a resume is too long:
 - Remove skills that are assumed at the candidate's level (e.g., "Microsoft Office" for a senior engineer)
 - Trim non-essential sections (hobbies, references, "References available upon request")
 
----
 
 ## Scoring Methodology
 
@@ -249,7 +239,6 @@ The overall strategic positioning score (0-100) is a composite of:
 | 50-59 | D | Very poor -- major strategic overhaul needed |
 | 0-49 | F | Critical -- resume does not effectively position the candidate |
 
----
 
 ## Output Requirements
 

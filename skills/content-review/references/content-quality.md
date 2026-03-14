@@ -1,11 +1,6 @@
----
-description: Content quality scoring rubric and methodology for resume bullet point analysis
-auto-loaded: true
----
-
 # Content Quality Analysis Rules
 
-This skill provides the domain knowledge and scoring methodology for evaluating resume content quality. It is auto-loaded by the content-analyst agent when performing analysis. The primary focus is bullet point scoring, weak pattern detection, quantification auditing, action verb assessment, and narrative coherence evaluation.
+This document provides the domain knowledge and scoring methodology for evaluating resume content quality. It is loaded by the content-analyst agent when performing analysis. The primary focus is bullet point scoring, weak pattern detection, quantification auditing, action verb assessment, and narrative coherence evaluation.
 
 ## Bullet Point Scoring Rubric (1-5 Scale)
 
@@ -94,7 +89,6 @@ Bullets with fewer than 5 words are almost always scored 1 or 2. A very short bu
 
 **Guideline:** If a bullet has fewer than 5 words, cap the maximum score at 2 unless it is a genuinely concise accomplishment with an implied strong result (e.g., "Promoted to VP within 18 months" - though even this benefits from expansion).
 
----
 
 ## Weak Pattern Detection
 
@@ -152,7 +146,6 @@ Language that reads like it was copied from a job posting rather than describing
 
 **Fix:** Describe a specific instance where the candidate performed this duty with a measurable outcome.
 
----
 
 ## Quantification Audit
 
@@ -190,7 +183,6 @@ Lower priority (metrics optional):
 - Collaborative activities - unless the candidate's specific contribution is quantifiable
 - Learning and growth activities - unless certifications or measurable skill gains
 
----
 
 ## Action Verb Assessment
 
@@ -229,7 +221,6 @@ When flagging a weak verb, suggest 2-3 stronger alternatives that:
 2. Accurately convey the nature of the action
 3. Are not already overused elsewhere in the resume
 
----
 
 ## Narrative Coherence Evaluation
 
@@ -290,7 +281,6 @@ The narrative coherence score (0-100) is a component of the overall content qual
 | 30-49 | Significant coherence problems: no clear direction, multiple unexplained gaps |
 | 0-29 | No discernible career narrative: random positions, no progression, no identity |
 
----
 
 ## Overall Content Quality Score
 
@@ -320,7 +310,6 @@ The overall content quality score (0-100) is a weighted composite of the compone
 | 50-59 | D | Very poor - major content overhaul needed |
 | 0-49 | F | Critical issues - resume content is not effective |
 
----
 
 ## Output Requirements
 

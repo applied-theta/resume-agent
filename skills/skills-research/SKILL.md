@@ -1,11 +1,12 @@
 ---
-description: Runs skills research and market intelligence analysis on a resume. Accepts optional file path as argument.
+name: skills-research
+description: >
+  Skills and market intelligence analysis -- researches current demand for
+  skills on a resume, verifies terminology accuracy, identifies trending
+  skills, and provides market-aware optimization recommendations.
 argument-hint: "[resume-path]"
-allowed-tools:
-  - Agent
-  - Read
-  - Bash
-  - Glob
+disable-model-invocation: true
+allowed-tools: Agent, Read, Bash, Glob
 ---
 
 # Skills Research

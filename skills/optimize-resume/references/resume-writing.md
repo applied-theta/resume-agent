@@ -1,15 +1,9 @@
----
-description: Resume rewriting methodology and optimization rules for the resume-rewriter agent
-auto-loaded: true
----
-
 # Resume Writing Methodology
 
-This skill provides the domain knowledge and methodology for rewriting and optimizing resumes. It is auto-loaded by the resume-rewriter agent when producing optimized content.
+This document provides the domain knowledge and methodology for rewriting and optimizing resumes. It is loaded by the resume-rewriter agent when producing optimized content.
 
 **Critical Rule: Never fabricate metrics, achievements, or experiences. If a specific number is unknown, use a bracketed placeholder `[X]` with a coaching note explaining what data the candidate should provide.**
 
----
 
 ## Rewriting Modes
 
@@ -49,7 +43,6 @@ Full rewrite mode is best when:
 1. `optimization-report.md` -- before/after pairs with explanations (always produced)
 2. `optimized-resume.md` -- complete rewritten resume (always produced in full rewrite mode; in conservative mode, produced by applying all recommended changes)
 
----
 
 ## Bullet Transformation Pattern
 
@@ -84,7 +77,6 @@ Use bracketed placeholders with coaching notes:
 
 See `transformation-rules.md` for the complete step-by-step transformation process and additional examples.
 
----
 
 ## Bracketed Placeholder Rules
 
@@ -134,7 +126,6 @@ Mentored [X] junior developers, with [X]% receiving promotions within [timeframe
 4. Provide fallback metrics if the primary metric is unavailable
 5. Group coaching notes at the end of each experience entry, not inline
 
----
 
 ## Summary Rewriting
 
@@ -174,7 +165,6 @@ When no JD is provided, rewrite the summary to:
 3. State their core technical or domain expertise
 4. Present a general value proposition
 
----
 
 ## Skills Section Optimization
 
@@ -196,7 +186,6 @@ When no JD is provided, rewrite the summary to:
 | Career Changer | Transferable Technical Skills, Domain Knowledge, Tools, Soft Skills |
 | Entry-Level | Programming Languages, Frameworks, Tools, Coursework Topics |
 
----
 
 ## Section Reordering Rules
 
@@ -256,11 +245,10 @@ Section order should follow the strategy advisor's recommendations. When no spec
 6. Education
 7. Certifications / Recent Training
 
----
 
 ## Template Selection
 
-Select the appropriate template from `${CLAUDE_PLUGIN_ROOT}/skills/resume-writing/templates/` based on the career archetype detected by the strategy advisor:
+Select the appropriate template from `${CLAUDE_PLUGIN_ROOT}/skills/optimize-resume/references/templates/` based on the career archetype detected by the strategy advisor:
 
 | Archetype | Template |
 |-----------|----------|
@@ -274,7 +262,6 @@ Select the appropriate template from `${CLAUDE_PLUGIN_ROOT}/skills/resume-writin
 
 For technical roles (detected from JD or resume content), prefer `technical.md` regardless of archetype, unless the archetype is executive or career-changer.
 
----
 
 ## Quality Guardrails
 
@@ -302,7 +289,6 @@ For technical roles (detected from JD or resume content), prefer `technical.md` 
 - Vary action verbs across bullets within the same role
 - Use industry-specific terminology appropriate to the candidate's field
 
----
 
 ## Confidence Classification Rubric
 
@@ -386,7 +372,6 @@ Every change must include a `source` field indicating what informed the change:
 
 **Interview-sourced content rule**: Any change with `source: interview` or `source: both` is automatically classified as **Low confidence** with `verification_required: true`, regardless of how minor the textual change appears. Interview content has not been verified against the candidate's written record and must be reviewed.
 
----
 
 ## Input Dependencies
 

@@ -1,5 +1,10 @@
 ---
-description: Generates optimized resume content based on prior analysis, delegating to the resume-rewriter subagent in conservative mode by default
+name: optimize-resume
+description: >
+  Resume optimization -- generates improved resume content based on prior
+  analysis, with optional interactive interview, conservative or full-rewrite
+  modes, change tracking with confidence levels, and granular approval workflow.
+disable-model-invocation: true
 allowed-tools: Agent, Read, Write, Bash, Glob, AskUserQuestion
 ---
 
@@ -15,7 +20,6 @@ This command requires a prior analysis run. At minimum, the session directory mu
 
 If these files do not exist, the user must run `/analyze-resume` first (resume can be provided via direct path, e.g., `/analyze-resume /path/to/resume.pdf`).
 
----
 
 ## Procedure
 
@@ -733,7 +737,6 @@ Re-analysis of the optimized resume produced the following score comparison:
   > **Warning:** Original scores are not available for comparison. Run `/analyze-resume` first for a complete analysis with scoring.
 - **Post-opt directory already exists**: Overwrite any existing `post-opt/` contents from a previous optimization run in the same session.
 
----
 
 ## Error Handling
 
@@ -864,7 +867,6 @@ If PDF generation fails:
 
 This is a non-blocking failure. The optimization workflow is already complete.
 
----
 
 ## Example Usage
 

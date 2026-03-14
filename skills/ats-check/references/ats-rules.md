@@ -1,11 +1,6 @@
----
-description: ATS compatibility scoring rules and methodology for resume analysis
-auto-loaded: true
----
-
 # ATS Compatibility Rules
 
-This skill provides the domain knowledge and scoring methodology for evaluating resume compatibility with Applicant Tracking Systems (ATS). It is auto-loaded by the ats-analyzer agent when performing analysis.
+This document provides the domain knowledge and scoring methodology for evaluating resume compatibility with Applicant Tracking Systems (ATS). It is loaded by the ats-analyzer agent when performing analysis.
 
 ## Scoring Overview
 
@@ -20,7 +15,6 @@ The ATS compatibility score is a weighted composite of four sub-dimensions, prod
 
 **Overall ATS Score** = (Parsability x 0.30) + (Format Compliance x 0.25) + (Keyword Readiness x 0.25) + (Structure Quality x 0.20)
 
----
 
 ## Dimension 1: Parsability (30% Weight)
 
@@ -61,7 +55,6 @@ Parsability measures whether an ATS can successfully extract structured data fie
 | 30-49 | Significant issues: contact info buried in headers/footers, creative section names throughout |
 | 0-29 | Critical failures: image-based PDF, no recognizable structure, contact info not parseable |
 
----
 
 ## Dimension 2: Format Compliance (25% Weight)
 
@@ -98,7 +91,6 @@ Refer to `format-checklist.json` for the complete checklist with severity rating
 | 30-49 | Multiple critical issues: tables + images, or text boxes with key content |
 | 0-29 | Heavily designed resume: multi-column table layout, graphics throughout, text boxes for sections |
 
----
 
 ## Dimension 3: Keyword Readiness (25% Weight)
 
@@ -140,7 +132,6 @@ ATS systems typically assign higher weight to keywords found in:
 | 30-49 | No dedicated skills section; keywords only in bullet points; no acronym pairing |
 | 0-29 | Very few extractable keywords; skills not identifiable by ATS |
 
----
 
 ## Dimension 4: Structure Quality (20% Weight)
 
@@ -181,7 +172,6 @@ Structure quality assesses whether the resume follows organizational patterns th
 | 30-49 | No clear chronological order; inconsistent formatting throughout; major length issues |
 | 0-29 | Functional/skills-based format with no chronology; chaotic formatting; extreme length |
 
----
 
 ## Common ATS Failure Patterns
 
@@ -228,7 +218,6 @@ Structure quality assesses whether the resume follows organizational patterns th
 - Background colors or patterns that interfere with text extraction
 **Detection**: Check for any visual elements that would be empty if all images were removed.
 
----
 
 ## Input Format Considerations
 
@@ -249,7 +238,6 @@ When analyzing a Markdown resume:
 - Markdown is inherently ATS-friendly for parsability since it is plain text
 - Focus analysis on keyword readiness and structure quality, as format compliance issues are minimal in Markdown
 
----
 
 ## Platform-Specific Considerations
 
@@ -265,7 +253,6 @@ Key platforms to consider:
 
 When providing recommendations, note which platforms are most affected by specific issues and prioritize fixes that improve compatibility across the broadest set of platforms.
 
----
 
 ## Scoring Aggregation
 
@@ -292,7 +279,6 @@ To compute the overall ATS score:
 | 50-59 | D | Very poor - major overhaul needed |
 | 0-49 | F | Critical failures - resume likely not parseable |
 
----
 
 ## Output Requirements
 

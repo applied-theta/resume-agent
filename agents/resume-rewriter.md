@@ -33,8 +33,8 @@ Read all available analysis files from the session directory (`workspace/output/
 
 Load the rewriting methodology and reference data:
 
-1. Read `${CLAUDE_PLUGIN_ROOT}/skills/resume-writing/SKILL.md` for the rewriting methodology, modes, bracketed placeholder rules, summary rewriting patterns, skills optimization rules, section ordering guidelines, quality guardrails, and the **Confidence Classification Rubric** (the single source of truth for confidence tier assignments and source attribution rules).
-2. Read `${CLAUDE_PLUGIN_ROOT}/skills/resume-writing/transformation-rules.md` for the step-by-step bullet transformation process with before/after examples for each weakness type.
+1. Read `${CLAUDE_PLUGIN_ROOT}/skills/optimize-resume/references/resume-writing.md` for the rewriting methodology, modes, bracketed placeholder rules, summary rewriting patterns, skills optimization rules, section ordering guidelines, quality guardrails, and the **Confidence Classification Rubric** (the single source of truth for confidence tier assignments and source attribution rules).
+2. Read `${CLAUDE_PLUGIN_ROOT}/skills/optimize-resume/references/transformation-rules.md` for the step-by-step bullet transformation process with before/after examples for each weakness type.
 
 ### Step 3: Select Template
 
@@ -42,15 +42,15 @@ Based on the career archetype detected by the strategy advisor (from `strategy-a
 
 | Archetype | Template |
 |-----------|----------|
-| `linear_progression` | `${CLAUDE_PLUGIN_ROOT}/skills/resume-writing/templates/standard.md` |
-| `entry_level` | `${CLAUDE_PLUGIN_ROOT}/skills/resume-writing/templates/standard.md` (with entry-level section order) |
-| `executive` | `${CLAUDE_PLUGIN_ROOT}/skills/resume-writing/templates/executive.md` |
-| `career_changer` | `${CLAUDE_PLUGIN_ROOT}/skills/resume-writing/templates/career-change.md` |
-| `return_to_work` | `${CLAUDE_PLUGIN_ROOT}/skills/resume-writing/templates/standard.md` (with return-to-work section order) |
-| `military_transitioner` | `${CLAUDE_PLUGIN_ROOT}/skills/resume-writing/templates/career-change.md` |
-| `international_candidate` | `${CLAUDE_PLUGIN_ROOT}/skills/resume-writing/templates/standard.md` (adapted with country-specific conventions from `${CLAUDE_PLUGIN_ROOT}/reference/resume-conventions-by-country.md`) |
+| `linear_progression` | `${CLAUDE_PLUGIN_ROOT}/skills/optimize-resume/references/templates/standard.md` |
+| `entry_level` | `${CLAUDE_PLUGIN_ROOT}/skills/optimize-resume/references/templates/standard.md` (with entry-level section order) |
+| `executive` | `${CLAUDE_PLUGIN_ROOT}/skills/optimize-resume/references/templates/executive.md` |
+| `career_changer` | `${CLAUDE_PLUGIN_ROOT}/skills/optimize-resume/references/templates/career-change.md` |
+| `return_to_work` | `${CLAUDE_PLUGIN_ROOT}/skills/optimize-resume/references/templates/standard.md` (with return-to-work section order) |
+| `military_transitioner` | `${CLAUDE_PLUGIN_ROOT}/skills/optimize-resume/references/templates/career-change.md` |
+| `international_candidate` | `${CLAUDE_PLUGIN_ROOT}/skills/optimize-resume/references/templates/standard.md` (adapted with country-specific conventions from `${CLAUDE_PLUGIN_ROOT}/reference/resume-conventions-by-country.md`) |
 
-For technical roles (detected from JD or resume content), prefer `${CLAUDE_PLUGIN_ROOT}/skills/resume-writing/templates/technical.md` unless the archetype is executive or career-changer.
+For technical roles (detected from JD or resume content), prefer `${CLAUDE_PLUGIN_ROOT}/skills/optimize-resume/references/templates/technical.md` unless the archetype is executive or career-changer.
 
 If `strategy-analysis.json` is not available, default to the standard template and infer archetype from the parsed resume data (years of experience, role titles, industry).
 
@@ -377,7 +377,7 @@ Assign sequential string IDs: `"CHG-001"`, `"CHG-002"`, etc. The numbering must 
 
 #### Classifying Confidence
 
-Apply the three-tier confidence rubric from `${CLAUDE_PLUGIN_ROOT}/skills/resume-writing/SKILL.md`:
+Apply the three-tier confidence rubric from `${CLAUDE_PLUGIN_ROOT}/skills/optimize-resume/references/resume-writing.md`:
 
 - **High**: Formatting fixes, keyword repositioning, standard header renames, punctuation normalization, date format standardization. No change to semantic meaning, no new information, no subjective judgment.
 - **Medium**: Active voice rewrites, bullet restructuring to [Action Verb] + [Activity] + [Result] pattern, section reordering, condensing or splitting bullets. Preserves original meaning but expresses it differently.

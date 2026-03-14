@@ -23,10 +23,10 @@ claude plugin install --dir /path/to/resume-agent-plugin
 
 Dependencies (`pymupdf`, `jsonschema`, `typst`) are installed automatically via the SessionStart hook.
 
-## Commands
+## Skills
 
-| Command | Description |
-|---------|-------------|
+| Skill | Description |
+|-------|-------------|
 | `/resume-agent:analyze-resume` | Full 6-dimension analysis pipeline |
 | `/resume-agent:parse-resume` | Parse resume into structured JSON |
 | `/resume-agent:ats-check` | ATS compatibility analysis |

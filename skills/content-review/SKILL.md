@@ -1,11 +1,12 @@
 ---
-description: Runs content quality analysis on a resume. Accepts optional file path as argument.
+name: content-review
+description: >
+  Content quality analysis -- scores every bullet point on a 1-5 scale,
+  detects weak patterns, audits quantification, evaluates action verbs,
+  and assesses narrative coherence across the resume.
 argument-hint: "[resume-path]"
-allowed-tools:
-  - Agent
-  - Read
-  - Bash
-  - Glob
+disable-model-invocation: true
+allowed-tools: Agent, Read, Bash, Glob
 ---
 
 # Content Review

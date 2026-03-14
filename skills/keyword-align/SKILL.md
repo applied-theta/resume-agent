@@ -1,6 +1,12 @@
 ---
-description: Runs keyword alignment analysis against a job description. Accepts optional file paths for resume and JD.
+name: keyword-align
+description: >
+  Keyword alignment analysis -- decomposes a job description into weighted
+  requirement categories, builds a resume keyword inventory, classifies
+  matches by confidence tier, and identifies critical gaps with prioritized
+  optimization actions.
 argument-hint: "[resume-path] [--jd path|url]"
+disable-model-invocation: true
 allowed-tools: Agent, Read, Bash, Glob, WebFetch
 ---
 
@@ -91,8 +97,8 @@ Provide the keyword-optimizer with:
 - The job description content (inline text, fetched URL content, or the file path in `workspace/input/`)
 
 The keyword-optimizer will:
-- Load the keyword alignment methodology from `${CLAUDE_PLUGIN_ROOT}/skills/keyword-alignment/SKILL.md`
-- Load industry cluster data from `${CLAUDE_PLUGIN_ROOT}/skills/keyword-alignment/industry-clusters/`
+- Load the keyword alignment methodology from `${CLAUDE_PLUGIN_ROOT}/skills/keyword-align/references/keyword-alignment.md`
+- Load industry cluster data from `${CLAUDE_PLUGIN_ROOT}/skills/keyword-align/references/industry-clusters/`
 - Decompose the JD into requirement categories
 - Build a keyword inventory from the parsed resume
 - Classify matches by confidence tier

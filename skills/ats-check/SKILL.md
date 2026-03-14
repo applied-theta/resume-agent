@@ -1,11 +1,12 @@
 ---
-description: Runs ATS compatibility analysis on a resume. Accepts optional file path as argument.
+name: ats-check
+description: >
+  ATS compatibility analysis -- evaluates how a resume performs in applicant
+  tracking systems across parsability, format compliance, keyword readiness,
+  and structure quality. Scores each dimension and provides specific fixes.
 argument-hint: "[resume-path]"
-allowed-tools:
-  - Agent
-  - Read
-  - Bash
-  - Glob
+disable-model-invocation: true
+allowed-tools: Agent, Read, Bash, Glob
 ---
 
 # ATS Check

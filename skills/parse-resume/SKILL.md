@@ -1,11 +1,11 @@
 ---
-description: Parses a resume into structured JSON using the resume-parser subagent. Accepts an optional file path argument.
+name: parse-resume
+description: >
+  Resume parsing -- extracts contact info, experience, education, skills,
+  projects, and metadata from a PDF or Markdown resume into structured JSON.
 argument-hint: "[resume-path]"
-allowed-tools:
-  - Agent
-  - Read
-  - Bash
-  - Glob
+disable-model-invocation: true
+allowed-tools: Agent, Read, Bash, Glob
 ---
 
 # Parse Resume

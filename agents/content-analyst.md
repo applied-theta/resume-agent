@@ -31,10 +31,10 @@ When user notes are provided, incorporate them as follows:
 
 Load content quality rules and supporting data before analysis:
 
-1. Read `${CLAUDE_PLUGIN_ROOT}/skills/content-quality/SKILL.md` for the scoring rubric, weak pattern detection rules, quantification audit methodology, action verb assessment criteria, and narrative coherence evaluation framework.
-2. Read `${CLAUDE_PLUGIN_ROOT}/skills/content-quality/weak-patterns.json` for regex-compatible weak pattern definitions organized by category (responsibility prefixes, weak action verbs, passive voice, vague scope, filler phrases, job description language).
-3. Read `${CLAUDE_PLUGIN_ROOT}/skills/content-quality/action-verbs.json` for categorized action verb lists by domain (leadership, technical, analytical, creative, communication, strategic, operational, financial) with strength ratings and weak verb alternatives.
-4. Read `${CLAUDE_PLUGIN_ROOT}/skills/content-quality/quantification-guide.md` for metric type definitions (financial, scale, efficiency, quality) with examples and suggestion methodology.
+1. Read `${CLAUDE_PLUGIN_ROOT}/skills/content-review/references/content-quality.md` for the scoring rubric, weak pattern detection rules, quantification audit methodology, action verb assessment criteria, and narrative coherence evaluation framework.
+2. Read `${CLAUDE_PLUGIN_ROOT}/skills/content-review/references/weak-patterns.json` for regex-compatible weak pattern definitions organized by category (responsibility prefixes, weak action verbs, passive voice, vague scope, filler phrases, job description language).
+3. Read `${CLAUDE_PLUGIN_ROOT}/skills/content-review/references/action-verbs.json` for categorized action verb lists by domain (leadership, technical, analytical, creative, communication, strategic, operational, financial) with strength ratings and weak verb alternatives.
+4. Read `${CLAUDE_PLUGIN_ROOT}/skills/content-review/references/quantification-guide.md` for metric type definitions (financial, scale, efficiency, quality) with examples and suggestion methodology.
 
 ## Analysis Process
 

@@ -17,9 +17,9 @@ You are a specialized ATS (Applicant Tracking System) compatibility analyzer. Yo
 
 1. **Parsed resume data**: Read `parsed-resume.json` from the session directory to get structured resume data.
 2. **Original resume file**: Read the original resume file (PDF text or Markdown) from the session directory for format-level analysis.
-3. **ATS rules and methodology**: Load the scoring methodology from `${CLAUDE_PLUGIN_ROOT}/skills/ats-rules/SKILL.md` and its supporting data files:
-   - `format-checklist.json` for format compliance checks with severity ratings
-   - `platform-quirks.json` for platform-specific parsing behaviors
+3. **ATS rules and methodology**: Load the scoring methodology from `${CLAUDE_PLUGIN_ROOT}/skills/ats-check/references/ats-rules.md` and its supporting data files:
+   - `${CLAUDE_PLUGIN_ROOT}/skills/ats-check/references/format-checklist.json` for format compliance checks with severity ratings
+   - `${CLAUDE_PLUGIN_ROOT}/skills/ats-check/references/platform-quirks.json` for platform-specific parsing behaviors
 
 ## Analysis Procedure
 
@@ -78,7 +78,7 @@ After completing the 4-dimension analysis above, perform a platform-specific ATS
 
 #### Baseline Context
 
-Load `${CLAUDE_PLUGIN_ROOT}/skills/ats-rules/platform-quirks.json` and read the entries for `workday`, `greenhouse`, and `lever`. Use each platform's `strengths`, `weaknesses`, `quirks`, `recommended_format`, `file_size_limit_mb`, and `supported_formats` as baseline context for the simulation.
+Load `${CLAUDE_PLUGIN_ROOT}/skills/ats-check/references/platform-quirks.json` and read the entries for `workday`, `greenhouse`, and `lever`. Use each platform's `strengths`, `weaknesses`, `quirks`, `recommended_format`, `file_size_limit_mb`, and `supported_formats` as baseline context for the simulation.
 
 #### Live Research
 

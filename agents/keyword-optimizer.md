@@ -32,7 +32,7 @@ When user notes are provided, incorporate them as career direction context throu
 
 ## Methodology
 
-Load the keyword alignment methodology and rules from `${CLAUDE_PLUGIN_ROOT}/skills/keyword-alignment/SKILL.md` and the industry cluster data files from `${CLAUDE_PLUGIN_ROOT}/skills/keyword-alignment/industry-clusters/`. Always load `general.json` as the baseline cluster, then layer any industry-specific cluster files that match the detected industry.
+Load the keyword alignment methodology and rules from `${CLAUDE_PLUGIN_ROOT}/skills/keyword-align/references/keyword-alignment.md` and the industry cluster data files from `${CLAUDE_PLUGIN_ROOT}/skills/keyword-align/references/industry-clusters/`. Always load `general.json` as the baseline cluster, then layer any industry-specific cluster files that match the detected industry.
 
 ### Step 1: JD Decomposition
 

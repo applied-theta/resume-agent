@@ -1,17 +1,11 @@
----
-description: Keyword alignment methodology for matching resumes against job descriptions
-auto-loaded: true
----
-
 # Keyword Alignment Methodology
 
-This skill provides the domain knowledge and methodology for analyzing keyword alignment between a resume and a target job description. It is auto-loaded by the keyword-optimizer agent when performing analysis.
+This document provides the domain knowledge and methodology for analyzing keyword alignment between a resume and a target job description. It is loaded by the keyword-optimizer agent when performing analysis.
 
 ## Overview
 
 Keyword alignment analysis answers the question: "How well does this resume match the target job description?" It decomposes the JD into structured requirement categories, builds a keyword inventory from the resume, classifies matches by confidence level, identifies critical gaps, and generates prioritized optimization actions with specific placement guidance.
 
----
 
 ## Step 1: JD Decomposition
 
@@ -34,7 +28,6 @@ Decompose the job description into six requirement categories:
 - When the JD lists a technology stack, each technology is a separate required or preferred hard skill.
 - Industry terms are domain concepts rather than specific tools (e.g., "event-driven architecture" is an industry term, "Kafka" is a tool).
 
----
 
 ## Step 2: Resume Keyword Inventory
 
@@ -59,7 +52,6 @@ Build a complete keyword inventory from the resume, noting where each keyword ap
 - Record the number of times a keyword appears and all locations where it is found.
 - Load industry keyword clusters from `industry-clusters/` to expand the matching vocabulary with known synonyms and related terms.
 
----
 
 ## Step 3: Match Classification
 
@@ -105,7 +97,6 @@ Industry clusters provide:
 - **Abbreviations**: Acronym-to-full-term mappings (e.g., "ML" = "Machine Learning")
 - **Related terms**: Terms in the same skill cluster for medium-confidence matching
 
----
 
 ## Step 4: Match Rate Computation
 
@@ -155,7 +146,6 @@ For a JD with 5 required hard skills (weight 3.0 each) and 3 tools (weight 2.0 e
 | 30-49% | Weak | Significant misalignment; consider whether this is the right role |
 | 0-29% | Poor | Major misalignment; role may not be a fit |
 
----
 
 ## Step 5: Critical Gap Identification
 
@@ -179,7 +169,6 @@ For each gap, provide:
 - **Priority**: Critical / High / Medium / Low
 - **Suggestion**: Specific action to address the gap (add to skills section, incorporate into a bullet point, mention in summary, or acknowledge the gap is genuine and suggest how to address it in a cover letter)
 
----
 
 ## Step 6: Optimization Action Generation
 
@@ -212,7 +201,6 @@ Number optimization actions in priority order based on:
 2. Ease of implementation (adding to skills section is easier than rewriting bullets)
 3. ATS weight of the target placement location
 
----
 
 ## Output Requirements
 

@@ -1,6 +1,11 @@
 ---
+name: export-pdf
+description: >
+  PDF export -- converts an optimized resume markdown file to a professionally
+  formatted, ATS-compatible PDF with style presets (Modern, Classic, Compact,
+  Harvard) and customizable fonts, colors, margins, and spacing.
 argument-hint: "[resume-path]"
-description: Export an optimized resume markdown file to a professionally formatted, ATS-compatible PDF with style presets and customization options.
+disable-model-invocation: true
 allowed-tools: Read, Bash, Glob, AskUserQuestion
 ---
 

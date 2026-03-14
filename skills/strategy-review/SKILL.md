@@ -1,11 +1,12 @@
 ---
-description: Runs strategic positioning analysis on a resume. Accepts optional file path as argument.
+name: strategy-review
+description: >
+  Strategic positioning analysis -- detects career archetype, evaluates
+  value proposition strength, assesses resume format appropriateness,
+  and recommends section ordering and length optimizations.
 argument-hint: "[resume-path]"
-allowed-tools:
-  - Agent
-  - Read
-  - Bash
-  - Glob
+disable-model-invocation: true
+allowed-tools: Agent, Read, Bash, Glob
 ---
 
 # Strategy Review
@@ -63,7 +64,7 @@ Delegate to the **strategy-advisor** subagent to perform the strategic positioni
 
 Provide the strategy-advisor with:
 - The session directory path (where `parsed-resume.json` is located)
-- The strategy-advisor will read `parsed-resume.json` for structured resume data, load career strategy reference data from `${CLAUDE_PLUGIN_ROOT}/skills/career-strategy/`, and optionally check for a job description in `workspace/input/` for target role alignment
+- The strategy-advisor will read `parsed-resume.json` for structured resume data, load career strategy reference data from `${CLAUDE_PLUGIN_ROOT}/skills/strategy-review/references/`, and optionally check for a job description in `workspace/input/` for target role alignment
 
 The strategy-advisor will write its output to `strategy-analysis.json` in the session directory.
 
