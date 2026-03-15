@@ -16,12 +16,13 @@ Options:
 Exits with code 0 on success, 1 on error. Errors are written to stderr.
 """
 
-import json
 import re
 import sys
 from pathlib import Path
 
 import typst
+
+from parse_resume import parse_resume_markdown
 
 # ---------------------------------------------------------------------------
 # Constants
@@ -94,124 +95,6 @@ PRESET_DEFAULTS: dict[str, dict[str, str]] = {
 }
 
 VALID_PRESETS = list(PRESET_DEFAULTS.keys())
-
-
-# ---------------------------------------------------------------------------
-# Markdown parser: resume markdown -> structured data
-# ---------------------------------------------------------------------------
-
-
-def parse_resume_markdown(text: str) -> dict:
-    """Parse resume markdown into a structured dict.
-
-    Returns a dict with keys:
-        name: str
-        contact_lines: list[str]
-        sections: list[dict] with keys:
-            heading: str
-            level: int (2 or 3)
-            meta_line: str | None  (bold company/date line for H3)
-            content: list[str]  (lines of content)
-    """
-    lines = text.strip().split("\n")
-    warnings: list[str] = []
-
-    name: str = ""
-    contact_lines: list[str] = []
-    sections: list[dict] = []
-    current_section: dict | None = None
-
-    i = 0
-    # Parse H1 name
-    while i < len(lines):
-        line = lines[i].strip()
-        if line.startswith("# ") and not line.startswith("## "):
-            name = line[2:].strip()
-            i += 1
-            break
-        elif line:
-            warnings.append("Missing H1 heading (candidate name)")
-            break
-        i += 1
-
-    if not name:
-        warnings.append("Missing H1 heading (candidate name)")
-
-    # Look for contact lines (pipe-delimited, right after H1 + blank line)
-    while i < len(lines) and not lines[i].strip():
-        i += 1
-
-    while i < len(lines):
-        candidate = lines[i].strip()
-        if not candidate or candidate.startswith("#"):
-            break
-        if "|" in candidate or "@" in candidate or any(
-            d in candidate.lower() for d in ["linkedin.com", "github.com", "http"]
-        ):
-            contact_lines.append(candidate)
-            i += 1
-        else:
-            break
-
-    # Parse remaining sections
-    while i < len(lines):
-        line = lines[i]
-        stripped = line.strip()
-
-        if stripped.startswith("### "):
-            heading = stripped[4:].strip()
-            current_section = {
-                "heading": heading,
-                "level": 3,
-                "meta_line": None,
-                "content": [],
-            }
-            sections.append(current_section)
-            i += 1
-            # Check for bold meta line (company/date)
-            while i < len(lines) and not lines[i].strip():
-                i += 1
-            if i < len(lines):
-                meta_candidate = lines[i].strip()
-                if meta_candidate.startswith("**") or (
-                    meta_candidate.startswith("*") and not meta_candidate.startswith("* ")
-                ):
-                    current_section["meta_line"] = meta_candidate
-                    i += 1
-                    continue
-            continue
-
-        elif stripped.startswith("## "):
-            heading = stripped[3:].strip()
-            current_section = {
-                "heading": heading,
-                "level": 2,
-                "meta_line": None,
-                "content": [],
-            }
-            sections.append(current_section)
-            i += 1
-            continue
-
-        elif current_section is not None:
-            current_section["content"].append(line)
-            i += 1
-        else:
-            i += 1
-
-    # Validate expected resume structure
-    h2_headings = [s["heading"].lower() for s in sections if s["level"] == 2]
-    expected_sections = ["summary", "experience", "education", "skills"]
-    for expected in expected_sections:
-        if not any(expected in h for h in h2_headings):
-            warnings.append(f"Missing expected section: {expected}")
-
-    return {
-        "name": name,
-        "contact_lines": contact_lines,
-        "sections": sections,
-        "warnings": warnings,
-    }
 
 
 # ---------------------------------------------------------------------------

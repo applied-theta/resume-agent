@@ -6,5 +6,12 @@ requires-python = ">=3.12"
 dependencies = [
     "pymupdf",
     "jsonschema",
+    "python-docx",
     "typst",
+    "fpdf2",
+]
+
+[dependency-groups]
+dev = [
+    "pytest",
 ]
