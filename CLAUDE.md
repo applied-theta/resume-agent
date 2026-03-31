@@ -74,7 +74,7 @@ The export system uses a shared parser with dual renderer pattern:
 6. Report generation (`analysis-report.md`)
 7. Chat summary
 
-`optimize-resume` follows analysis with interview → rewrite → approval → re-score.
+`optimize-resume` collects optional user notes → interview → rewrite → approval → re-score.
 
 `export-resume` handles post-optimization export:
 1. Format selection (PDF or DOCX)

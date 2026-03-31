@@ -8,13 +8,13 @@ description: >
   get feedback on a resume, evaluate a resume, check resume quality, assess a
   resume for job applications, or run any kind of comprehensive resume review --
   even if they don't say "analyze resume" explicitly.
-argument-hint: "[resume-path] [--jd path|url] [--notes \"free-form text\"]"
+argument-hint: "[resume-path] [--jd path|url]"
 allowed-tools: Agent, Read, Write, Bash, Glob, WebFetch, AskUserQuestion
 ---
 
 # Analyze Resume
 
-Run the full resume analysis pipeline. This skill orchestrates the complete analysis workflow: parsing the resume, collecting optional user notes, detecting career strategy, running parallel analysis agents, computing weighted scores, generating a comprehensive report, and presenting a conversational summary.
+Run the full resume analysis pipeline. This skill orchestrates the complete analysis workflow: parsing the resume, detecting career strategy, running parallel analysis agents, computing weighted scores, generating a comprehensive report, and presenting a conversational summary.
 
 ## Usage
 
@@ -23,15 +23,12 @@ Run the full resume analysis pipeline. This skill orchestrates the complete anal
 /analyze-resume /path/to/resume.pdf                      → copies resume, then analyzes
 /analyze-resume /path/to/resume.pdf --jd /path/to/jd.txt → copies both, then analyzes
 /analyze-resume /path/to/resume.pdf --jd https://...     → copies resume, fetches JD URL
-/analyze-resume /path/to/resume.pdf --notes "Career changer targeting PM roles"
-/analyze-resume --notes "Focus on leadership experience, transitioning from IC to management"
 ```
 
 ## Prerequisites
 
 - A resume file provided as a direct path argument, or placed in `workspace/input/`
 - Optionally, a job description (file path via `--jd`, file in `workspace/input/`, pasted inline, provided as a URL, or provided interactively when prompted)
-- Optionally, user notes via `--notes` (or provided interactively when prompted)
 
 
 ## Pipeline Overview
@@ -42,7 +39,6 @@ The pipeline executes in this order:
 1.   Session Setup      Create timestamped output directory
 2a.  Input Detection    Copy files if path args provided; find resume in workspace/input/; auto-detect JD
 2b.  JD Collection      Interactive JD prompt if no JD auto-detected; URL/path handling; fallback logic
-2.5  Notes Collection   Collect optional user notes (--notes arg or interactive prompt)
 3.   Parse              Delegate to resume-parser subagent
 4.   Parallel Analysis  strategy-advisor + ats-analyzer + content-analyst + keyword-optimizer (if JD) + skills-research
 5.   Score Computation  Run compute-scores.py
@@ -146,47 +142,6 @@ Tell the user:
 > Mode: `{with JD / without JD}`
 
 
-## Step 2.5: Notes Collection
-
-Collect optional user notes that provide career context for the analysis. Notes are session-scoped only and are never persisted between sessions.
-
-### Check for `--notes` argument
-
-If the user provided a `--notes` argument with the `/analyze-resume` command:
-1. Extract the free-form text value from the argument.
-2. If the value is an empty string (e.g., `--notes ""`), treat this as no notes provided and fall through to the interactive prompt below.
-3. If the value is non-empty, use it as the user's notes.
-
-### Interactive prompt (when `--notes` not provided or empty)
-
-If no notes were provided via `--notes` (or the value was empty), prompt the user via `AskUserQuestion`:
-
-> Do you have any context to share about your career goals, specific concerns, or areas you'd like the analysis to focus on?
-
-Provide these options:
-- "Yes, I'd like to add notes"
-- "No, continue without notes"
-
-**If user selects "No, continue without notes":** Proceed to Step 3 without notes. No `user-notes.txt` is written.
-
-**If user selects "Yes, I'd like to add notes":** Collect the free-form text from the user.
-- If the user provides empty text (blank or whitespace only): re-prompt once with "It looks like no notes were entered. Would you like to try again or continue without notes?" with options "Try again" / "Continue without notes". If empty again or user selects continue, proceed without notes.
-- If the user provides non-empty text: use it as the user's notes.
-
-### Write notes to session directory
-
-When notes are available (non-empty text from either `--notes` argument or interactive prompt):
-
-1. Write the notes to `workspace/output/{session}/user-notes.txt`.
-2. If the file write fails, log the error but do not crash the pipeline. Continue without persisted notes. The notes text is still available in memory for passing to agents in Step 4.
-
-Tell the user:
-> User notes saved to session directory.
-
-**If no notes:** Tell the user:
-> No user notes provided. Continuing with standard analysis.
-
-
 ## Step 3: Parse Resume
 
 Delegate to the **resume-parser** subagent to extract structured data from the resume.
@@ -194,8 +149,6 @@ Delegate to the **resume-parser** subagent to extract structured data from the r
 **Input to provide the subagent:**
 - The resume file path
 - The session directory path for output
-
-**Notes are NOT passed to resume-parser.** The parser extracts structured data only.
 
 **Expected output:** `workspace/output/{session}/parsed-resume.json`
 
@@ -219,25 +172,13 @@ Run all analysis agents in parallel as background tasks. Use the Task tool or su
 **Always run (no notes needed):**
 1. **ats-analyzer** -- ATS compatibility analysis and platform simulation
 
-**Always run (receive notes if available):**
+**Always run:**
 2. **strategy-advisor** -- Career archetype detection and strategic positioning
 3. **content-analyst** -- Content quality analysis
 4. **skills-research** -- Market demand analysis, terminology verification, and trending skills
 
-**Run only if JD is available (receives notes if available):**
+**Run only if JD is available:**
 5. **keyword-optimizer** -- Keyword alignment analysis
-
-### Notes Threading
-
-User notes (from Step 2.5) are passed to these agents only:
-- **strategy-advisor**: Notes inform career archetype detection and value proposition assessment
-- **content-analyst**: Notes inform content quality priorities and focus areas
-- **keyword-optimizer**: Notes inform career direction context for keyword relevance
-- **skills-research**: Notes inform target role determination and research focus
-
-Notes are **NOT** passed to:
-- **resume-parser** (Step 3, already completed): Parser extracts raw data only
-- **ats-analyzer**: ATS compatibility is objective/technical; user intent does not affect ATS scoring
 
 ### Input to Provide Each Subagent
 
@@ -245,10 +186,8 @@ All agents receive:
 - The session directory path (subagents read `parsed-resume.json` and other needed files from this directory)
 
 Additionally:
-- **strategy-advisor**: user notes text (if available)
-- **content-analyst**: user notes text (if available)
-- **keyword-optimizer**: JD content or file path + user notes text (if available)
-- **skills-research**: JD content or file path (if available) + user notes text (if available) + target role context
+- **keyword-optimizer**: JD content or file path
+- **skills-research**: JD content or file path (if available) + target role context
 - **ats-analyzer**: (no additional inputs beyond session directory)
 
 ### Expected Outputs
@@ -346,9 +285,6 @@ Present the results conversationally:
 >
 > **Biggest opportunity:** {lowest scoring dimension and brief note on the top fix}
 >
-> {If user notes were provided:}
-> **Your context:** Your notes about {brief summary of notes} shaped the analysis -- see the "User Context" section in the full report for details.
->
 > **Skills snapshot:** {1-2 sentence highlight from skills-research -- e.g., "Your Python and AWS skills are in high demand. Consider adding Kubernetes, which appears in 72% of similar job postings."}
 >
 > **ATS platform highlight:** {1-sentence highlight from platform simulation -- e.g., "Your resume scores highest on Greenhouse (92/100) but may need formatting adjustments for Workday (71/100)."}
@@ -392,12 +328,6 @@ If the resume parser fails completely (no `parsed-resume.json`):
 1. Stop the pipeline -- downstream agents cannot run without parsed data
 2. Report the specific error to the user with guidance on how to fix the input
 
-### Notes File Write Failure
-If writing `user-notes.txt` to the session directory fails:
-1. Log the error but do not crash the pipeline
-2. Continue with the notes text in memory (still available for passing to agents)
-3. Proceed to Step 3 normally
-
 ### JD Prompt Follow-Up Failure
 If the user selects "Yes" at the JD prompt but the follow-up fails (bad file path, unreachable URL, unrecognizable input):
 1. Report the specific issue to the user (e.g., "File not found: /path/to/jd.txt" or "Could not fetch URL: connection timed out")
@@ -424,7 +354,7 @@ If a background analysis agent (from Step 4) times out before completing:
 
 When no JD is provided:
 - Skip the keyword-optimizer agent entirely in Step 4
-- The skills-research agent still runs (infers target role from resume and user notes)
+- The skills-research agent still runs (infers target role from resume)
 - The scoring script automatically uses without-JD weights (5 dimensions)
 - The report omits the Keyword Alignment section
 - The chat summary notes that keyword analysis was skipped
@@ -439,7 +369,6 @@ Display progress at each pipeline stage to keep the user informed:
 |-------|---------|
 | Start | "Starting resume analysis..." |
 | Input found | "Found resume: {file}. Mode: {with/without JD}" |
-| Notes | "User notes saved to session directory." or "No user notes provided." |
 | Parsing | "Parsing resume..." |
 | Parse complete | "Resume parsed. {N} experience entries found." |
 | Parallel start | "Running all analysis agents in parallel..." (list all agents being dispatched) |

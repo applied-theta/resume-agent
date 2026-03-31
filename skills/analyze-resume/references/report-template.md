@@ -21,22 +21,7 @@ read by the analyze-resume skill during Step 6 (Report Generation).
 
 {2-3 paragraph overview of the resume's strengths and weaknesses. Highlight the most
 impactful findings. Note the career archetype detected and how it influences the analysis.
-If a JD was provided, note the alignment level. If user notes were provided, briefly
-acknowledge how they shaped the analysis focus.}
-
----
-
-## User Context
-
-{INCLUDE THIS SECTION ONLY WHEN USER NOTES WERE PROVIDED.}
-
-{Summarize the user's stated goals, concerns, and focus areas from user-notes.txt.
-Explain how these notes influenced the analysis across dimensions. For example:
-- "You mentioned transitioning from IC to management — the Strategy and Content analyses
-  weighted leadership indicators more heavily."
-- "Your concern about ATS compatibility for Workday was addressed in the Platform Simulation."
-
-If notes were not provided, omit this entire section (do not include a placeholder).}
+If a JD was provided, note the alignment level.}
 
 ---
 
@@ -173,6 +158,5 @@ Each action should be specific and actionable. Prioritize by impact on overall s
 - The action plan should be a prioritized, deduplicated synthesis of the top recommendations from all agents, including skills-research recommendations.
 - If a dimension is missing due to agent failure, note it clearly and adjust the report accordingly.
 - Use the grade mapping from `scoring-rubric.json` to assign grades to individual dimension scores.
-- The "User Context" section is only included when notes were provided. Do not include an empty placeholder.
 - The "Skills Intelligence" section is always included (with a fallback message if data is unavailable).
 - The "ATS Platform Simulation" section is always included (with a fallback message if data is unavailable).
