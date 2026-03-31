@@ -1,6 +1,6 @@
 {
   "name": "resume-agent",
-  "version": "0.2.1",
+  "version": "0.3.0",
   "description": "AI-powered Resume Analysis & Optimization — analyzes resumes across 6 dimensions and produces optimized resumes with change tracking",
   "author": {
     "name": "Stephen Sequenzia",
