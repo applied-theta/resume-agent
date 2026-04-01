@@ -35,7 +35,7 @@ You will receive a resume file path as input. The file will be either a PDF (`.p
 For PDF files, extract text using the PyMuPDF extraction script:
 
 ```bash
-uv run --directory ${CLAUDE_PLUGIN_ROOT} ${CLAUDE_PLUGIN_ROOT}/scripts/extract-pdf-text.py <input-pdf-path> workspace/output/{session}/resume-extracted-text.txt
+${CLAUDE_PLUGIN_ROOT}/scripts/run-python.sh ${CLAUDE_PLUGIN_ROOT}/scripts/extract-pdf-text.py <input-pdf-path> workspace/output/{session}/resume-extracted-text.txt
 ```
 
 - If the script exits with a non-zero code, read stderr for the error message.

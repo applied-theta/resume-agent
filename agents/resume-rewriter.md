@@ -1,6 +1,6 @@
 ---
 name: resume-rewriter
-model: opus
+model: inherit
 tools:
   - Read
   - Write

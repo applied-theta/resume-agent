@@ -11,8 +11,8 @@ A Claude Code plugin for AI-powered resume analysis and optimization. Analyzes r
 - **Python >= 3.12** with `uv` for package management (falls back to `pip` in Cowork VMs)
 - Dependencies: `pymupdf`, `jsonschema`, `typst`, `python-docx`, `fpdf2` (auto-installed via SessionStart hook)
 - Dev dependencies: `pytest` (in `[dependency-groups] dev`)
-- Run scripts with: `uv run scripts/<script>.py`
-- Run tests with: `uv run pytest`
+- Run scripts with: `scripts/run-python.sh scripts/<script>.py` (auto-detects `uv` vs `python3`)
+- Run tests with: `uv run pytest` (local dev with `uv`; not available on Cowork)
 
 ## Architecture
 
@@ -85,10 +85,11 @@ The export system uses a shared parser with dual renderer pattern:
 
 ### Python Scripts
 
-All scripts are CLI tools run via `uv run`:
+All scripts are CLI tools run via `scripts/run-python.sh` (auto-selects `uv run` or `python3`):
 
 | Script | Purpose |
 |--------|---------|
+| `scripts/run-python.sh` | Environment-aware Python runner (routes through `uv run` or `python3`) |
 | `scripts/extract-pdf-text.py` | PDF text extraction via PyMuPDF |
 | `scripts/compute-scores.py` | Weighted score computation from analysis JSONs |
 | `scripts/validate-output.py` | JSON Schema validation for output files |

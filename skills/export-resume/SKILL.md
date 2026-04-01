@@ -157,7 +157,7 @@ The user may also type a custom hex color.
 Assemble the CLI arguments based on the user's selections and run the **environment-aware PDF router** script. The router automatically selects the best available PDF backend (Typst when available in Claude Code, Python fallback in Cowork VM). No manual backend selection is needed.
 
 ```bash
-uv run --directory ${CLAUDE_PLUGIN_ROOT} ${CLAUDE_PLUGIN_ROOT}/scripts/md_to_pdf_router.py <input-path> <output-path> --preset <preset> [--font <font>] [--color <color>] [--margin <margin>] [--page-size <size>] [--line-spacing <spacing>] [--section-spacing <spacing>] [--pdf-a]
+${CLAUDE_PLUGIN_ROOT}/scripts/run-python.sh ${CLAUDE_PLUGIN_ROOT}/scripts/md_to_pdf_router.py <input-path> <output-path> --preset <preset> [--font <font>] [--color <color>] [--margin <margin>] [--page-size <size>] [--line-spacing <spacing>] [--section-spacing <spacing>] [--pdf-a]
 ```
 
 Where `<output-path>` follows the pattern `{original-stem}-optimized.pdf` in the appropriate directory.
@@ -182,7 +182,7 @@ After a successful PDF export, automatically run ATS validation to verify the ge
 Run the validation script with a timeout of 30 seconds:
 
 ```bash
-timeout 30 uv run --directory ${CLAUDE_PLUGIN_ROOT} ${CLAUDE_PLUGIN_ROOT}/scripts/validate_pdf.py <output-path> <input-path>
+timeout 30 ${CLAUDE_PLUGIN_ROOT}/scripts/run-python.sh ${CLAUDE_PLUGIN_ROOT}/scripts/validate_pdf.py <output-path> <input-path>
 ```
 
 Where `<output-path>` is the generated PDF and `<input-path>` is the source markdown file.
@@ -273,7 +273,7 @@ Then re-present the preset selection (options 1-4 only).
 Assemble the CLI arguments and run the conversion script:
 
 ```bash
-uv run --directory ${CLAUDE_PLUGIN_ROOT} ${CLAUDE_PLUGIN_ROOT}/scripts/md-to-docx.py <input-path> <output-path> --preset <preset> [--template <template-path>]
+${CLAUDE_PLUGIN_ROOT}/scripts/run-python.sh ${CLAUDE_PLUGIN_ROOT}/scripts/md-to-docx.py <input-path> <output-path> --preset <preset> [--template <template-path>]
 ```
 
 Where `<output-path>` follows the pattern `{original-stem}-optimized.docx` in the appropriate directory.
@@ -293,7 +293,7 @@ After a successful DOCX export, automatically run ATS validation to verify the g
 Run the validation script with a timeout of 30 seconds:
 
 ```bash
-timeout 30 uv run --directory ${CLAUDE_PLUGIN_ROOT} ${CLAUDE_PLUGIN_ROOT}/scripts/validate_docx.py <output-path> <input-path>
+timeout 30 ${CLAUDE_PLUGIN_ROOT}/scripts/run-python.sh ${CLAUDE_PLUGIN_ROOT}/scripts/validate_docx.py <output-path> <input-path>
 ```
 
 Where `<output-path>` is the generated DOCX and `<input-path>` is the source markdown file.

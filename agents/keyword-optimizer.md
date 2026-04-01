@@ -160,7 +160,7 @@ Write output to `workspace/output/{session}/keyword-analysis.json`. The output m
 
 Use Bash to validate the output against the JSON Schema after writing:
 ```bash
-uv run --directory ${CLAUDE_PLUGIN_ROOT} python -c "
+${CLAUDE_PLUGIN_ROOT}/scripts/run-python.sh python -c "
 import json, jsonschema
 with open('${CLAUDE_PLUGIN_ROOT}/schemas/keyword-analysis.schema.json') as f: schema = json.load(f)
 with open('workspace/output/{session}/keyword-analysis.json') as f: data = json.load(f)

@@ -687,7 +687,7 @@ Tell the user:
 Run the scoring script on the `post-opt/` directory:
 
 ```bash
-uv run --directory ${CLAUDE_PLUGIN_ROOT} ${CLAUDE_PLUGIN_ROOT}/scripts/compute-scores.py workspace/output/{session}/post-opt/
+${CLAUDE_PLUGIN_ROOT}/scripts/run-python.sh ${CLAUDE_PLUGIN_ROOT}/scripts/compute-scores.py workspace/output/{session}/post-opt/
 ```
 
 This produces `post-opt/scores-summary.json` using the same rubric and weights as the original scoring.
@@ -908,7 +908,7 @@ Follow the same flow as the `/export-pdf` skill:
 
 3. **Generate PDF** by running:
    ```bash
-   uv run --directory ${CLAUDE_PLUGIN_ROOT} ${CLAUDE_PLUGIN_ROOT}/scripts/md-to-pdf.py workspace/output/{session}/optimized-resume.md workspace/output/{session}/optimized-resume.pdf --preset <preset> [customization flags]
+   ${CLAUDE_PLUGIN_ROOT}/scripts/run-python.sh ${CLAUDE_PLUGIN_ROOT}/scripts/md-to-pdf.py workspace/output/{session}/optimized-resume.md workspace/output/{session}/optimized-resume.pdf --preset <preset> [customization flags]
    ```
 
 4. **Report result** to the user:

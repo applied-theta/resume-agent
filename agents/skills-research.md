@@ -181,7 +181,7 @@ Write the analysis to `workspace/output/{session}/skills-research.json`. The out
 Use Bash to validate the output against the schema after writing:
 
 ```bash
-uv run --directory ${CLAUDE_PLUGIN_ROOT} python -c "
+${CLAUDE_PLUGIN_ROOT}/scripts/run-python.sh python -c "
 import json, jsonschema
 with open('${CLAUDE_PLUGIN_ROOT}/schemas/skills-research.schema.json') as f: schema = json.load(f)
 with open('workspace/output/{session}/skills-research.json') as f: data = json.load(f)

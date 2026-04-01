@@ -225,7 +225,7 @@ The pipeline follows graceful degradation: any individual agent can fail without
 Run the scoring script to compute weighted overall scores:
 
 ```bash
-uv run --directory ${CLAUDE_PLUGIN_ROOT} ${CLAUDE_PLUGIN_ROOT}/scripts/compute-scores.py workspace/output/{session}/
+${CLAUDE_PLUGIN_ROOT}/scripts/run-python.sh ${CLAUDE_PLUGIN_ROOT}/scripts/compute-scores.py workspace/output/{session}/
 ```
 
 This script:
