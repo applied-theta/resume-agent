@@ -14,4 +14,4 @@ fi
 PLUGIN_ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 
 cd "$PLUGIN_ROOT"
-uv run --quiet scripts/validate-output.py "$FILE_PATH"
+"$PLUGIN_ROOT/scripts/run-python.sh" scripts/validate-output.py "$FILE_PATH"

@@ -4,13 +4,14 @@ description: >
   Resume optimization -- generates improved resume content based on prior
   analysis, with optional interactive interview, conservative or full-rewrite
   modes, change tracking with confidence levels, and granular approval workflow.
+argument-hint: "[--notes \"free-form text\"]"
 disable-model-invocation: true
 allowed-tools: Agent, Read, Write, Bash, Glob, AskUserQuestion
 ---
 
 # Optimize Resume
 
-Generate optimized resume content based on a prior analysis run. This command delegates to the resume-rewriter subagent to produce before/after change pairs with explanations (conservative mode, the default) or a complete rewrite (full mode, on request), along with a fully rewritten resume file and a structured change manifest with confidence indicators. An optional interactive interview captures career context before the rewriter runs, enriching optimization quality. After the rewriter produces output, a granular approval workflow gives the user control over individual changes before finalizing the resume. A before/after score comparison validates optimization improvement through full re-analysis. High-scoring resumes receive special handling to prevent over-optimization.
+Generate optimized resume content based on a prior analysis run. This command collects optional user notes for career context, then delegates to the resume-rewriter subagent to produce before/after change pairs with explanations (conservative mode, the default) or a complete rewrite (full mode, on request), along with a fully rewritten resume file and a structured change manifest with confidence indicators. An optional interactive interview captures additional career context before the rewriter runs, enriching optimization quality. After the rewriter produces output, a granular approval workflow gives the user control over individual changes before finalizing the resume. A before/after score comparison validates optimization improvement through full re-analysis. High-scoring resumes receive special handling to prevent over-optimization.
 
 ## Prerequisites
 
@@ -134,6 +135,46 @@ When `polish_mode` is `true`, the following downstream steps are affected:
 1. **Step 3.5 (Interview):** Reduced interview scope -- select only 2-3 categories and limit to 1 question each. Focus on emphasis preferences and any targeted improvements.
 2. **Step 4 (Rewriter Delegation):** Pass the `polish_mode` flag to the resume-rewriter, which triggers its "polish only" mode -- limiting changes to formatting fixes, minor rewording, and keyword optimization. No structural changes, no section reordering, no major content additions.
 
+### Step 2.7: Notes Collection
+
+Collect optional user notes that provide career context for the optimization. Notes inform the interview question selection (Step 3.5) and flow through to the rewriter via `interview-findings.json`. Notes are session-scoped only and are never persisted between sessions.
+
+#### Check for `--notes` argument
+
+If the user provided a `--notes` argument with the `/optimize-resume` command:
+1. Extract the free-form text value from the argument.
+2. If the value is an empty string (e.g., `--notes ""`), treat this as no notes provided and fall through to the interactive prompt below.
+3. If the value is non-empty, use it as the user's notes.
+
+#### Interactive prompt (when `--notes` not provided or empty)
+
+If no notes were provided via `--notes` (or the value was empty), prompt the user via `AskUserQuestion`:
+
+> Do you have any context to share about your career goals, specific concerns, or areas you'd like the optimization to focus on?
+
+Provide these options:
+- "Yes, I'd like to add notes"
+- "No, continue without notes"
+
+**If user selects "No, continue without notes":** Proceed to Step 3 without notes. No `user-notes.txt` is written.
+
+**If user selects "Yes, I'd like to add notes":** Collect the free-form text from the user.
+- If the user provides empty text (blank or whitespace only): re-prompt once with "It looks like no notes were entered. Would you like to try again or continue without notes?" with options "Try again" / "Continue without notes". If empty again or user selects continue, proceed without notes.
+- If the user provides non-empty text: use it as the user's notes.
+
+#### Write notes to session directory
+
+When notes are available (non-empty text from either `--notes` argument or interactive prompt):
+
+1. Write the notes to `workspace/output/{session}/user-notes.txt`.
+2. If the file write fails, log the error but do not crash the pipeline. Continue without persisted notes. The notes text is still available in memory for passing to Step 3.5 and Step 4.
+
+Tell the user:
+> User notes saved to session directory.
+
+**If no notes:** Tell the user:
+> No user notes provided. Continuing with standard optimization.
+
 ### Step 3: Determine Rewriting Mode
 
 The default mode is **conservative** -- producing before/after pairs for each change with explanations.
@@ -160,7 +201,23 @@ Options:
 - "Yes, interview me"
 - "Skip -- optimize with analysis data only"
 
-**If the user selects "Skip":** Proceed directly to Step 4. No `interview-findings.json` is produced. The rewriter runs with analysis data only, and all changes in the manifest will have `source: analysis`.
+**If the user selects "Skip":**
+
+- **If user notes were provided (Step 2.7):** Generate a minimal `interview-findings.json` to pass notes context to the rewriter. Write the file to the session directory with:
+  - `status`: `"partial"`
+  - `career_direction`: Extract career direction from the notes if present, otherwise empty string
+  - `emphasis_preferences`: Extract any emphasis preferences from the notes as an array of strings
+  - `optimization_directives`: Synthesize actionable optimization directives from the notes (e.g., "User wants to emphasize leadership experience", "User is targeting PM roles")
+  - `new_accomplishments`: empty array
+  - `gap_context`: empty array
+  - `section_priorities`: empty object
+  - `target_role_insights`: Extract target role details from notes if mentioned
+  - `research_results`: empty array
+  - `interview_metadata`: `{ "questions_asked": 0, "categories_covered": [], "duration_estimate": "0 minutes" }`
+
+  Proceed to Step 4 with `interview-findings.json` available. Changes informed by notes will have `source: interview` in the manifest.
+
+- **If no user notes were provided:** Proceed directly to Step 4. No `interview-findings.json` is produced. The rewriter runs with analysis data only, and all changes in the manifest will have `source: analysis`.
 
 #### 3.5.2: Load Context for Question Selection
 
@@ -172,7 +229,7 @@ Read the following files from the session directory to inform question selection
 4. **`keyword-analysis.json`** (if available) -- keyword gaps and alignment data
 5. **`strategy-analysis.json`** (if available) -- career archetype, strategic positioning, value proposition assessment
 6. **`skills-research.json`** (if available) -- market demand data and skills intelligence
-7. **`user-notes.txt`** (if available) -- free-form user context from the analysis phase; used to avoid re-asking topics the user already covered
+7. **`user-notes.txt`** (if available) -- free-form user context collected in Step 2.7; used to avoid re-asking topics the user already covered
 
 If `scores-summary.json` is missing, proceed with the interview using available analysis files, but skip category scoring that depends on dimension scores. If no analysis files are available at all, skip the interview and proceed to Step 4 with a note:
 > Interview skipped -- insufficient analysis data for targeted questions.
@@ -293,10 +350,12 @@ After the interview closes:
    - If the task failed or returned no results: Include it with `status: inconclusive` and findings set to "Research inconclusive -- {explanation of what was searched}".
    - If no research tasks were dispatched: The `research_results` array is empty.
 
-2. **Compile `interview-findings.json`**: Write the interview findings to the session directory, conforming to `${CLAUDE_PLUGIN_ROOT}/schemas/interview-findings.schema.json`. The file contains:
+2. **Fold in user notes**: If `user-notes.txt` exists in the session directory (from Step 2.7), incorporate the notes content into the interview findings. Notes context supplements interview responses -- when both sources provide information for the same field (e.g., career_direction), synthesize them together. Notes-derived content should be clearly attributable by including it alongside interview-gathered data, not replacing it.
+
+3. **Compile `interview-findings.json`**: Write the interview findings to the session directory, conforming to `${CLAUDE_PLUGIN_ROOT}/schemas/interview-findings.schema.json`. The file contains:
 
    - **`status`** (required): `"complete"` if all selected categories were covered and the interview ended naturally, `"partial"` if the user said "done"/"skip" early, disengagement was detected, or the interview was interrupted.
-   - **`career_direction`** (string): Summary of career aspirations and trajectory preferences gathered during the interview. Empty string if not discussed.
+   - **`career_direction`** (string): Summary of career aspirations and trajectory preferences gathered during the interview and/or user notes. Empty string if not discussed.
    - **`new_accomplishments`** (array): Accomplishments, metrics, or experiences shared during the interview that are not in the original resume. Each entry includes:
      - `content`: Description of the accomplishment
      - `confidence`: Always `"low"` (interview-sourced, not verified against original resume)
@@ -309,13 +368,13 @@ After the interview closes:
    - **`optimization_directives`** (required, array of strings): Prioritized list of specific optimization actions synthesized from all interview data. These are actionable instructions for the rewriter (e.g., "Emphasize leadership experience over technical skills", "Add quantified metrics for the role at {company}", "Frame the career transition from {field A} to {field B} as intentional progression").
    - **`interview_metadata`** (object): Tracking data including `questions_asked` (integer), `categories_covered` (array of category name strings), and `duration_estimate` (string, e.g., "3-5 minutes").
 
-3. **Handle contradictory information**: If the user provided contradictory information during the interview (e.g., expressed interest in both management and IC roles), record both statements in the relevant fields and add a note in `optimization_directives` for the rewriter to handle (e.g., "User indicated interest in both management and IC roles -- default to resume's existing emphasis unless further clarification is available").
+4. **Handle contradictory information**: If the user provided contradictory information during the interview or between notes and interview responses (e.g., expressed interest in both management and IC roles), record both statements in the relevant fields and add a note in `optimization_directives` for the rewriter to handle (e.g., "User indicated interest in both management and IC roles -- default to resume's existing emphasis unless further clarification is available").
 
-4. **Validate the output**: The `interview-findings.json` file is validated against `${CLAUDE_PLUGIN_ROOT}/schemas/interview-findings.schema.json` by the PreToolUse hook when written.
+5. **Validate the output**: The `interview-findings.json` file is validated against `${CLAUDE_PLUGIN_ROOT}/schemas/interview-findings.schema.json` by the PreToolUse hook when written.
 
 #### 3.5.8: Edge Cases
 
-- **User skips interview (Step 3.5.1)**: No `interview-findings.json` is produced. All changes in the manifest default to `source: analysis`. The rewriter runs with analysis data only.
+- **User skips interview (Step 3.5.1)**: If user notes were provided (Step 2.7), a minimal `interview-findings.json` is produced with notes-derived context. If no notes were provided, no `interview-findings.json` is produced and all changes default to `source: analysis`.
 - **Partial interview (user says "done" early)**: Findings are written with `status: partial`. Whatever was gathered is passed to the rewriter. Incomplete categories are omitted from findings rather than filled with placeholder data.
 - **Research agent returns no results**: The `research_results` array entry for that query notes `status: inconclusive` with findings set to "Research inconclusive".
 - **User provides contradictory information**: Recorded in findings and noted in `optimization_directives` for the rewriter to handle.
@@ -628,7 +687,7 @@ Tell the user:
 Run the scoring script on the `post-opt/` directory:
 
 ```bash
-uv run --directory ${CLAUDE_PLUGIN_ROOT} ${CLAUDE_PLUGIN_ROOT}/scripts/compute-scores.py workspace/output/{session}/post-opt/
+${CLAUDE_PLUGIN_ROOT}/scripts/run-python.sh ${CLAUDE_PLUGIN_ROOT}/scripts/compute-scores.py workspace/output/{session}/post-opt/
 ```
 
 This produces `post-opt/scores-summary.json` using the same rubric and weights as the original scoring.
@@ -849,7 +908,7 @@ Follow the same flow as the `/export-pdf` skill:
 
 3. **Generate PDF** by running:
    ```bash
-   uv run --directory ${CLAUDE_PLUGIN_ROOT} ${CLAUDE_PLUGIN_ROOT}/scripts/md-to-pdf.py workspace/output/{session}/optimized-resume.md workspace/output/{session}/optimized-resume.pdf --preset <preset> [customization flags]
+   ${CLAUDE_PLUGIN_ROOT}/scripts/run-python.sh ${CLAUDE_PLUGIN_ROOT}/scripts/md-to-pdf.py workspace/output/{session}/optimized-resume.md workspace/output/{session}/optimized-resume.pdf --preset <preset> [customization flags]
    ```
 
 4. **Report result** to the user:

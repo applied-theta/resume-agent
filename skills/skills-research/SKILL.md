@@ -64,7 +64,7 @@ Delegate to the **skills-research** subagent to perform the market intelligence 
 
 Provide the skills-research agent with:
 - The session directory path (where `parsed-resume.json` is located)
-- The skills-research agent will read `parsed-resume.json` for structured resume data, optionally check for a job description in `workspace/input/` for target role context, and optionally read `user-notes.txt` from the session directory if it exists from a previous `/analyze-resume` run
+- The skills-research agent will read `parsed-resume.json` for structured resume data and optionally check for a job description in `workspace/input/` for target role context
 
 The skills-research agent will write its output to `skills-research.json` in the session directory.
 
@@ -78,7 +78,7 @@ After the skills-research agent completes, read `skills-research.json` from the 
 **Summary format:**
 
 1. **Overall Market Intelligence Score** with letter grade (use the grade mapping from CLAUDE.md)
-2. **Target Role** -- report the detected target role and how it was determined (from JD, user notes, or inferred from resume)
+2. **Target Role** -- report the detected target role and how it was determined (from JD or inferred from resume)
 3. **Market Demand Overview** -- summarize the skill assessments: how many skills are High/Moderate/Low/Emerging demand, and highlight the top high-demand skills. Note any skills with Declining trends.
 4. **Terminology Issues** -- list any skills with incorrect terminology from the `terminology_verification` array where `is_correct` is false, showing the original term and the correct form
 5. **Trending Skills** -- list the trending skills identified for the target role that are not on the resume, with relevance context
