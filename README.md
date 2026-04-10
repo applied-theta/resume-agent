@@ -21,7 +21,9 @@ claude plugin install --dir /path/to/resume-agent-plugin
 - [uv](https://docs.astral.sh/uv/) — Python package manager (auto-installs dependencies on first session)
 - Python >= 3.12
 
-Dependencies (`pymupdf`, `jsonschema`, `typst`) are installed automatically via the SessionStart hook.
+Dependencies (`pymupdf`, `jsonschema`, `typst`, `python-docx`, `fpdf2`) are installed automatically via the SessionStart hook.
+
+**Cowork support**: In Claude Cowork VMs where `uv` and Typst are unavailable, the plugin falls back to `pip` for package management and fpdf2 for PDF rendering.
 
 ## Skills
 
@@ -35,7 +37,7 @@ Dependencies (`pymupdf`, `jsonschema`, `typst`) are installed automatically via 
 | `/resume-agent:strategy-review` | Strategic positioning analysis |
 | `/resume-agent:skills-research` | Market intelligence and skills demand |
 | `/resume-agent:optimize-resume` | Resume rewriting with change tracking |
-| `/resume-agent:export-pdf` | Export resume markdown to styled PDF |
+| `/resume-agent:export-resume` | Export resume to styled PDF or DOCX |
 
 ## Quick Start
 
@@ -58,6 +60,36 @@ The plugin orchestrates 8 specialized subagents:
 - **skills-research** — Market demand analysis and terminology verification
 - **interview-researcher** — Background research during optimization interview
 - **resume-rewriter** — Produces optimized resume content (Opus model)
+
+### Pipeline
+
+```mermaid
+flowchart LR
+    subgraph analyze["analyze-resume"]
+        A[Parse]:::primary -->|sequential| B[Parallel Analysis]:::secondary
+        B --> C[Score]:::success
+        C --> D[Report]:::success
+    end
+    subgraph optimize["optimize-resume"]
+        E[Interview]:::primary --> F[Rewrite]:::warning --> G[Approval]:::success
+    end
+    subgraph export["export-resume"]
+        H[Format Select]:::primary --> I[Render]:::secondary --> J[ATS Validate]:::success
+    end
+    D -.-> E
+    G -.-> H
+
+    classDef primary fill:#dbeafe,stroke:#2563eb,color:#000
+    classDef secondary fill:#f3e8ff,stroke:#7c3aed,color:#000
+    classDef success fill:#dcfce7,stroke:#16a34a,color:#000
+    classDef warning fill:#fef3c7,stroke:#d97706,color:#000
+```
+
+### Export Formats
+
+- **PDF** — 4 presets (Classic, Modern, Compact, Harvard) via Typst templates, with fpdf2 fallback for Cowork
+- **DOCX** — 4 presets (Professional, Simple, Creative, Academic) via python-docx, plus custom template support
+- Post-export ATS validation ensures text extraction fidelity and heading preservation
 
 ## Scoring
 
@@ -93,8 +125,9 @@ Scores are computed across 6 dimensions with configurable weights (see `skills/a
 
 ## Known Issues
 
+- **Version mismatch**: `plugin.json` (0.4.0) and `pyproject.toml` (1.0.0) have different version numbers
 - **Pyright type errors**: 13 errors (PyMuPDF return types, importlib patterns). All tests pass.
-- **Empty golden-file directories**: Integration/snapshot tests are planned but not implemented.
+- **PDF/A in fallback**: `pdf_a=True` is silently ignored by the fpdf2 backend — only Typst supports PDF/A-2b
 
 ## License
 

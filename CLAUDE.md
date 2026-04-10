@@ -151,3 +151,43 @@ Environment detection config (`.env-config`) lives at the plugin root, separate 
 - **Schema validation on write**: The PreToolUse hook validates all structured JSON outputs before they're written.
 - **Single source of truth for scoring**: All weights, grade mappings, and dimension definitions come from `scoring-rubric.json`.
 - **Environment awareness**: The plugin auto-detects available tools and adapts its behavior for both Claude Code and Claude Cowork environments via `.env-config`. Workspace location is configurable via `RESUME_WORKSPACE` env var for Cowork deployments.
+
+## Inter-Agent Communication
+
+Agents do **not** communicate directly with each other. All inter-agent data exchange happens through JSON files in the session directory:
+
+- `parsed-resume.json` is the universal data bus — every downstream agent reads it
+- Each agent writes its own output file (e.g., `ats-analysis.json`, `content-analysis.json`)
+- `compute-scores.py` reads all analysis JSONs to produce `scores-summary.json`
+- The `resume-rewriter` reads all analysis JSONs + optional `interview-findings.json`
+
+This "shared filesystem" pattern avoids the complexity of message-passing protocols between agents.
+
+## Test Suite
+
+- **312 tests**, all passing (~7s via `uv run pytest`)
+- Coverage is **export-focused** — 7 test files covering the Python script layer:
+  - `test_parse_resume.py` — shared parser
+  - `test_md_to_pdf_fallback.py` — fpdf2 renderer
+  - `test_md_to_pdf_router.py` — backend routing
+  - `test_md_to_docx.py` — Word export
+  - `test_validate_pdf.py` — PDF ATS validation
+  - `test_validate_docx.py` — DOCX ATS validation
+  - `test_export_edge_cases.py` — edge case utilities
+- Orchestration, scoring, and agent behavior are **not unit tested** — they rely on schema validation hooks and LLM behavioral consistency
+
+## Critical Script Dependencies
+
+Key import relationships between Python scripts:
+
+- `parse_resume.py` → imported by `md-to-pdf.py`, `md_to_pdf_fallback.py`, `md-to-docx.py`, `validate_pdf.py`, `validate_docx.py`
+- `env_config.py` → imported by `md_to_pdf_router.py`, `export_edge_cases.py`
+- `export_edge_cases.py` → imported by `md_to_pdf_router.py`, `md_to_pdf_fallback.py`, `validate_pdf.py`, `validate_docx.py`
+- `md_to_pdf_router.py` uses `importlib.util.spec_from_file_location` to import `md-to-pdf.py` (hyphenated filename not importable via standard import)
+
+## Known Gaps
+
+- **ATS platform schema mismatch**: `ats-analysis.schema.json` platform enum allows only 3 platforms (Workday, Greenhouse, Lever) but `platform-quirks.json` reference data covers 7 platforms
+- **Version mismatch**: `plugin.json` says v0.4.0, `pyproject.toml` says v1.0.0
+- **PDF/A fallback**: `pdf_a=True` is silently ignored by `md_to_pdf_fallback.py` — only the Typst backend supports PDF/A-2b compliance
+- **Mixed script naming**: Older scripts use kebab-case (`md-to-pdf.py`), newer use snake_case (`parse_resume.py`), requiring `importlib` workarounds for cross-import
