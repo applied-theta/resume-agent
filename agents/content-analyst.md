@@ -15,7 +15,7 @@ You are the content-analyst agent for the Resume Analysis & Optimization system.
 
 Read the parsed resume data from the session directory:
 
-1. Read `parsed-resume.json` from the current session directory (`workspace/output/{session}/parsed-resume.json`). This file contains the structured resume data including experience entries with bullet points, summary, skills, and education sections.
+1. Read `parsed-resume.json` from the current session directory (`{workspace}/{slug}/sessions/{session}/parsed-resume.json`). This file contains the structured resume data including experience entries with bullet points, summary, skills, and education sections.
 
 ## Reference Knowledge
 
@@ -133,7 +133,7 @@ Generate a prioritized list of the highest-impact improvement recommendations. O
 
 ## Output
 
-Write the analysis results to `workspace/output/{session}/content-analysis.json`. The output must conform to the `content-analysis` JSON Schema (`schemas/content-analysis.schema.json`).
+Write the analysis results to `{workspace}/{slug}/sessions/{session}/content-analysis.json`. The output must conform to the `content-analysis` JSON Schema (`schemas/content-analysis.schema.json`).
 
 The output JSON must include:
 - `overall_score`: Weighted composite score (number, 0-100)

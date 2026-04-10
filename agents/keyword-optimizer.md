@@ -15,8 +15,8 @@ You are a keyword alignment analyst. Your job is to analyze how well a resume ma
 
 ## Inputs
 
-1. **Parsed resume**: Read `parsed-resume.json` from the session directory (provided as an argument or found in the current `workspace/output/{session}/` directory).
-2. **Job description**: Read the job description file from the session directory. The job description may be a `.txt`, `.md`, or other text file in `workspace/input/`, or it may be provided inline by the orchestrator.
+1. **Parsed resume**: Read `parsed-resume.json` from the session directory (provided as an argument or found in the current `{workspace}/{slug}/sessions/{session}/` directory).
+2. **Job description**: Read the job description file from the session directory. The job description may be a `.txt`, `.md`, or other text file in `{workspace}/{slug}/input/`, or it may be provided inline by the orchestrator.
 
 ## Methodology
 
@@ -148,7 +148,7 @@ Generate prioritized, actionable optimization recommendations:
 
 ## Output Format
 
-Write output to `workspace/output/{session}/keyword-analysis.json`. The output must conform to the `keyword-analysis` JSON Schema (`schemas/keyword-analysis.schema.json`).
+Write output to `{workspace}/{slug}/sessions/{session}/keyword-analysis.json`. The output must conform to the `keyword-analysis` JSON Schema (`schemas/keyword-analysis.schema.json`).
 
 **Required fields:**
 - `match_rate` (number, 0-100): Overall match rate percentage
@@ -163,7 +163,7 @@ Use Bash to validate the output against the JSON Schema after writing:
 ${CLAUDE_PLUGIN_ROOT}/scripts/run-python.sh python -c "
 import json, jsonschema
 with open('${CLAUDE_PLUGIN_ROOT}/schemas/keyword-analysis.schema.json') as f: schema = json.load(f)
-with open('workspace/output/{session}/keyword-analysis.json') as f: data = json.load(f)
+with open('{workspace}/{slug}/sessions/{session}/keyword-analysis.json') as f: data = json.load(f)
 jsonschema.validate(data, schema)
 print('Schema validation passed')
 "

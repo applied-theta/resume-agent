@@ -57,7 +57,7 @@ The export system uses a shared parser with dual renderer pattern:
 2. **PDF rendering** — Two backends, auto-selected by environment:
    - **Typst** (`scripts/md-to-pdf.py`) — Primary backend in Claude Code; uses Typst templates for high-quality PDF output
    - **Python fallback** (`scripts/md_to_pdf_fallback.py`) — Fallback in Cowork VMs where Typst is unavailable; uses fpdf2 with 4 presets (classic, modern, compact, harvard)
-   - **Router** (`scripts/md_to_pdf_router.py`) — Auto-detects the available backend via `workspace/.env-config` and dispatches accordingly
+   - **Router** (`scripts/md_to_pdf_router.py`) — Auto-detects the available backend via `.env-config` and dispatches accordingly
 3. **DOCX rendering** (`scripts/md-to-docx.py`) — Produces Word documents via python-docx with 4 bundled preset templates and support for user-provided custom templates
 4. **ATS validation** — Automatic post-export validation for both formats:
    - `scripts/validate_pdf.py` — Checks PDF text extraction fidelity, heading preservation, and garbled text detection
@@ -66,7 +66,8 @@ The export system uses a shared parser with dual renderer pattern:
 ### Pipeline Flow
 
 `analyze-resume` orchestrates:
-1. Session setup → `workspace/output/YYYY-MM-DD-HHMMSS/`
+0. Workspace setup → resolve `WORKSPACE_ROOT`, determine resume slug
+1. Session setup → `{workspace}/{slug}/sessions/YYYY-MM-DD-HHMMSS/`
 2. Input detection + JD collection
 3. Parse (sequential, foreground — resume-parser agent)
 4. Parallel analysis (4-5 agents as background tasks)
@@ -115,7 +116,7 @@ Scoring weights and grade boundaries are defined in `skills/analyze-resume/scori
 ### Hooks
 
 Defined in `hooks/hooks.json`:
-- **SessionStart** — `setup-deps.sh` detects the runtime environment (package manager, Typst availability, font access), installs dependencies via `uv sync` or `pip`, and writes `workspace/.env-config` with detected capabilities. Re-runs on every session start to handle environment changes.
+- **SessionStart** — `setup-deps.sh` detects the runtime environment (package manager, Typst availability, font access), installs dependencies via `uv sync` or `pip`, and writes `.env-config` at the plugin root with detected capabilities and `WORKSPACE_ROOT`. Re-runs on every session start to handle environment changes.
 - **PreToolUse (Write)** — `validate-output.sh` validates JSON output files against schemas
 - **Stop** — Echoes session completion message
 
@@ -129,10 +130,19 @@ Defined in `hooks/hooks.json`:
 
 ### Workspace Convention
 
-All user data flows through `workspace/` (gitignored):
-- `workspace/input/` — User's resume and optional job description
-- `workspace/output/YYYY-MM-DD-HHMMSS/` — Timestamped session directories with all outputs
-- `workspace/.env-config` — Auto-generated environment detection config (created by `setup-deps.sh`)
+All user data flows through a configurable workspace root (default: `workspace/`, gitignored). The workspace root is resolved via `WORKSPACE_ROOT` in `.env-config` (override with `RESUME_WORKSPACE` env var or `--workspace` argument). Each resume gets its own slug-named subdirectory:
+
+```
+{WORKSPACE_ROOT}/
+├── {resume-slug}/
+│   ├── input/          — User's resume and optional job description
+│   └── sessions/
+│       └── YYYY-MM-DD-HHMMSS/  — Timestamped session directories with all outputs
+```
+
+Workspace resolution rules and slug derivation are documented in `skills/shared/workspace-resolution.md` (single source of truth referenced by all skills).
+
+Environment detection config (`.env-config`) lives at the plugin root, separate from user data.
 
 ## Key Design Principles
 
@@ -140,4 +150,4 @@ All user data flows through `workspace/` (gitignored):
 - **Never fabricate data**: Use `[X]` placeholders for missing metrics. Scores reflect genuine assessment.
 - **Schema validation on write**: The PreToolUse hook validates all structured JSON outputs before they're written.
 - **Single source of truth for scoring**: All weights, grade mappings, and dimension definitions come from `scoring-rubric.json`.
-- **Environment awareness**: The plugin auto-detects available tools and adapts its behavior for both Claude Code and Claude Cowork environments via `workspace/.env-config`.
+- **Environment awareness**: The plugin auto-detects available tools and adapts its behavior for both Claude Code and Claude Cowork environments via `.env-config`. Workspace location is configurable via `RESUME_WORKSPACE` env var for Cowork deployments.

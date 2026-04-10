@@ -19,16 +19,18 @@ Run the full resume analysis pipeline. This skill orchestrates the complete anal
 ## Usage
 
 ```
-/analyze-resume                                          → scans workspace/input/
+/analyze-resume                                          → scans active resume's input/
 /analyze-resume /path/to/resume.pdf                      → copies resume, then analyzes
 /analyze-resume /path/to/resume.pdf --jd /path/to/jd.txt → copies both, then analyzes
 /analyze-resume /path/to/resume.pdf --jd https://...     → copies resume, fetches JD URL
+/analyze-resume --workspace /custom/path                 → override workspace root
 ```
 
 ## Prerequisites
 
-- A resume file provided as a direct path argument, or placed in `workspace/input/`
-- Optionally, a job description (file path via `--jd`, file in `workspace/input/`, pasted inline, provided as a URL, or provided interactively when prompted)
+- Read `${CLAUDE_PLUGIN_ROOT}/skills/shared/workspace-resolution.md` for workspace layout and path conventions
+- A resume file provided as a direct path argument, or placed in the active resume's `input/` directory
+- Optionally, a job description (file path via `--jd`, file in `{workspace}/{slug}/input/`, pasted inline, provided as a URL, or provided interactively when prompted)
 
 
 ## Pipeline Overview
@@ -36,8 +38,9 @@ Run the full resume analysis pipeline. This skill orchestrates the complete anal
 The pipeline executes in this order:
 
 ```
-1.   Session Setup      Create timestamped output directory
-2a.  Input Detection    Copy files if path args provided; find resume in workspace/input/; auto-detect JD
+0.   Workspace Setup    Resolve workspace root, determine resume slug
+1.   Session Setup      Create timestamped session directory
+2a.  Input Detection    Copy files if path args provided; find resume in input/; auto-detect JD
 2b.  JD Collection      Interactive JD prompt if no JD auto-detected; URL/path handling; fallback logic
 3.   Parse              Delegate to resume-parser subagent
 4.   Parallel Analysis  strategy-advisor + ats-analyzer + content-analyst + keyword-optimizer (if JD) + skills-research
@@ -46,9 +49,28 @@ The pipeline executes in this order:
 7.   Chat Summary       Present conversational summary with highlights
 ```
 
-Step 3 runs in foreground (all subsequent agents depend on it). Step 4 launches up to 5 analysis agents (or 4 without JD) as background tasks in parallel. Steps 5-7 run sequentially after all agents complete.
+Step 0 runs once at the start. Step 3 runs in foreground (all subsequent agents depend on it). Step 4 launches up to 5 analysis agents (or 4 without JD) as background tasks in parallel. Steps 5-7 run sequentially after all agents complete.
 
 The pipeline dispatches 7 agents total: 1 parser (sequential) + up to 5 analysis agents in parallel (strategy-advisor, ats-analyzer, content-analyst, skills-research always; keyword-optimizer only with JD). The resume-rewriter is invoked separately via `/optimize-resume`.
+
+
+## Step 0: Workspace Setup
+
+Resolve the workspace root and determine the resume slug. Follow the procedure in `${CLAUDE_PLUGIN_ROOT}/skills/shared/workspace-resolution.md`.
+
+1. **Resolve workspace root (`{workspace}`):**
+   - If `--workspace /path` was provided, use that path.
+   - Otherwise, read `${CLAUDE_PLUGIN_ROOT}/.env-config` and extract the `WORKSPACE_ROOT` value.
+   - If the file doesn't exist or `WORKSPACE_ROOT` is not set, use `${CLAUDE_PLUGIN_ROOT}/workspace/`.
+
+2. **Determine resume slug (`{slug}`):**
+   - If a resume file path was provided as an argument, derive the slug from the filename (see workspace-resolution.md for slug derivation rules).
+   - If no path argument, defer slug derivation until Step 2a when the resume file is identified.
+
+3. **Mention the slug to the user** (after the resume file is identified):
+   > Resume project: `{slug}/`
+   
+   The user can request a different name; otherwise proceed.
 
 
 ## Step 1: Session Setup
@@ -56,13 +78,15 @@ The pipeline dispatches 7 agents total: 1 parser (sequential) + up to 5 analysis
 Create a timestamped session directory for this analysis run:
 
 ```
-workspace/output/YYYY-MM-DD-HHMMSS/
+{workspace}/{slug}/sessions/YYYY-MM-DD-HHMMSS/
 ```
 
 Use the current date and time. This directory will hold all output files from the pipeline.
 
+Ensure the parent directories exist: `mkdir -p {workspace}/{slug}/sessions/YYYY-MM-DD-HHMMSS/`
+
 Tell the user:
-> Starting resume analysis... Session directory: `workspace/output/{session}/`
+> Starting resume analysis... Session directory: `{workspace}/{slug}/sessions/{session}/`
 
 
 ## Step 2a: Input Detection
@@ -70,25 +94,28 @@ Tell the user:
 ### Copy Input Files (if path arguments provided)
 
 If the user provided a resume file path as an argument:
-1. Ensure the input directory exists: `mkdir -p workspace/input`
-2. Copy the file: `cp <provided-path> workspace/input/`
-3. If the copy fails (file not found, permission denied), report the error and stop.
+1. Derive the resume slug from the filename if not already done in Step 0 (see workspace-resolution.md for slug derivation rules).
+2. Ensure the input directory exists: `mkdir -p {workspace}/{slug}/input`
+3. Copy the file: `cp <provided-path> {workspace}/{slug}/input/`
+4. If the copy fails (file not found, permission denied), report the error and stop.
 
 If the user provided a JD file path via `--jd`:
-1. Copy the file: `cp <provided-path> workspace/input/`
+1. Copy the file: `cp <provided-path> {workspace}/{slug}/input/`
 2. If the copy fails, report the error and stop.
 
-After copying (or if no path arguments were provided), proceed with the normal workspace/input/ scan below.
+After copying (or if no path arguments were provided), proceed with the input scan below.
 
 ### Find the Resume
 
-Scan `workspace/input/` for resume files. Look for files with `.pdf`, `.md`, or `.markdown` extensions.
+Scan `{workspace}/{slug}/input/` for resume files. Look for files with `.pdf`, `.md`, or `.markdown` extensions.
+
+If no slug was established yet (no path argument provided), scan across all resume directories: `{workspace}/*/input/` for resume files, and use the most recent. Derive the slug from the directory name.
 
 **If no resume file is found:**
 > No resume file found. Please provide a resume in one of two ways:
 >
 > 1. **Direct path**: `/analyze-resume /path/to/resume.pdf`
-> 2. **Workspace**: Place a PDF or Markdown file in `workspace/input/` and run `/analyze-resume`
+> 2. **Input directory**: Place a PDF or Markdown file in `{workspace}/{slug}/input/` and run `/analyze-resume`
 >
 > Supported formats: PDF (`.pdf`), Markdown (`.md`)
 
@@ -98,7 +125,7 @@ Stop the pipeline. Do not proceed.
 
 ### Auto-Detect Job Description
 
-Check for a job description in `workspace/input/`. Look for files with names containing "jd", "job", or "description" (case-insensitive), or `.txt` files that are not the resume.
+Check for a job description in `{workspace}/{slug}/input/`. Look for files with names containing "jd", "job", or "description" (case-insensitive), or `.txt` files that are not the resume.
 
 Also check if the user provided a JD inline in the conversation, as a URL, or via the `--jd` argument (already copied above).
 
@@ -109,7 +136,7 @@ Also check if the user provided a JD inline in the conversation, as a URL, or vi
 
 ### Prompt for Job Description (if none found)
 
-If no JD was found from any automatic source (no `--jd` argument, no JD file detected in `workspace/input/`, no inline content or URL), prompt the user via `AskUserQuestion`:
+If no JD was found from any automatic source (no `--jd` argument, no JD file detected in `{workspace}/{slug}/input/`, no inline content or URL), prompt the user via `AskUserQuestion`:
 
 > **Would you like to include a job description?**
 > Adding a job description enables keyword alignment analysis and uses a 6-dimension scoring model for more targeted results.
@@ -125,7 +152,7 @@ Options (2):
 
 Then process the provided input:
 - **URL** (starts with `http://` or `https://`): Use `WebFetch` to retrieve the content. If the fetch fails or the content does not look like a job posting, inform the user and fall back to without-JD mode.
-- **File path**: Copy to `workspace/input/`. If the copy fails (file not found, permission denied), inform the user and fall back to without-JD mode.
+- **File path**: Copy to `{workspace}/{slug}/input/`. If the copy fails (file not found, permission denied), inform the user and fall back to without-JD mode.
 - **Empty or unrecognizable input**: Treat JD as unavailable, inform the user, and continue in without-JD mode.
 
 All error cases fall back to without-JD mode with an informative message — never crash the pipeline. See the "JD Prompt Follow-Up Failure" error handling subsection for details.
@@ -150,7 +177,7 @@ Delegate to the **resume-parser** subagent to extract structured data from the r
 - The resume file path
 - The session directory path for output
 
-**Expected output:** `workspace/output/{session}/parsed-resume.json`
+**Expected output:** `{workspace}/{slug}/sessions/{session}/parsed-resume.json`
 
 Tell the user:
 > Parsing resume...
@@ -192,11 +219,11 @@ Additionally:
 
 ### Expected Outputs
 
-- `workspace/output/{session}/strategy-analysis.json`
-- `workspace/output/{session}/ats-analysis.json` (includes `platform_simulation` section)
-- `workspace/output/{session}/content-analysis.json`
-- `workspace/output/{session}/skills-research.json`
-- `workspace/output/{session}/keyword-analysis.json` (only if JD provided)
+- `{workspace}/{slug}/sessions/{session}/strategy-analysis.json`
+- `{workspace}/{slug}/sessions/{session}/ats-analysis.json` (includes `platform_simulation` section)
+- `{workspace}/{slug}/sessions/{session}/content-analysis.json`
+- `{workspace}/{slug}/sessions/{session}/skills-research.json`
+- `{workspace}/{slug}/sessions/{session}/keyword-analysis.json` (only if JD provided)
 
 Tell the user:
 > Running all analysis agents in parallel...
@@ -225,7 +252,7 @@ The pipeline follows graceful degradation: any individual agent can fail without
 Run the scoring script to compute weighted overall scores:
 
 ```bash
-${CLAUDE_PLUGIN_ROOT}/scripts/run-python.sh ${CLAUDE_PLUGIN_ROOT}/scripts/compute-scores.py workspace/output/{session}/
+${CLAUDE_PLUGIN_ROOT}/scripts/run-python.sh ${CLAUDE_PLUGIN_ROOT}/scripts/compute-scores.py {workspace}/{slug}/sessions/{session}/
 ```
 
 This script:
@@ -249,7 +276,7 @@ Tell the user:
 
 ## Step 6: Report Generation
 
-Write a comprehensive analysis report to `workspace/output/{session}/analysis-report.md`.
+Write a comprehensive analysis report to `{workspace}/{slug}/sessions/{session}/analysis-report.md`.
 
 ### Report Template
 
@@ -294,7 +321,7 @@ Present the results conversationally:
 > 2. {Second most impactful}
 > 3. {Third most impactful}
 >
-> The full report is saved at `workspace/output/{session}/analysis-report.md`.
+> The full report is saved at `{workspace}/{slug}/sessions/{session}/analysis-report.md`.
 >
 > Want to optimize your resume? Run `/optimize-resume` to get rewritten bullet points and a restructured resume.
 
@@ -302,7 +329,7 @@ Present the results conversationally:
 ## Error Handling
 
 ### No Resume Found
-If no resume file is found in `workspace/input/` (and no path argument was provided), stop the pipeline immediately with clear instructions (see Step 2).
+If no resume file is found in `{workspace}/{slug}/input/` (and no path argument was provided), stop the pipeline immediately with clear instructions (see Step 2).
 
 ### Individual Agent Failure
 If a single analysis agent fails:

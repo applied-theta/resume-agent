@@ -40,11 +40,11 @@ Dependencies (`pymupdf`, `jsonschema`, `typst`) are installed automatically via 
 ## Quick Start
 
 1. Install the plugin
-2. Place your resume (PDF or Markdown) in `workspace/input/`
-3. Run `/resume-agent:analyze-resume`
-4. Optionally provide a job description for keyword alignment
-5. Review the analysis report in `workspace/output/{session}/`
-6. Run `/resume-agent:optimize-resume` for rewritten content
+2. Run `/resume-agent:analyze-resume /path/to/resume.pdf`
+3. Optionally provide a job description for keyword alignment
+4. Review the analysis report in your workspace session directory
+5. Run `/resume-agent:optimize-resume` for rewritten content
+6. Run `/resume-agent:export-resume` to export as PDF or DOCX
 
 ## Architecture
 

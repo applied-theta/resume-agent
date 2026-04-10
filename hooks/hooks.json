@@ -17,7 +17,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "echo 'Session complete. Results saved to workspace/output/'",
+            "command": "bash -c 'source ${CLAUDE_PLUGIN_ROOT}/.env-config 2>/dev/null && echo \"Session complete. Results saved to ${WORKSPACE_ROOT:-workspace/}\" || echo \"Session complete.\"'",
             "timeout": 5
           }
         ]

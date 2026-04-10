@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # Environment-aware Python script runner.
-# Routes through uv (Claude Code) or python3 (Cowork) based on workspace/.env-config.
+# Routes through uv (Claude Code) or python3 (Cowork) based on .env-config.
 #
 # Usage:
 #   run-python.sh scripts/foo.py arg1 arg2
@@ -19,7 +19,7 @@ fi
 
 # Read environment config if available; default to no-uv.
 HAS_UV=false
-ENV_CONFIG="$PLUGIN_ROOT/workspace/.env-config"
+ENV_CONFIG="$PLUGIN_ROOT/.env-config"
 if [ -f "$ENV_CONFIG" ]; then
   # shellcheck source=/dev/null
   . "$ENV_CONFIG"

@@ -15,9 +15,10 @@ Generate optimized resume content based on a prior analysis run. This command co
 
 ## Prerequisites
 
-This command requires a prior analysis run. At minimum, the session directory must contain:
-- `parsed-resume.json` -- structured resume data from the resume-parser
-- At least one analysis file (`ats-analysis.json`, `content-analysis.json`, `keyword-analysis.json`, or `strategy-analysis.json`)
+- Read `${CLAUDE_PLUGIN_ROOT}/skills/shared/workspace-resolution.md` for workspace layout and path conventions
+- This command requires a prior analysis run. At minimum, the session directory must contain:
+  - `parsed-resume.json` -- structured resume data from the resume-parser
+  - At least one analysis file (`ats-analysis.json`, `content-analysis.json`, `keyword-analysis.json`, or `strategy-analysis.json`)
 
 If these files do not exist, the user must run `/analyze-resume` first (resume can be provided via direct path, e.g., `/analyze-resume /path/to/resume.pdf`).
 
@@ -26,9 +27,9 @@ If these files do not exist, the user must run `/analyze-resume` first (resume c
 
 ### Step 1: Locate the Session Directory
 
-Find the most recent session directory under `workspace/output/` that contains analysis results.
+Find the most recent session directory that contains analysis results. Resolve the workspace root first by reading `${CLAUDE_PLUGIN_ROOT}/.env-config` for `WORKSPACE_ROOT` (fallback: `${CLAUDE_PLUGIN_ROOT}/workspace/`).
 
-1. Use `Glob` to search for `workspace/output/*/parsed-resume.json`.
+1. Use `Glob` to search for `{workspace}/{slug}/sessions/*/parsed-resume.json` (if a resume slug is known from this conversation) or `{workspace}/*/sessions/*/parsed-resume.json` (if no slug context). Also check the legacy path `{workspace}/output/*/parsed-resume.json` as a fallback.
 2. If multiple session directories exist, use the most recent one (by timestamp in the directory name).
 3. If a session directory was already established in this conversation, prefer that one.
 
@@ -69,7 +70,7 @@ Check the session directory for the required analysis files.
 3. If some analysis files are missing, note which ones are available. The resume-rewriter handles missing files gracefully and adjusts its approach accordingly.
 
 Tell the user which analysis files were found:
-> Found analysis results in `workspace/output/{session}/`:
+> Found analysis results in `{workspace}/{slug}/sessions/{session}/`:
 > - Parsed resume: Yes
 > - ATS analysis: {Yes/No}
 > - Content analysis: {Yes/No}
@@ -166,7 +167,7 @@ Provide these options:
 
 When notes are available (non-empty text from either `--notes` argument or interactive prompt):
 
-1. Write the notes to `workspace/output/{session}/user-notes.txt`.
+1. Write the notes to `{workspace}/{slug}/sessions/{session}/user-notes.txt`.
 2. If the file write fails, log the error but do not crash the pipeline. Continue without persisted notes. The notes text is still available in memory for passing to Step 3.5 and Step 4.
 
 Tell the user:
@@ -390,7 +391,7 @@ After the interview closes:
 Delegate to the **resume-rewriter** subagent, providing:
 - The session directory path (where all analysis files are located)
 - The rewriting mode (conservative or full rewrite)
-- The path to the original resume file in `workspace/input/` (for reference)
+- The path to the original resume file in `{workspace}/{slug}/input/` (for reference)
 - The path to `interview-findings.json` in the session directory (if the interview was conducted in Step 3.5 and the file was produced)
 - The `polish_mode` flag (if `true`, the rewriter operates in "polish only" mode -- limiting changes to formatting fixes, minor rewording, and keyword optimization; no structural changes, no section reordering, no major content additions)
 
@@ -615,10 +616,10 @@ Read `optimization-report.md` from the session directory and present a conversat
 5. **Interview Context Note** -- if the interview was conducted (Step 3.5), note which categories were covered and how interview insights informed the optimization
 6. **Missing Analysis Note** -- if any analysis files were unavailable, note which optimizations were limited as a result
 7. **Output Files** -- tell the user where the files are saved:
-   > Full optimization report: `workspace/output/{session}/optimization-report.md`
-   > Optimized resume: `workspace/output/{session}/optimized-resume.md`
-   > Change manifest: `workspace/output/{session}/change-manifest.json`
-   > Interview findings: `workspace/output/{session}/interview-findings.json` (if interview was conducted)
+   > Full optimization report: `{workspace}/{slug}/sessions/{session}/optimization-report.md`
+   > Optimized resume: `{workspace}/{slug}/sessions/{session}/optimized-resume.md`
+   > Change manifest: `{workspace}/{slug}/sessions/{session}/change-manifest.json`
+   > Interview findings: `{workspace}/{slug}/sessions/{session}/interview-findings.json` (if interview was conducted)
 8. **Next Steps** -- suggest the user:
    - Review the optimization report to understand each change
    - Review any flagged changes (verification-required or low-confidence) with extra attention
@@ -636,14 +637,14 @@ After the approval workflow and results summary (or directly after Reject All), 
 Select the resume file to re-analyze based on the approval outcome:
 
 - **Accept All or Selective (with accepted changes):** Re-analyze `optimized-resume.md` from the session directory.
-- **Reject All:** Re-analyze the original resume file from `workspace/input/` to produce an honest zero-delta baseline. This confirms the scoring is consistent and shows no artificial improvement.
+- **Reject All:** Re-analyze the original resume file from `{workspace}/{slug}/input/` to produce an honest zero-delta baseline. This confirms the scoring is consistent and shows no artificial improvement.
 
 #### 9.2: Create Post-Optimization Directory
 
 Create a `post-opt/` subdirectory within the session directory:
 
 ```
-workspace/output/{session}/post-opt/
+{workspace}/{slug}/sessions/{session}/post-opt/
 ```
 
 **If directory creation fails:** Display a warning and skip the comparison:
@@ -687,7 +688,7 @@ Tell the user:
 Run the scoring script on the `post-opt/` directory:
 
 ```bash
-${CLAUDE_PLUGIN_ROOT}/scripts/run-python.sh ${CLAUDE_PLUGIN_ROOT}/scripts/compute-scores.py workspace/output/{session}/post-opt/
+${CLAUDE_PLUGIN_ROOT}/scripts/run-python.sh ${CLAUDE_PLUGIN_ROOT}/scripts/compute-scores.py {workspace}/{slug}/sessions/{session}/post-opt/
 ```
 
 This produces `post-opt/scores-summary.json` using the same rubric and weights as the original scoring.
@@ -908,11 +909,11 @@ Follow the same flow as the `/export-pdf` skill:
 
 3. **Generate PDF** by running:
    ```bash
-   ${CLAUDE_PLUGIN_ROOT}/scripts/run-python.sh ${CLAUDE_PLUGIN_ROOT}/scripts/md-to-pdf.py workspace/output/{session}/optimized-resume.md workspace/output/{session}/optimized-resume.pdf --preset <preset> [customization flags]
+   ${CLAUDE_PLUGIN_ROOT}/scripts/run-python.sh ${CLAUDE_PLUGIN_ROOT}/scripts/md-to-pdf.py {workspace}/{slug}/sessions/{session}/optimized-resume.md {workspace}/{slug}/sessions/{session}/optimized-resume.pdf --preset <preset> [customization flags]
    ```
 
 4. **Report result** to the user:
-   > **PDF exported:** `workspace/output/{session}/optimized-resume.pdf` ({file size})
+   > **PDF exported:** `{workspace}/{slug}/sessions/{session}/optimized-resume.pdf` ({file size})
    > The PDF uses embedded fonts and has a native text layer for ATS compatibility.
 
 #### 10.3: If "No" — Skip
@@ -999,5 +1000,5 @@ System: Which style preset? (Modern / Classic / Compact)
 User: Modern
 System: Customize or use defaults?
 User: Defaults
-System: PDF exported: workspace/output/2026-02-27-143000/optimized-resume.pdf (42.3 KB)
+System: PDF exported: {workspace}/{slug}/sessions/2026-02-27-143000/optimized-resume.pdf (42.3 KB)
 ```

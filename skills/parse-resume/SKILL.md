@@ -12,10 +12,14 @@ allowed-tools: Agent, Read, Bash, Glob
 
 Parse a resume file into structured JSON. This command runs the resume-parser subagent to extract contact information, experience, education, skills, projects, and metadata into a `parsed-resume.json` file.
 
+## Prerequisites
+
+- Read `${CLAUDE_PLUGIN_ROOT}/skills/shared/workspace-resolution.md` for workspace layout and path conventions
+
 ## Usage
 
 ```
-/parse-resume                    → scans workspace/input/
+/parse-resume                    → scans {workspace}/{slug}/input/
 /parse-resume /path/to/resume.pdf → copies resume, then parses
 ```
 
@@ -26,25 +30,25 @@ Parse a resume file into structured JSON. This command runs the resume-parser su
 #### Copy Input File (if path argument provided)
 
 If the user provided a resume file path as an argument:
-1. Ensure the input directory exists: `mkdir -p workspace/input`
-2. Copy the file: `cp <provided-path> workspace/input/`
+1. Ensure the input directory exists: `mkdir -p {workspace}/{slug}/input`
+2. Copy the file: `cp <provided-path> {workspace}/{slug}/input/`
 3. If the copy fails (file not found, permission denied), report the error and stop.
 
 #### Locate the Resume
 
-Look in `workspace/input/` for a resume file. Supported formats are PDF (`.pdf`) and Markdown (`.md` or `.markdown`).
+Look in `{workspace}/{slug}/input/` for a resume file. Supported formats are PDF (`.pdf`) and Markdown (`.md` or `.markdown`).
 
 Use `Glob` to search for files:
-- `workspace/input/*.pdf`
-- `workspace/input/*.md`
-- `workspace/input/*.markdown`
+- `{workspace}/{slug}/input/*.pdf`
+- `{workspace}/{slug}/input/*.md`
+- `{workspace}/{slug}/input/*.markdown`
 
 **If no resume file is found:**
 Report to the user:
 > No resume file found. Please provide a resume in one of two ways:
 >
 > 1. **Direct path**: `/parse-resume /path/to/resume.pdf`
-> 2. **Workspace**: Place a PDF or Markdown file in `workspace/input/` and run `/parse-resume`
+> 2. **Workspace**: Place a PDF or Markdown file in `{workspace}/{slug}/input/` and run `/parse-resume`
 
 Stop processing.
 
@@ -66,7 +70,7 @@ Check the file extension of the located resume file:
 Generate a timestamped session directory for output:
 
 1. Get the current timestamp in the format `YYYY-MM-DD-HHMMSS`.
-2. Create the directory `workspace/output/{timestamp}/`.
+2. Create the directory `{workspace}/{slug}/sessions/{timestamp}/`.
 3. If a session directory was already created in this conversation, reuse it instead of creating a new one.
 
 ### Step 4: Delegate to Resume Parser
@@ -79,7 +83,7 @@ The subagent will:
 - Extract text from PDF (using `${CLAUDE_PLUGIN_ROOT}/scripts/extract-pdf-text.py`) or read Markdown directly
 - Identify and classify resume sections
 - Extract contact information, experience, education, skills, projects, and additional sections
-- Write structured JSON output to `workspace/output/{session}/parsed-resume.json`
+- Write structured JSON output to `{workspace}/{slug}/sessions/{session}/parsed-resume.json`
 
 ### Step 5: Report Results
 
@@ -106,4 +110,4 @@ After the resume-parser subagent completes, report the results to the user.
 /parse-resume ~/Documents/resume.pdf
 ```
 
-The user either provides a direct file path or places their resume in `workspace/input/` and runs this command. The system parses the resume and reports what was extracted.
+The user either provides a direct file path or places their resume in `{workspace}/{slug}/input/` and runs this command. The system parses the resume and reports what was extracted.

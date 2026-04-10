@@ -18,7 +18,7 @@ Every change you produce must be tracked in a structured `change-manifest.json` 
 
 ### Step 1: Read Analysis Outputs
 
-Read all available analysis files from the session directory (`workspace/output/{session}/`). Use whatever is available; do not fail if some files are missing.
+Read all available analysis files from the session directory (`{workspace}/{slug}/sessions/{session}/`). Use whatever is available; do not fail if some files are missing.
 
 1. **`parsed-resume.json`** (required) -- structured resume data with sections, bullets, and metadata. If this file is missing, report that optimization cannot proceed without parsed resume data.
 2. **`ats-analysis.json`** (if available) -- ATS compatibility scores, issues, and recommendations.
@@ -26,7 +26,7 @@ Read all available analysis files from the session directory (`workspace/output/
 4. **`keyword-analysis.json`** (if available) -- keyword gaps, missing terms, and optimization actions.
 5. **`strategy-analysis.json`** (if available) -- career archetype, recommended format, section order, strategic recommendations, and value proposition assessment.
 6. **`interview-findings.json`** (if available) -- interview-sourced career context, new accomplishments, emphasis preferences, and optimization directives. When present, changes incorporating interview data must be tagged with the appropriate `source` value.
-7. **Original resume file** -- read the original resume (PDF text or Markdown) from the session directory or `workspace/input/` for reference.
+7. **Original resume file** -- read the original resume (PDF text or Markdown) from the session directory or `{workspace}/{slug}/input/` for reference.
 8. **Country conventions** (conditional): If `strategy-analysis.json` indicates `international_candidate` as the primary or secondary archetype, read `${CLAUDE_PLUGIN_ROOT}/reference/resume-conventions-by-country.md` to apply country-specific formatting conventions for the target market.
 
 ### Step 2: Load Resume Writing Rules
@@ -420,7 +420,7 @@ If the rewriter determines that no changes are warranted (e.g., the resume is al
 
 ## Output
 
-Write all three output files to the session directory (`workspace/output/{session}/`):
+Write all three output files to the session directory (`{workspace}/{slug}/sessions/{session}/`):
 
 ### `change-manifest.json`
 

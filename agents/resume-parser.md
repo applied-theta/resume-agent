@@ -23,7 +23,7 @@ You will receive a resume file path as input. The file will be either a PDF (`.p
 
 1. Check that the file path was provided.
 2. Use `Glob` to verify the file exists. If not found:
-   - Report error: "No resume file found in workspace/input/. Please add a PDF or Markdown file."
+   - Report error: "No resume file found in {workspace}/{slug}/input/. Please add a PDF or Markdown file."
    - Stop processing.
 3. Check the file extension:
    - `.pdf` → proceed to PDF extraction (Step 2a)
@@ -35,7 +35,7 @@ You will receive a resume file path as input. The file will be either a PDF (`.p
 For PDF files, extract text using the PyMuPDF extraction script:
 
 ```bash
-${CLAUDE_PLUGIN_ROOT}/scripts/run-python.sh ${CLAUDE_PLUGIN_ROOT}/scripts/extract-pdf-text.py <input-pdf-path> workspace/output/{session}/resume-extracted-text.txt
+${CLAUDE_PLUGIN_ROOT}/scripts/run-python.sh ${CLAUDE_PLUGIN_ROOT}/scripts/extract-pdf-text.py <input-pdf-path> {workspace}/{slug}/sessions/{session}/resume-extracted-text.txt
 ```
 
 - If the script exits with a non-zero code, read stderr for the error message.
@@ -48,7 +48,7 @@ ${CLAUDE_PLUGIN_ROOT}/scripts/run-python.sh ${CLAUDE_PLUGIN_ROOT}/scripts/extrac
 - If stderr contains "Could not extract text":
   - Report error: "Could not extract text from PDF. The file may be corrupted or image-only."
   - Write an error result to `parsed-resume.json` with this error message and stop.
-- On success, read the extracted text from `workspace/output/{session}/resume-extracted-text.txt`.
+- On success, read the extracted text from `{workspace}/{slug}/sessions/{session}/resume-extracted-text.txt`.
 - Read the page count from the `[PAGES:N]` header on the first line of the extracted text. Set `metadata.page_count` to N. Do not count separators manually.
 - Set `metadata.format` to `"pdf"`.
 
@@ -182,7 +182,7 @@ Populate the metadata object:
 
 ### Step 11: Write Output
 
-Write the structured JSON output to `workspace/output/{session}/parsed-resume.json` where `{session}` is the session directory provided to you.
+Write the structured JSON output to `{workspace}/{slug}/sessions/{session}/parsed-resume.json` where `{session}` is the session directory provided to you.
 
 The output must conform to the parsed-resume JSON Schema (`schemas/parsed-resume.schema.json`). The top-level structure is:
 
@@ -262,7 +262,7 @@ The output must conform to the parsed-resume JSON Schema (`schemas/parsed-resume
 | Error Condition | Error Message | Action |
 |-----------------|---------------|--------|
 | **PyMuPDF extraction fails** | "Could not extract text from PDF. The file may be corrupted or image-only." | Write error to `parsed-resume.json`, pipeline continues with degraded output |
-| **File not found** | "No resume file found in workspace/input/. Please add a PDF or Markdown file." | Abort with clear instructions |
+| **File not found** | "No resume file found in {workspace}/{slug}/input/. Please add a PDF or Markdown file." | Abort with clear instructions |
 
 When writing an error to `parsed-resume.json`, use this structure:
 

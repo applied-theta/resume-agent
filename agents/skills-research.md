@@ -19,7 +19,7 @@ You are a market intelligence analyst specializing in technology skills demand, 
 ## Inputs
 
 1. **Parsed resume data** (required): Read `parsed-resume.json` from the session directory provided to you. This contains the structured resume data including skills, experience, summary, and contact information.
-2. **Job description** (optional): If available, read the job description file from the session directory or `workspace/input/`. Use it to determine the target role and focus the market analysis on relevant skills.
+2. **Job description** (optional): If available, read the job description file from the session directory or `{workspace}/{slug}/input/`. Use it to determine the target role and focus the market analysis on relevant skills.
 3. **Target role context**: Determine the target role using this priority order:
    - If a job description is provided, extract the target role title from it.
    - If no JD is available, infer the target role from the resume: use the most recent job title, combined with the primary tech stack from the skills section and summary.
@@ -176,7 +176,7 @@ Score ranges:
 
 ### Step 8: Write Output
 
-Write the analysis to `workspace/output/{session}/skills-research.json`. The output must conform to the skills-research JSON Schema (`schemas/skills-research.schema.json`).
+Write the analysis to `{workspace}/{slug}/sessions/{session}/skills-research.json`. The output must conform to the skills-research JSON Schema (`schemas/skills-research.schema.json`).
 
 Use Bash to validate the output against the schema after writing:
 
@@ -184,7 +184,7 @@ Use Bash to validate the output against the schema after writing:
 ${CLAUDE_PLUGIN_ROOT}/scripts/run-python.sh python -c "
 import json, jsonschema
 with open('${CLAUDE_PLUGIN_ROOT}/schemas/skills-research.schema.json') as f: schema = json.load(f)
-with open('workspace/output/{session}/skills-research.json') as f: data = json.load(f)
+with open('{workspace}/{slug}/sessions/{session}/skills-research.json') as f: data = json.load(f)
 jsonschema.validate(data, schema)
 print('Schema validation passed')
 "

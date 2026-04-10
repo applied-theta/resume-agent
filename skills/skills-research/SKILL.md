@@ -13,10 +13,14 @@ allowed-tools: Agent, Read, Bash, Glob
 
 Run a market intelligence analysis on a resume. This command evaluates market demand for the candidate's skills, verifies technology terminology accuracy, identifies trending skills for the target role, and produces prioritized recommendations backed by source citations.
 
+## Prerequisites
+
+- Read `${CLAUDE_PLUGIN_ROOT}/skills/shared/workspace-resolution.md` for workspace layout and path conventions
+
 ## Usage
 
 ```
-/skills-research                        → scans workspace/input/
+/skills-research                        → scans {workspace}/{slug}/input/
 /skills-research /path/to/resume.pdf    → copies resume, then analyzes
 ```
 
@@ -24,13 +28,13 @@ Run a market intelligence analysis on a resume. This command evaluates market de
 
 ### Step 1: Determine the Session Directory
 
-Identify the current session directory under `workspace/output/`. If a session directory already exists from a previous command in this conversation, reuse it. Otherwise, create a new timestamped session directory: `workspace/output/YYYY-MM-DD-HHMMSS/`.
+Identify the current session directory under `{workspace}/{slug}/sessions/`. If a session directory already exists from a previous command in this conversation, reuse it. Otherwise, create a new timestamped session directory: `{workspace}/{slug}/sessions/YYYY-MM-DD-HHMMSS/`.
 
 ### Step 2: Check for Parsed Resume
 
 Check whether `parsed-resume.json` exists in the session directory.
 
-- Use `Glob` to look for `workspace/output/*/parsed-resume.json` if no session is established, or check the specific session directory.
+- Use `Glob` to look for `{workspace}/{slug}/sessions/*/parsed-resume.json` if no session is established, or check the specific session directory. Also check `{workspace}/output/*/parsed-resume.json` as a legacy fallback.
 - If `parsed-resume.json` exists and does not contain an `"error": true` field, proceed to Step 4.
 - If `parsed-resume.json` does not exist, proceed to Step 3.
 
@@ -40,16 +44,16 @@ A parsed resume is required before skills research can run. Delegate to the **re
 
 **Copy input file (if path argument provided):**
 If the user provided a resume file path as an argument:
-1. Ensure the input directory exists: `mkdir -p workspace/input`
-2. Copy the file: `cp <provided-path> workspace/input/`
+1. Ensure the input directory exists: `mkdir -p {workspace}/{slug}/input`
+2. Copy the file: `cp <provided-path> {workspace}/{slug}/input/`
 3. If the copy fails (file not found, permission denied), report the error and stop.
 
-1. Look for a resume file in `workspace/input/` (PDF or Markdown).
-2. If no resume file is found in `workspace/input/`:
+1. Look for a resume file in `{workspace}/{slug}/input/` (PDF or Markdown).
+2. If no resume file is found in `{workspace}/{slug}/input/`:
    - Display a clear message to the user:
      > No resume found. Please provide a resume in one of two ways:
      > 1. **Direct path**: `/skills-research /path/to/resume.pdf`
-     > 2. **Workspace**: Place a PDF or Markdown file in `workspace/input/` and run `/skills-research`
+     > 2. **Workspace**: Place a PDF or Markdown file in `{workspace}/{slug}/input/` and run `/skills-research`
    - Stop execution.
 3. If a resume file is found, delegate to the **resume-parser** agent, providing the file path and session directory.
 4. After parsing completes, verify that `parsed-resume.json` was created in the session directory.
@@ -64,12 +68,12 @@ Delegate to the **skills-research** subagent to perform the market intelligence 
 
 Provide the skills-research agent with:
 - The session directory path (where `parsed-resume.json` is located)
-- The skills-research agent will read `parsed-resume.json` for structured resume data and optionally check for a job description in `workspace/input/` for target role context
+- The skills-research agent will read `parsed-resume.json` for structured resume data and optionally check for a job description in `{workspace}/{slug}/input/` for target role context
 
 The skills-research agent will write its output to `skills-research.json` in the session directory.
 
 **If the skills-research agent fails or does not produce output:**
-> Skills research analysis encountered an issue. Please check the session directory for details: `workspace/output/{session}/`
+> Skills research analysis encountered an issue. Please check the session directory for details: `{workspace}/{slug}/sessions/{session}/`
 
 ### Step 5: Present Results Summary
 

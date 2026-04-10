@@ -14,6 +14,10 @@ allowed-tools: Read, Bash, Glob, AskUserQuestion
 
 Convert a resume markdown file to a professionally formatted PDF or Word (DOCX) document. Replaces the former `/export-pdf` skill with unified format selection.
 
+## Prerequisites
+
+- Read `${CLAUDE_PLUGIN_ROOT}/skills/shared/workspace-resolution.md` for workspace layout and path conventions
+
 ## Usage
 
 ```
@@ -34,12 +38,12 @@ Convert a resume markdown file to a professionally formatted PDF or Word (DOCX) 
    Stop processing.
 2. Use the provided path as the input file.
 3. Determine the output directory:
-   - If the file is inside a session directory (`workspace/output/*/`), write the export to that same session directory.
+   - If the file is inside a session directory (`{workspace}/{slug}/sessions/*/` or legacy `{workspace}/output/*/`), write the export to that same session directory.
    - Otherwise, write the export alongside the source file (same directory).
 
 #### If no path argument was provided:
 
-1. Use `Glob` to search for `workspace/output/*/optimized-resume.md`.
+1. Use `Glob` to search for `{workspace}/*/sessions/*/optimized-resume.md`. Also check `{workspace}/output/*/optimized-resume.md` as a legacy fallback.
 2. If multiple sessions exist, use the most recent one (by timestamp in the directory name).
 3. If a session directory was already established in this conversation, prefer that one.
 4. Use the found `optimized-resume.md` as the input file. The export will be written to the same session directory.
@@ -396,5 +400,5 @@ On success, report to the user. Include the ATS validation result in the report.
 ```
 /export-resume
 /export-resume ~/Documents/my-resume.md
-/export-resume workspace/output/2026-02-27-143000/optimized-resume.md
+/export-resume {workspace}/{slug}/sessions/2026-02-27-143000/optimized-resume.md
 ```

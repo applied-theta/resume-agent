@@ -147,7 +147,7 @@ For each dimension, generate specific, actionable recommendations:
 
 ## Output Format
 
-Write your analysis to `workspace/output/{session}/ats-analysis.json` conforming to the `ats-analysis` JSON Schema (`schemas/ats-analysis.schema.json`).
+Write your analysis to `{workspace}/{slug}/sessions/{session}/ats-analysis.json` conforming to the `ats-analysis` JSON Schema (`schemas/ats-analysis.schema.json`).
 
 The output must include:
 

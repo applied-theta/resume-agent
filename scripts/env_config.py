@@ -9,8 +9,8 @@ Usage:
     else:
         # Use Python fallback renderer
 
-The config file lives at ``workspace/.env-config`` and is regenerated on
-every session start by the SessionStart hook.
+The config file lives at ``.env-config`` in the plugin root and is
+regenerated on every session start by the SessionStart hook.
 """
 
 from pathlib import Path
@@ -18,7 +18,7 @@ from pathlib import Path
 
 _SCRIPT_DIR = Path(__file__).resolve().parent
 _PROJECT_ROOT = _SCRIPT_DIR.parent
-_CONFIG_PATH = _PROJECT_ROOT / "workspace" / ".env-config"
+_CONFIG_PATH = _PROJECT_ROOT / ".env-config"
 
 # Defaults used when the config file hasn't been generated yet (e.g. tests
 # or manual script invocation outside a Claude session).
@@ -34,6 +34,7 @@ _DEFAULTS: dict[str, str] = {
     "FONTS_DIR": str(_PROJECT_ROOT / "fonts"),
     "FONTS_ACCESSIBLE": "false",
     "PLUGIN_ROOT": str(_PROJECT_ROOT),
+    "WORKSPACE_ROOT": str(_PROJECT_ROOT / "workspace"),
 }
 
 
@@ -109,3 +110,15 @@ def fonts_accessible(config: dict[str, str] | None = None) -> bool:
     """Return True if the bundled fonts directory contains usable font files."""
     cfg = config or load_env_config()
     return cfg.get("FONTS_ACCESSIBLE", "false") == "true"
+
+
+def workspace_root(config: dict[str, str] | None = None) -> Path:
+    """Return the resolved workspace root directory.
+
+    Resolution order:
+    1. ``RESUME_WORKSPACE`` environment variable (checked by setup-deps.sh)
+    2. ``WORKSPACE_ROOT`` from the config file
+    3. Fallback: ``<plugin-root>/workspace/``
+    """
+    cfg = config or load_env_config()
+    return Path(cfg.get("WORKSPACE_ROOT", str(_PROJECT_ROOT / "workspace")))

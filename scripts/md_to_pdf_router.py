@@ -42,7 +42,7 @@ def detect_pdf_backend(config: dict[str, str] | None = None) -> str:
 
     Resolution order:
     1. If *config* is provided, use its ``PDF_BACKEND`` value.
-    2. Otherwise load from ``workspace/.env-config`` via ``env_config``.
+    2. Otherwise load from ``.env-config`` via ``env_config``.
     3. If the config file is missing (first run before setup hook),
        attempt a live Typst import probe as a fallback.
 
@@ -59,7 +59,7 @@ def detect_pdf_backend(config: dict[str, str] | None = None) -> str:
     backend = cfg.get("PDF_BACKEND", "python-fallback")
 
     # If config file was never written (all defaults), do a live probe
-    config_path = PROJECT_ROOT / "workspace" / ".env-config"
+    config_path = PROJECT_ROOT / ".env-config"
     if not config_path.exists() and config is None:
         backend = _probe_typst_live()
 
@@ -69,7 +69,7 @@ def detect_pdf_backend(config: dict[str, str] | None = None) -> str:
 def _probe_typst_live() -> str:
     """Probe for Typst availability without a config file.
 
-    Called when ``workspace/.env-config`` does not exist (e.g. first run
+    Called when ``.env-config`` does not exist (e.g. first run
     before the SessionStart hook fires).
     """
     try:

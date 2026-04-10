@@ -5,7 +5,7 @@ This document provides architecture context and scoring references for the resum
 ## System Architecture
 
 ```
-User Layer:  Slash commands, conversational input, file-based input (workspace/input/)
+User Layer:  Slash commands, conversational input, file-based input ({workspace}/{slug}/input/)
     |
     v
 Orchestration: /analyze-resume skill - pipeline coordination
@@ -18,7 +18,7 @@ Support:     Scripts (extract-pdf-text, compute-scores, validate-output, md-to-p
              Skills (ats-check, content-review, keyword-align, strategy-review, optimize-resume)
     |
     v
-File System: workspace/input/ (user files), workspace/output/{session}/ (results)
+File System: {workspace}/{slug}/input/ (user files), {workspace}/{slug}/sessions/{session}/ (results)
 ```
 
 ## Subagents
@@ -74,6 +74,6 @@ The `structure_format` scoring dimension is primarily extracted from `ats-analys
 ## Safety Rules
 
 - **Never fabricate metrics or achievements.** Use bracketed placeholders `[X]` for unknown data.
-- **PII stays local.** All resume data remains in the `workspace/` directory.
+- **PII stays local.** All resume data remains in the workspace directory.
 - **Honest scoring.** Scores must reflect genuine assessment.
 - **Missing data acknowledged.** Note absent data rather than guessing.

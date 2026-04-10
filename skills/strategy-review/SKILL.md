@@ -13,10 +13,14 @@ allowed-tools: Agent, Read, Bash, Glob
 
 Run a strategic positioning analysis on a resume. This command evaluates career archetype classification, value proposition effectiveness, format appropriateness, section ordering, and overall strategic positioning, producing actionable recommendations for improving how the resume markets the candidate.
 
+## Prerequisites
+
+- Read `${CLAUDE_PLUGIN_ROOT}/skills/shared/workspace-resolution.md` for workspace layout and path conventions
+
 ## Usage
 
 ```
-/strategy-review                        → scans workspace/input/
+/strategy-review                        → scans {workspace}/{slug}/input/
 /strategy-review /path/to/resume.pdf    → copies resume, then analyzes
 ```
 
@@ -24,13 +28,13 @@ Run a strategic positioning analysis on a resume. This command evaluates career 
 
 ### Step 1: Determine the Session Directory
 
-Identify the current session directory under `workspace/output/`. If a session directory already exists from a previous command in this conversation, reuse it. Otherwise, create a new timestamped session directory: `workspace/output/YYYY-MM-DD-HHMMSS/`.
+Identify the current session directory under `{workspace}/{slug}/sessions/`. If a session directory already exists from a previous command in this conversation, reuse it. Otherwise, create a new timestamped session directory: `{workspace}/{slug}/sessions/YYYY-MM-DD-HHMMSS/`.
 
 ### Step 2: Check for Parsed Resume
 
 Check whether `parsed-resume.json` exists in the session directory.
 
-- Use `Glob` to look for `workspace/output/*/parsed-resume.json` if no session is established, or check the specific session directory.
+- Use `Glob` to look for `{workspace}/{slug}/sessions/*/parsed-resume.json` if no session is established, or check the specific session directory. Also check `{workspace}/output/*/parsed-resume.json` as a legacy fallback.
 - If `parsed-resume.json` exists and does not contain an `"error": true` field, proceed to Step 4.
 - If `parsed-resume.json` does not exist, proceed to Step 3.
 
@@ -40,16 +44,16 @@ A parsed resume is required before strategy analysis can run. Delegate to the **
 
 **Copy input file (if path argument provided):**
 If the user provided a resume file path as an argument:
-1. Ensure the input directory exists: `mkdir -p workspace/input`
-2. Copy the file: `cp <provided-path> workspace/input/`
+1. Ensure the input directory exists: `mkdir -p {workspace}/{slug}/input`
+2. Copy the file: `cp <provided-path> {workspace}/{slug}/input/`
 3. If the copy fails (file not found, permission denied), report the error and stop.
 
-1. Look for a resume file in `workspace/input/` (PDF or Markdown).
-2. If no resume file is found in `workspace/input/`:
+1. Look for a resume file in `{workspace}/{slug}/input/` (PDF or Markdown).
+2. If no resume file is found in `{workspace}/{slug}/input/`:
    - Display a clear message to the user:
      > No resume found. Please provide a resume in one of two ways:
      > 1. **Direct path**: `/strategy-review /path/to/resume.pdf`
-     > 2. **Workspace**: Place a PDF or Markdown file in `workspace/input/` and run `/strategy-review`
+     > 2. **Workspace**: Place a PDF or Markdown file in `{workspace}/{slug}/input/` and run `/strategy-review`
    - Stop execution.
 3. If a resume file is found, delegate to the **resume-parser** agent, providing the file path and session directory.
 4. After parsing completes, verify that `parsed-resume.json` was created in the session directory.
@@ -64,7 +68,7 @@ Delegate to the **strategy-advisor** subagent to perform the strategic positioni
 
 Provide the strategy-advisor with:
 - The session directory path (where `parsed-resume.json` is located)
-- The strategy-advisor will read `parsed-resume.json` for structured resume data, load career strategy reference data from `${CLAUDE_PLUGIN_ROOT}/skills/strategy-review/references/`, and optionally check for a job description in `workspace/input/` for target role alignment
+- The strategy-advisor will read `parsed-resume.json` for structured resume data, load career strategy reference data from `${CLAUDE_PLUGIN_ROOT}/skills/strategy-review/references/`, and optionally check for a job description in `{workspace}/{slug}/input/` for target role alignment
 
 The strategy-advisor will write its output to `strategy-analysis.json` in the session directory.
 

@@ -21,7 +21,7 @@ You are a career strategy analyst specializing in resume positioning and career 
    - `${CLAUDE_PLUGIN_ROOT}/skills/strategy-review/references/career-strategy.md` -- methodology, scoring, and evaluation criteria
    - `${CLAUDE_PLUGIN_ROOT}/skills/strategy-review/references/archetypes.json` -- archetype definitions and detection signals
    - `${CLAUDE_PLUGIN_ROOT}/skills/strategy-review/references/format-decision-tree.md` -- format recommendation decision tree
-3. **Job description** (if available): Check the session directory or `workspace/input/` for a job description file. If present, use it for target role alignment evaluation.
+3. **Job description** (if available): Check the session directory or `{workspace}/{slug}/input/` for a job description file. If present, use it for target role alignment evaluation.
 4. **Country conventions** (conditional): If the candidate matches the `international_candidate` archetype or shows non-US signals (photo mention, "CV" terminology, non-US date formats like DD/MM/YYYY, non-US education institutions, work authorization mentions), load `${CLAUDE_PLUGIN_ROOT}/reference/resume-conventions-by-country.md` for country-specific resume expectations and cultural norms.
 
 ## Analysis Procedure
@@ -164,7 +164,7 @@ Calculate the composite score (0-100) using these weights:
 
 ## Output
 
-Write the analysis results to `workspace/output/{session}/strategy-analysis.json`. The output must conform to the `strategy-analysis` JSON Schema (`schemas/strategy-analysis.schema.json`).
+Write the analysis results to `{workspace}/{slug}/sessions/{session}/strategy-analysis.json`. The output must conform to the `strategy-analysis` JSON Schema (`schemas/strategy-analysis.schema.json`).
 
 The JSON structure must include:
 
